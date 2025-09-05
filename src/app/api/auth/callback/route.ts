@@ -41,12 +41,12 @@ export async function GET(req: NextRequest) {
             res.cookies.set('refreshToken', refreshToken, { httpOnly: true, secure: true });
         }
         return NextResponse.json({ message: 'Authorization successful.' }, { status: 200 });
-    } catch (error) {
+    } catch ({error} : {error: unknown}) {
         if (axios.isAxiosError(error)) {
             console.error('Error exchanging code for token:', error.response ? error.response.data : error.message);
         } else {
             console.error('Error exchanging code for token:', error);
         }
-        return NextResponse.json({ error: 'Authentication failed during token exchange.' }, { status: 500 });
+        return NextResponse.json({ error: error.message }, { status: 500 });
     }
 }
