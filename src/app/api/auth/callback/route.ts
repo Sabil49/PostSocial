@@ -3,7 +3,7 @@ import axios from 'axios';
 
 // Example for handling an OAuth 2.0 Authorization Code callback
 const CLIENT_ID = 'dlg5alhxWHM2V3pMcFpaSUJ3Rm46MTpjaQ';
-const CLIENT_SECRET = '1zeLNovJNm0ptgjpemllyI_e3w5SQLrGGv48NG7FRzyf0ajFWA';
+const CLIENT_SECRET = 'dTQOHz3RXStinHZuVn0Z2orgh5M5VUVDEu8YBnVah0M35N5G2X';
 const REDIRECT_URI = 'https://post-social-opal.vercel.app/api/auth/callback';
 const TOKEN_URL = 'https://api.x.com/2/oauth2/token';
 
