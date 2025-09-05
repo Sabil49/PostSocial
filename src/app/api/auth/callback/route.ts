@@ -16,7 +16,7 @@ export async function GET(req: NextRequest) {
         console.error('Authorization code missing from callback.');
         return NextResponse.json({ error: 'Authorization failed.' }, { status: 400 });
     }
-
+    console.log('Checking authorization code');
     try {
         console.log('Authorization code received:', code);
         const response = await axios.post(TOKEN_URL, new URLSearchParams({
