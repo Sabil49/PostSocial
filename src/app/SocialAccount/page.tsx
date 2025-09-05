@@ -14,7 +14,7 @@
 
       return (
         <button onClick={handleConnectX}>
-          Connect with X
+          <b>&gt;Connect with X</b>
         </button>
       );
     }
