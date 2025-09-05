@@ -18,6 +18,7 @@ export async function GET(req: NextRequest) {
     }
 
     try {
+        console.log('Authorization code received:', code);
         const response = await axios.post(TOKEN_URL, new URLSearchParams({
             grant_type: 'authorization_code',
             code: code,
@@ -47,6 +48,6 @@ export async function GET(req: NextRequest) {
         } else {
             console.error('Error exchanging code for token:', error);
         }
-        return NextResponse.json({ error: 'Authentication failed during token exchange.' }, { status: 500 });
+        return NextResponse.json({ error: 'Error exchanging code for token.' }, { status: 500 });
     }
 }
