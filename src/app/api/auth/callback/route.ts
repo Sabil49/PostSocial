@@ -57,7 +57,7 @@ export async function GET(req: NextRequest) {
     });
 
        const tweetData = await twitterResponse.json();
-       return new Response(JSON.stringify(tweetData.data), { status: 200 });
+       return new Response(JSON.stringify(tweetData), { status: 200 });
 
    } catch (error) {
        return NextResponse.json({ error: `Error in token exchange: ${error}` }, { status: 500 });
