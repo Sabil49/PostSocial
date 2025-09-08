@@ -11,7 +11,7 @@ export async function GET() {
       return new Response(JSON.stringify({ error: 'Access token not found' }), { status: 401 });
     }
 
-    const twitterResponse = await fetch(`https://api.twitter.com/2/users/${Sabiltechbusiness}/tweets`, { // Replace YOUR_USER_ID
+    const twitterResponse = await fetch('https://api.twitter.com/2/users/YOUR_USER_ID/tweets', { // Replace YOUR_USER_ID
       headers: {
         Authorization: `Bearer ${accessToken}`,
       },

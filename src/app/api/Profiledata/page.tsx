@@ -1,9 +1,9 @@
 import { cookies } from 'next/headers'; 
 
-export async function GET() {
-      try {
-        const cookieStore = await cookies();
-            const accessToken = cookieStore.get('accessToken')?.value; 
+export async function GET(){
+  try {
+    const cookieStore = await cookies();
+    const accessToken = cookieStore.get('accessToken')?.value;
 
             if (!accessToken) {
               return new Response(JSON.stringify({ error: 'Access token not found' }), { status: 401 });
