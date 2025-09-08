@@ -21,7 +21,8 @@ export async function GET(req: NextRequest) {
      const tokenResponse = await fetch(xTokenUrl, {
       method: 'POST',
       headers: {
-         'Content-Type': 'application/x-www-form-urlencoded',
+        Authorization: 'Basic ' + btoa(`${clientId}:${clientSecret}`),
+        'Content-Type': 'application/x-www-form-urlencoded',
        },
        body: new URLSearchParams({
          grant_type: 'authorization_code',
