@@ -1,18 +1,17 @@
 import { NextRequest,NextResponse } from 'next/server';
 
-export async function GET(req: NextRequest) {
+export async function GET(req: NextRequest, res: NextResponse) {
     const { searchParams } = new URL(req.url);
     const code = searchParams.get('code');  
     if (!code) {     
-        return new Response('Authorization failed', { status: 400 });
+        //return new Response('Authorization failed', { status: 400 });
+        return NextResponse.json({ error: 'Authorization failed.' }, { status: 400 });
       }
   
-  //return new Response(`code...: ${code}`, { status: 200 });
-   try {
-    
+   try {    
      const tokenResponse = await fetch('https://api.x.com/2/oauth2/token', {
-       method: 'POST',
-     headers: {
+      method: 'POST',
+      headers: {
          'Content-Type': 'application/x-www-form-urlencoded',
        },
        body: new URLSearchParams({
@@ -28,15 +27,15 @@ export async function GET(req: NextRequest) {
      const data = await tokenResponse.json();
 
      if (data.error) {
-         return new Response('Get token failed', { status: 400 });
+         return NextResponse.json({ error: 'Get token failed.' }, { status: 400 });
      }
 
-     const res = NextResponse.redirect(new URL('/', req.url));
-       res.cookies.set('accessToken', `${data.access_token}`, { httpOnly: true, secure: true });
-       return res;
+     const resRedirect = NextResponse.redirect(new URL('/', req.url));
+       resRedirect.cookies.set('accessToken', `${data.access_token}`, { httpOnly: true, secure: true });
+       return resRedirect;
 
    } catch (error) {
-       return new Response(`Error in token exchange: ${error}`, { status: 500 });
+       return NextResponse.json({ error: `Error in token exchange: ${error}` }, { status: 500 });
    }
 }
 
