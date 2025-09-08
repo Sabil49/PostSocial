@@ -1,11 +1,11 @@
-  "use client";
-  import React from 'react';
+    "use client";
+    import React from 'react';
 
-  function ConnectXButton() {
+
+    
+    function ConnectXButton() {
       const handleConnectX = () => {
-
-        const authUrl = `${process.env.NEXT_PUBLIC_X_AUTH_URL}`;
-        window.location.href = authUrl;
+        window.location.href = `${process.env.NEXT_PUBLIC_X_AUTH_URL}`;
       };
 
       return (
