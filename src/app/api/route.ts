@@ -1,8 +1,7 @@
-import {  NextResponse } from 'next/server';
-// import axios from 'axios';
+
 
 export async function GET() {
-  return NextResponse.json({ message: 'Authorization successful.' }, { status: 200 });
+   return new Response('Hello from API!', { status: 200 });
   // const { searchParams } = new URL(req.url);
   //   const code = searchParams.get('code');
   //   console.log('Received code:', code);
