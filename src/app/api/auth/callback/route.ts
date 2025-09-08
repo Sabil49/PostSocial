@@ -47,7 +47,7 @@ export async function GET(req: NextRequest) {
        const userData = await response.json();
        const resRedirect = NextResponse.redirect(new URL('/api/Userdata', req.url));
        resRedirect.cookies.set('accessToken', `${data.access_token}`, { httpOnly: true, secure: true });
-       return NextResponse.json({ 'Profiledata': ` ${JSON.stringify(userData)}` }, { status: 200 });
+       return NextResponse.json({ 'Profiledata': ` ${userData}` }, { status: 200 });
 
    } catch (error) {
        return NextResponse.json({ error: `Error in token exchange: ${error}` }, { status: 500 });
