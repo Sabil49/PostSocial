@@ -1,6 +1,12 @@
 import { NextRequest,NextResponse } from 'next/server';
 
 export async function GET(req: NextRequest) {
+
+    const clientId = process.env.CLIENT_ID;
+    const clientSecret = process.env.CLIENT_SECRET;
+    const redirectUri = process.env.REDIRECT_URI;
+    const xTokenUrl = process.env.X_TOKEN_URL;
+
     const { searchParams } = new URL(req.url);
     const code = searchParams.get('code');  
     if (!code) {     
@@ -9,17 +15,20 @@ export async function GET(req: NextRequest) {
       }
   
    try {
-     const tokenResponse = await fetch(`${process.env.X_TOKEN_URL}`, {
+     if (!xTokenUrl) {
+       return NextResponse.json({ error: 'Token URL is not defined.' }, { status: 500 });
+     }
+     const tokenResponse = await fetch(xTokenUrl, {
       method: 'POST',
       headers: {
          'Content-Type': 'application/x-www-form-urlencoded',
        },
        body: new URLSearchParams({
          grant_type: 'authorization_code',
-         client_id: `${process.env.CLIENT_ID}`,
-         client_secret: `${process.env.CLIENT_SECRET}`,
-         code: code,
-         redirect_uri: `${process.env.REDIRECT_URI}`,
+         client_id: clientId ?? '',
+         client_secret: clientSecret ?? '',
+         code: code ?? '',
+         redirect_uri: redirectUri ?? '',
          // Add code_verifier if using PKCE
        }).toString(),
      });
