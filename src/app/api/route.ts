@@ -43,14 +43,14 @@ const TOKEN_URL = 'https://api.x.com/2/oauth2/token';
     //    }).toString(),
     //  });
 
-     const data = await tokenResponse.data;
+     
 
-     if (data.error) {
+     if (tokenResponse.data.error) {
          return NextResponse.json({ error: 'Get token failed.' }, { status: 400 });
      }
 
      const resRedirect = NextResponse.redirect(new URL('/', req.url));
-       resRedirect.cookies.set('accessToken', `${data.access_token}`, { httpOnly: true, secure: true });
+       resRedirect.cookies.set('accessToken', `${tokenResponse.data.access_token}`, { httpOnly: true, secure: true });
        return resRedirect;
 
    } catch (error) {
