@@ -29,7 +29,7 @@ export async function GET(req: NextRequest) {
          client_secret: clientSecret ?? '',
          code: code ?? '',
          redirect_uri: redirectUri ?? '',
-         // Add code_verifier if using PKCE
+         code_verifier: 'challenge', // Must match the code_challenge sent in the initial request
        }).toString(),
      });
 
