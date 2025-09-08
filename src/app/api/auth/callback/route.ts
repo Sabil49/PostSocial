@@ -40,7 +40,7 @@ export async function GET(req: NextRequest) {
          return NextResponse.json({ error: data }, { status: 400 });
      }
 
-     const resRedirect = NextResponse.redirect(new URL('/UserData', req.url));
+     const resRedirect = NextResponse.redirect(new URL('/api/Profiledata', req.url));
        resRedirect.cookies.set('accessToken', `${data.access_token}`, { httpOnly: true, secure: true });
        return resRedirect;
 
