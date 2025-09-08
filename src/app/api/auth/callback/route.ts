@@ -39,10 +39,15 @@ export async function GET(req: NextRequest) {
      if (data.error) {
          return NextResponse.json({ error: data }, { status: 400 });
      }
-
-     const resRedirect = NextResponse.redirect(new URL('/api/Profiledata', req.url));
+     const response = await fetch('https://api.twitter.com/2/users/me', {
+              headers: {
+                'Authorization': `Bearer ${data.access_token}`,
+              },
+            });
+       const userData = await response.json();
+       const resRedirect = NextResponse.redirect(new URL('/api/Userdata', req.url));
        resRedirect.cookies.set('accessToken', `${data.access_token}`, { httpOnly: true, secure: true });
-       return resRedirect;
+       return NextResponse.json({ 'Profiledata': ` ${JSON.stringify(userData)}` }, { status: 200 });
 
    } catch (error) {
        return NextResponse.json({ error: `Error in token exchange: ${error}` }, { status: 500 });
