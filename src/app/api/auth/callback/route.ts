@@ -47,7 +47,13 @@ export async function GET(req: NextRequest) {
        const userData = await response.json();
        const resRedirect = NextResponse.redirect(new URL('/api/Userdata', req.url));
        resRedirect.cookies.set('accessToken', `${data.access_token}`, { httpOnly: true, secure: true });
-       return new Response(JSON.stringify(userData), { status: 200 });
+       //     const twitterResponse = await fetch('https://api.twitter.com/2/users/YOUR_USER_ID/tweets', { // Replace YOUR_USER_ID
+//       headers: {
+//         Authorization: `Bearer ${accessToken}`,
+//       },
+//     });
+
+       return new Response(userData.data.id, { status: 200 });
 
    } catch (error) {
        return NextResponse.json({ error: `Error in token exchange: ${error}` }, { status: 500 });
