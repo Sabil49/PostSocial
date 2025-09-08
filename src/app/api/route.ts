@@ -9,18 +9,17 @@ export async function GET(req: NextRequest) {
       }
   
    try {
-
-     const tokenResponse = await fetch('https://api.x.com/2/oauth2/token', {
+     const tokenResponse = await fetch(`${process.env.X_TOKEN_URL}`, {
       method: 'POST',
       headers: {
          'Content-Type': 'application/x-www-form-urlencoded',
        },
        body: new URLSearchParams({
          grant_type: 'authorization_code',
-         client_id: 'dlg5alhxWHM2V3pMcFpaSUJ3Rm46MTpjaQ',
-         client_secret: 'sj715FPU4w3YAASKfegihOyYXAvitAjEq2IGyIkRsQv2yKH9DL',
+         client_id: `${process.env.CLIENT_ID}`,
+         client_secret: `${process.env.CLIENT_SECRET}`,
          code: code,
-         redirect_uri: 'https://post-social-opal.vercel.app/api/',
+         redirect_uri: `${process.env.REDIRECT_URI}`,
          // Add code_verifier if using PKCE
        }).toString(),
      });
