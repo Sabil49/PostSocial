@@ -1,7 +1,9 @@
+import { NextRequest } from 'next/server';
 
-
-export async function GET() {
-   return new Response('Hello from API!', { status: 200 });
+export async function GET(req: NextRequest) {
+    const { searchParams } = new URL(req.url);
+    const code = searchParams.get('code');
+   return new Response(`${code}`, { status: 200 });
   // const { searchParams } = new URL(req.url);
   //   const code = searchParams.get('code');
   //   console.log('Received code:', code);
