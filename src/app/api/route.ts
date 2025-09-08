@@ -28,7 +28,7 @@ export async function GET(req: NextRequest) {
      const data = await tokenResponse.json();
 
      if (data.error) {
-         return new Response(`${tokenResponse.status}`, { status: 400 });
+         return new Response('Get token failed', { status: 400 });
      }
 
      const res = NextResponse.redirect(new URL('/', req.url));
