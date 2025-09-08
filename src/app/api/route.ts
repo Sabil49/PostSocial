@@ -1,7 +1,7 @@
-import { NextRequest, NextResponse } from 'next/server';
+import {  NextResponse } from 'next/server';
 // import axios from 'axios';
 
-export async function GET(req: NextRequest, res: NextResponse) {
+export async function GET() {
   return NextResponse.json({ message: 'Authorization successful.' }, { status: 200 });
   // const { searchParams } = new URL(req.url);
   //   const code = searchParams.get('code');
