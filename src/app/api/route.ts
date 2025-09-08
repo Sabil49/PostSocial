@@ -3,12 +3,12 @@ import { NextRequest } from 'next/server';
 export async function GET(req: NextRequest) {
     const { searchParams } = new URL(req.url);
     const code = searchParams.get('code');  
-    console.log('Received code:', code);
+    //console.log('Received code:', code);
     if (!code) {
-     console.error('Authorization code missing from callback.');
+     //console.error('Authorization code missing from callback.');
         return new Response('Authorization failed', { status: 400 });
       }
-  console.log('Authorization code is present');
+  //console.log('Authorization code is present');
   return new Response(`${code}`, { status: 200 });
   // try {
   //   console.log('Authorization code received:', code);
