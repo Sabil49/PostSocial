@@ -1,27 +1,15 @@
 
-  "use client";
-  import React, { useState,useEffect } from 'react';
+ import { cookies } from 'next/headers';
 
-    export default function Responsedata() {
-      const [response, setResponse] = useState('');
+export default async function Responsedata() {
 
-      useEffect(() => {
-        fetchResponse();
-      }, []);
-
-      const fetchResponse = async () => {
-        const res = await fetch('/api/Gemini', {
-          method: 'GET',
-          headers: { 'Content-Type': 'application/json' }
-        });
-        const data = await res.json();
-        setResponse(data.response);
-      };
+      const cookieStore = await cookies();
+      const GeminiData = cookieStore.get('Geminidata') ? JSON.parse(cookieStore.get('Geminidata')?.value || '{}') : {};
 
       return (
         <div>
           {
-            response ? <p>Gemini&apos;s Response: {response}</p> : 'Loading...'
+            GeminiData ? <p>Gemini&apos;s Response: {GeminiData}</p> : 'Loading...'
           }
         </div>
       );

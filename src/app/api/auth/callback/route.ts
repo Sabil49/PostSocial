@@ -45,10 +45,6 @@ export async function GET(req: NextRequest) {
               },
             });
        const userData = await response.json();
-       //const resRedirect = NextResponse.redirect(new URL('/api/Userdata', req.url));
-       //resRedirect.cookies.set('accessToken', `${data.access_token}`, { httpOnly: true, secure: true });
-       //return resRedirect;  // to set cookie and redirect
-       // Fetch user tweets using the obtained access token
        if (!userData.data.id) {
         return new Response(JSON.stringify({ error: 'User ID not found' }), { status: 401 });
        }
