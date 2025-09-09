@@ -27,7 +27,7 @@ interface ChatCompletionResponse {
 }
 
 // Function to make the chat completion API call
-export async function GET(): Promise<void | string> {
+export async function GET(){
   // Use environment variables for URL and API key
   const url = process.env.X_API_URL;
   const headers = {
