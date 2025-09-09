@@ -23,7 +23,4 @@
           console.error('Error calling Grok API:', error);
           return NextResponse.json({ error: 'Failed to get response from Grok.' }, { status: 500 });
         }
-      } else {
-        return NextResponse.json({ error: `Method ${req.method} Not Allowed` }, { status: 405 });
-      }
     }
