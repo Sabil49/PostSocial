@@ -1,12 +1,13 @@
 import { GoogleGenAI } from "@google/genai";
 import { cookies } from 'next/headers'; 
 
-const cookieStore = await cookies();
-const twitterData = cookieStore.get('twitterData') ? JSON.parse(cookieStore.get('twitterData')?.value || '{}') : {};
 
 const ai = new GoogleGenAI({ apiKey: process.env.GOOGLE_GEMINI_API_KEY || "" });
 
-export async function GET(){    
+export async function GET(){   
+  const cookieStore = await cookies();
+const twitterData = cookieStore.get('twitterData') ? JSON.parse(cookieStore.get('twitterData')?.value || '{}') : {};
+ 
   console.log(twitterData);
   const response = await ai.models.generateContent({
     model: "gemini-2.5-flash",
