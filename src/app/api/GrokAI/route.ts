@@ -52,7 +52,7 @@ export async function GET(): Promise<void | string> {
   };
 
     if (!url) {
-      console.error('API URL is not defined');
+      console.error('API URL is not defined...');
       return;
     }
 
