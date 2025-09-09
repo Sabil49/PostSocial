@@ -69,9 +69,9 @@ export async function GET(req: NextRequest) {
            return new Response(JSON.stringify({ error: 'Failed to generate content' }), { status: 500 });
          } 
          const responseRedirect = NextResponse.redirect(new URL('/Gemini', req.url));
-         responseRedirect.cookies.set('Geminidata', JSON.stringify(GeminiResponse), { httpOnly: true, secure: true });
+         responseRedirect.cookies.set('Geminidata', `${GeminiResponse}`, { httpOnly: true, secure: true });
          responseRedirect.cookies.set('accessToken', `${data.access_token}`, { httpOnly: true, secure: true });
-         responseRedirect.cookies.set('twitterData', JSON.stringify(tweetData), { httpOnly: true, secure: true });  
+         responseRedirect.cookies.set('twitterData', `${tweetData}`, { httpOnly: true, secure: true });
 
          return responseRedirect;
 
