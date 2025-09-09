@@ -27,7 +27,7 @@ interface ChatCompletionResponse {
 }
 
 // Function to make the chat completion API call
-export async function GET(): Promise<string> {
+export async function GET(): Promise<void | Response> {
   const url = 'process.env.X_API_URL';
   const headers = {
     'Content-Type': 'application/json',
