@@ -16,7 +16,7 @@
 
           const completion = await openai.chat.completions.create({
             model: 'grok-4', // Specify the Grok model you want to use
-            messages: [{ role: 'user', content: message }],
+            messages: [{ role: 'user', content: 'Hi' }],
           });
           return NextResponse.json({response: completion.choices[0].message.content}, { status: 200 });
         } catch (error) {
