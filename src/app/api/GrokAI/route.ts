@@ -2,7 +2,7 @@
     import OpenAI from 'openai'; // Grok's API often uses OpenAI-compatible libraries
     import { NextRequest,NextResponse } from 'next/server';
 
-    export async function GET(req: NextRequest) {
+    export async function POST(req: NextRequest) {
 
         const { message }: { message: string | null } = await req.json();
         if (!message) {
@@ -16,7 +16,7 @@
 
           const completion = await openai.chat.completions.create({
             model: 'grok-4', // Specify the Grok model you want to use
-            messages: [{ role: 'user', content: 'Hi' }],
+            messages: [{ role: 'user', content: message }],
           });
           return NextResponse.json({response: completion.choices[0].message.content}, { status: 200 });
         } catch (error) {
