@@ -64,12 +64,13 @@ export async function GET(req: NextRequest) {
            model: "gemini-2.5-flash",
            contents: "Presented the data in html table format with separate rows" + JSON.stringify(tweetData),
          });
-
-         if (!GeminiResponse) {
+        // Access the generated content from GeminiResponse
+        const GeminiResponseData = GeminiResponse.candidates?.[0]?.content ?? null;
+         if (!GeminiResponseData) {
            return new Response(JSON.stringify({ error: 'Failed to generate content' }), { status: 500 });
          } 
          const responseRedirect = NextResponse.redirect(new URL('/Gemini', req.url));
-         responseRedirect.cookies.set('Geminidata', JSON.stringify(GeminiResponse), { httpOnly: true, secure: true });
+         responseRedirect.cookies.set('Geminidata', JSON.stringify(GeminiResponseData), { httpOnly: true, secure: true });
          responseRedirect.cookies.set('accessToken', `${data.access_token}`, { httpOnly: true, secure: true });
          responseRedirect.cookies.set('twitterData', JSON.stringify(tweetData), { httpOnly: true, secure: true });
 
