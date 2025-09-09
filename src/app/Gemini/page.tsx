@@ -9,6 +9,7 @@ async function main() {
     contents: "Explain how AI works in a few words.",
   });
   console.log(response.text);
+  return <div>{response.text}</div>;
 }
 
 main();
