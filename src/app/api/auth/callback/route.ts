@@ -1,8 +1,5 @@
 import { NextRequest,NextResponse } from 'next/server';
-import { GoogleGenAI } from "@google/genai";
-import { cookies } from 'next/headers';
 
-const ai = new GoogleGenAI({ apiKey: process.env.GOOGLE_GEMINI_API_KEY || "" });
 
 export async function GET(req: NextRequest) {
 
@@ -43,39 +40,10 @@ export async function GET(req: NextRequest) {
      if (data.error) {
          return NextResponse.json({ error: data }, { status: 400 });
      }
-     const response = await fetch('https://api.twitter.com/2/users/me', {
-              headers: {
-                'Authorization': `Bearer ${data.access_token}`,
-              },
-            });
-       const userData = await response.json();
-       if (!userData.data.id) {
-        return new Response(JSON.stringify({ error: 'User ID not found' }), { status: 401 });
-       }
-       const twitterResponse = await fetch(`https://api.twitter.com/2/users/${userData.data.id}/tweets`, {
-      headers: {
-        Authorization: `Bearer ${data.access_token}`,
-      },
-    });
-
-       const tweetData = await twitterResponse.json();
-
-       const GeminiResponse = await ai.models.generateContent({
-           model: "gemini-2.5-flash",
-           contents: "Presented the data in readable format " + JSON.stringify(tweetData),
-         });
-        // Access the generated content from GeminiResponse
-        const GeminiResponseData = GeminiResponse.candidates?.[0]?.content ?? null;
-         if (!GeminiResponseData) {
-           return new Response(JSON.stringify({ error: 'Failed to generate content' }), { status: 500 });
-         } 
-         const responseRedirect = NextResponse.redirect(new URL('/Gemini', req.url));
-         responseRedirect.cookies.set('Geminidata', JSON.stringify(GeminiResponseData), { httpOnly: true, secure: true });
-         responseRedirect.cookies.set('accessToken', `${data.access_token}`, { httpOnly: true, secure: true });
-         responseRedirect.cookies.set('twitterData', JSON.stringify(tweetData), { httpOnly: true, secure: true });
-
-         return responseRedirect;
-
+     
+     const TokenRedirect = NextResponse.redirect(new URL('/api/Userdata', req.url));
+     TokenRedirect.cookies.set('accessToken', `${data.access_token}`, { httpOnly: true, secure: true });
+      return TokenRedirect;
    } catch (error) {
        return NextResponse.json({ error: `Error in token exchange: ${error}` }, { status: 500 });
    }
