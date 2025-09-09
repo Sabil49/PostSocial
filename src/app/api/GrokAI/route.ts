@@ -2,7 +2,7 @@
     import OpenAI from 'openai'; // Grok's API often uses OpenAI-compatible libraries
     import { NextRequest,NextResponse } from 'next/server';
 
-    export default async function handler(req: NextRequest) {
+    export default async function GET(req: NextRequest) {
       if (req.method === 'POST') {
 
         const { message }: { message: string | null } = await req.json();
