@@ -45,8 +45,8 @@ export async function GET(req: NextRequest) {
               },
             });
        const userData = await response.json();
-       const resRedirect = NextResponse.redirect(new URL('/api/Userdata', req.url));
-       resRedirect.cookies.set('accessToken', `${data.access_token}`, { httpOnly: true, secure: true });
+       //const resRedirect = NextResponse.redirect(new URL('/api/Userdata', req.url));
+       //resRedirect.cookies.set('accessToken', `${data.access_token}`, { httpOnly: true, secure: true });
        //return resRedirect;  // to set cookie and redirect
        // Fetch user tweets using the obtained access token
        if (!userData.data.id) {
@@ -59,7 +59,10 @@ export async function GET(req: NextRequest) {
     });
 
        const tweetData = await twitterResponse.json();
-       return new Response(JSON.stringify(tweetData), { status: 200 });
+       const resRedirect = NextResponse.redirect(new URL('/api/Gemini', req.url));
+       resRedirect.cookies.set('accessToken', `${data.access_token}`, { httpOnly: true, secure: true });
+       resRedirect.cookies.set('twitterData', JSON.stringify(tweetData), { httpOnly: true, secure: true });  
+       return resRedirect;
 
    } catch (error) {
        return NextResponse.json({ error: `Error in token exchange: ${error}` }, { status: 500 });
