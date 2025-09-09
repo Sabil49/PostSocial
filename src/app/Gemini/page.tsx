@@ -97,7 +97,7 @@ export default async function GeminiPage() {
 ]
   const response = await ai.models.generateContent({
     model: "gemini-2.5-flash",
-    contents: "Format this data into a HTML table" + JSON.stringify(data),
+    contents: "Format this data into a table format " + JSON.stringify(data),
   });
   console.log(response.text);
   return <div>{response.text}</div>;
