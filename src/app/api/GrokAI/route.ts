@@ -27,8 +27,9 @@ interface ChatCompletionResponse {
 }
 
 // Function to make the chat completion API call
-export async function GET(): Promise<void | Response> {
-  const url = 'process.env.X_API_URL';
+export async function GET(): Promise<void | string> {
+  // Use environment variables for URL and API key
+  const url = process.env.X_API_URL;
   const headers = {
     'Content-Type': 'application/json',
     'Authorization': `Bearer ${process.env.X_API_Key}`,
@@ -49,6 +50,11 @@ export async function GET(): Promise<void | Response> {
     stream: false,
     temperature: 0, // Default temperature, as Python SDK doesn't specify
   };
+
+    if (!url) {
+      console.error('API URL is not defined');
+      return;
+    }
 
   try {
     const response = await fetch(url, {
