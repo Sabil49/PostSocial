@@ -9,7 +9,7 @@ export default async function Responsedata() {
       return (
         <div>
            {
-            Geminidata ? <p>Gemini&apos;s Response: {Geminidata}</p> : 'Loading...'
+            Geminidata ? <p>Gemini&apos;s Response: {JSON.stringify(Geminidata)}</p> : 'Loading...'
           } 
         </div>
       );
