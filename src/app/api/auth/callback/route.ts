@@ -1,4 +1,8 @@
 import { NextRequest,NextResponse } from 'next/server';
+import { GoogleGenAI } from "@google/genai";
+import { cookies } from 'next/headers';
+
+const ai = new GoogleGenAI({ apiKey: process.env.GOOGLE_GEMINI_API_KEY || "" });
 
 export async function GET(req: NextRequest) {
 
@@ -55,10 +59,21 @@ export async function GET(req: NextRequest) {
     });
 
        const tweetData = await twitterResponse.json();
-       const resRedirect = NextResponse.redirect(new URL('/api/Gemini', req.url));
-       resRedirect.cookies.set('accessToken', `${data.access_token}`, { httpOnly: true, secure: true });
-       resRedirect.cookies.set('twitterData', JSON.stringify(tweetData), { httpOnly: true, secure: true });  
-       return resRedirect;
+
+       const GeminiResponse = await ai.models.generateContent({
+           model: "gemini-2.5-flash",
+           contents: "Presented the data in html table format with separate rows" + JSON.stringify(tweetData),
+         });
+
+         if (!GeminiResponse) {
+           return new Response(JSON.stringify({ error: 'Failed to generate content' }), { status: 500 });
+         } 
+         const responseRedirect = NextResponse.redirect(new URL('/Gemini', req.url));
+         responseRedirect.cookies.set('Geminidata', JSON.stringify(GeminiResponse), { httpOnly: true, secure: true });
+         responseRedirect.cookies.set('accessToken', `${data.access_token}`, { httpOnly: true, secure: true });
+         responseRedirect.cookies.set('twitterData', JSON.stringify(tweetData), { httpOnly: true, secure: true });  
+
+         return responseRedirect;
 
    } catch (error) {
        return NextResponse.json({ error: `Error in token exchange: ${error}` }, { status: 500 });
