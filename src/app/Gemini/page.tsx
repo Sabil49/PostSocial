@@ -100,6 +100,6 @@ export default async function GeminiPage() {
     contents: "Presented the data in html table format with separate rows" + JSON.stringify(data),
   });
   console.log(response.text);
-  return <div>{response.text}</div>;
+  return <div>JSON.parse{response.text}</div>;
 
 }
