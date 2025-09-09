@@ -4,7 +4,7 @@ import { cookies } from 'next/headers';
 export default async function Responsedata() {
 
        const cookieStore = await cookies();
-       const GeminiData = cookieStore.get('Geminidata')?.value; // Using optional chaining for safety
+       const GeminiData = cookieStore.get('Geminidata') ? JSON.parse(cookieStore.get('Geminidata')?.value || '{}') : {};
 
       return (
         <div>
