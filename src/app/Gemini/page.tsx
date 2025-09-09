@@ -6,7 +6,7 @@ export default async function GeminiPage() {
 
   const response = await ai.models.generateContent({
     model: "gemini-2.5-flash",
-    contents: "Explain how AI works in a few words.",
+    contents: "Explain what is life and what is the purpose of life in detail.",
   });
   console.log(response.text);
   return <div>{response.text}</div>;
