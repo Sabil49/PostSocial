@@ -1,30 +1,29 @@
-import OpenAI from "openai";
+// import OpenAI from "openai";
 
 export default async function Chatbot() {
-  const client = new OpenAI({
-  baseURL: "https://api.x.ai/v1",
-  apiKey: process.env.NEXT_PUBLIC_X_API_Key,
-});
+//   const client = new OpenAI({
+//   baseURL: "https://api.x.ai/v1",
+//   apiKey: process.env.NEXT_PUBLIC_X_API_Key,
+// });
 
-const completion = await client.chat.completions.create({
-  model: "grok-3",
-  messages: [
-    {
-      role: "system",
-      content: "You are Grok, a chatbot inspired by the Hitchhiker's Guide to the Galaxy."
-    },
-    {
-      role: "user",
-      content: "What is the meaning of life, the universe, and everything?"
-    },
-  ],
-  temperature: 0,
-});
-console.log(completion.choices[0].message);  
+// const completion = await client.chat.completions.create({
+//   model: "grok-3",
+//   messages: [
+//     {
+//       role: "system",
+//       content: "You are Grok, a chatbot inspired by the Hitchhiker's Guide to the Galaxy."
+//     },
+//     {
+//       role: "user",
+//       content: "What is the meaning of life, the universe, and everything?"
+//     },
+//   ],
+//   temperature: 0,
+// });
+// console.log(completion.choices[0].message);  
   return (
     <div>
       <h1>Grok Chatbot</h1>
-      <p>Grok&apos;s Response: {completion.choices[0].message.content}</p>
     </div>
   );
 }
