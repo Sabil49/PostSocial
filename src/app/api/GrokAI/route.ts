@@ -1,77 +1,30 @@
-// Define interfaces for the request and response structure
-interface Message {
-  role: 'system' | 'user';
-  content: string;
-}
+    // pages/api/grok.js
+    import OpenAI from 'openai'; // Grok's API often uses OpenAI-compatible libraries
+    import { NextRequest,NextResponse } from 'next/server';
 
-interface ChatCompletionRequest {
-  messages: Message[];
-  model: string;
-  stream?: boolean;
-  temperature?: number;
-}
+    export default async function handler(req: NextRequest) {
+      if (req.method === 'POST') {
 
-interface ChatCompletionResponse {
-  id: string;
-  object: string;
-  created: number;
-  model: string;
-  choices: {
-    message: {
-      role: string;
-      content: string;
-    };
-    finish_reason: string;
-    index: number;
-  }[];
-}
+        const { message }: { message: string | null } = await req.json();
+        if (!message) {
+          return NextResponse.json({ error: 'Message is required' }, { status: 400 });
+        }
+        try {
+          const openai = new OpenAI({
+            apiKey: process.env.X_API_Key, // Use your Grok API key
+            baseURL: process.env.X_API_URL, // Verify Grok's specific API base URL
+          });
 
-// Function to make the chat completion API call
-export async function GET(){
-  // Use environment variables for URL and API key
-  const url = process.env.X_API_URL;
-  const headers = {
-    'Content-Type': 'application/json',
-    'Authorization': `Bearer ${process.env.X_API_Key}`,
-  };
-
-  const data: ChatCompletionRequest = {
-    messages: [
-      {
-        role: 'system',
-        content: 'You are Grok, a highly intelligent, helpful AI assistant.',
-      },
-      {
-        role: 'user',
-        content: 'What is the meaning of life, the universe, and everything?',
-      },
-    ],
-    model: 'grok-4', // Note: Verify model name; 'grok-3' may be correct
-    stream: false,
-    temperature: 0, // Default temperature, as Python SDK doesn't specify
-  };
-
-    if (!url) {
-      console.error('API URL is not defined...');
-      return;
+          const completion = await openai.chat.completions.create({
+            model: 'grok-4', // Specify the Grok model you want to use
+            messages: [{ role: 'user', content: message }],
+          });
+          return NextResponse.json({response: completion.choices[0].message.content}, { status: 200 });
+        } catch (error) {
+          console.error('Error calling Grok API:', error);
+          return NextResponse.json({ error: 'Failed to get response from Grok.' }, { status: 500 });
+        }
+      } else {
+        return NextResponse.json({ error: `Method ${req.method} Not Allowed` }, { status: 405 });
+      }
     }
-
-  try {
-    const response = await fetch(url, {
-      method: 'POST',
-      headers,
-      body: JSON.stringify(data),
-      signal: AbortSignal.timeout(3600 * 1000), // 3600s timeout, matching Python
-    });
-
-    if (!response.ok) {
-      throw new Error(`HTTP error! Status: ${response.status}`);
-    }
-
-    const result: ChatCompletionResponse = await response.json();
-    return result.choices[0].message.content; // Return the response content
-  } catch (error) {
-    console.error('Error making API call:', error);
-    throw error;
-  }
-}
