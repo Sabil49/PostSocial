@@ -5,7 +5,7 @@ const client = new OpenAI({
   apiKey: process.env.NEXT_PUBLIC_X_API_Key,
 });
 
-const completion = await client.chat.completions.create({
+export const completion = await client.chat.completions.create({
   model: "grok-3",
   messages: [
     {
@@ -20,7 +20,10 @@ const completion = await client.chat.completions.create({
   temperature: 0,
 });
 console.log(completion.choices[0].message);  
-  
+
+  // Below is a simple React component to interact with the Grok API
+  // Uncomment and use it in your React application as needed
+
   //  "use client";
   //   import React, { useState } from 'react';
 
