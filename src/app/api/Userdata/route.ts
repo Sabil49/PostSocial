@@ -26,7 +26,7 @@ export async function GET(req: NextRequest) {
 
        const GeminiResponse = await ai.models.generateContent({
            model: "gemini-2.5-flash",
-           contents: "Convert the data in row format " + JSON.stringify(tweetData),
+           contents: "Show the data json format " + JSON.stringify(tweetData),
          });
         // Access the generated content from GeminiResponse
         const GeminiResponseData = GeminiResponse.candidates?.[0]?.content ?? null;
