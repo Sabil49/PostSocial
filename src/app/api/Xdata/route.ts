@@ -24,19 +24,19 @@ export async function GET(req: NextRequest) {
     });
 
        const tweetData = await twitterResponse.json();
-        return NextResponse.json(tweetData);
-      //  const GeminiResponse = await ai.models.generateContent({
-      //      model: "gemini-2.5-flash",
-      //      contents: "Convert the data in row format " + JSON.stringify(tweetData),
-      //    });
-      //   // Access the generated content from GeminiResponse
-      //   const GeminiResponseData = GeminiResponse.candidates?.[0]?.content ?? null;
-      //    if (!GeminiResponseData) {
-      //      return new Response(JSON.stringify({ error: 'Failed to generate content' }), { status: 500 });
-      //    } 
-         //const responseRedirect = NextResponse.redirect(new URL('/Gemini', req.url));
-         //responseRedirect.cookies.set('Geminidata', JSON.stringify(GeminiResponseData), { httpOnly: true, secure: true });
-         //responseRedirect.cookies.set('twitterData', JSON.stringify(tweetData), { httpOnly: true, secure: true });
+        //return NextResponse.json(tweetData);
+       const GeminiResponse = await ai.models.generateContent({
+           model: "gemini-2.5-flash",
+           contents: "Do sentiment analysis for 'How people feel about something after looking tweet'. use 'Text' field as tweet from provided data. " + JSON.stringify(tweetData),
+         });
+        // Access the generated content from GeminiResponse
+        const GeminiResponseData = GeminiResponse.candidates?.[0]?.content ?? null;
+         if (!GeminiResponseData) {
+           return new Response(JSON.stringify({ error: 'Failed to generate content' }), { status: 500 });
+         } 
+         const responseRedirect = NextResponse.redirect(new URL('/Gemini', req.url));
+         responseRedirect.cookies.set('Geminidata', JSON.stringify(GeminiResponseData), { httpOnly: true, secure: true });
+         responseRedirect.cookies.set('twitterData', JSON.stringify(tweetData), { httpOnly: true, secure: true });
 
-         //return responseRedirect;
+         return responseRedirect;
 }
