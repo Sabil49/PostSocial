@@ -30,7 +30,7 @@ export async function GET(req: NextRequest) {
            contents: "Do sentiment analysis for 'How people feel about something after looking tweet'. use 'Text' field as tweet from provided data. " + JSON.stringify(tweetData),
          });
         // Access the generated content from GeminiResponse
-        const GeminiResponseData = GeminiResponse.candidates?.[0]?.content ?? null;
+        const GeminiResponseData = GeminiResponse.text;
          if (!GeminiResponseData) {
            return new Response(JSON.stringify({ error: 'Failed to generate content' }), { status: 500 });
          } 
