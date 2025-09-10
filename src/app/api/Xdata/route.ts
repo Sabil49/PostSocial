@@ -7,13 +7,16 @@ import { cookies } from 'next/headers';
 export async function GET() {
   const cookieStore = await cookies();
   const accessToken = cookieStore.get('accessToken')?.value; // Using optional chaining for safety
-  return NextResponse.json({ accessToken: accessToken || null });
-  // const response = await fetch('https://api.twitter.com/2/users/me', {
-  //   headers: {
-  //     'Authorization': `Bearer ${accessToken}`,
-  //   },
-  // });
-  //  const userData = await response.json();
+  if (!accessToken) {
+    return new Response(JSON.stringify({ error: 'Access token not found' }), { status: 401 });
+  }
+  const response = await fetch('https://api.twitter.com/2/users/me', {
+    headers: {
+      'Authorization': `Bearer ${accessToken}`,
+    },
+  });
+   const userData = await response.json();
+  return NextResponse.json(userData.data);
   // if (!userData.data.id) {
   //   return new Response(JSON.stringify({ error: 'User ID not found' }), { status: 401 });
   // }
