@@ -1,8 +1,8 @@
 import { NextRequest,NextResponse } from 'next/server';
-import { GoogleGenAI } from "@google/genai";
-import { cookies } from 'next/headers';
+//import { GoogleGenAI } from "@google/genai";
+// import { cookies } from 'next/headers';
 
-const ai = new GoogleGenAI({ apiKey: process.env.GOOGLE_GEMINI_API_KEY || "" });
+// const ai = new GoogleGenAI({ apiKey: process.env.GOOGLE_GEMINI_API_KEY || "" });
 
 export async function GET(req: NextRequest) {
   NextResponse.json({ message: "User data route is operational" });
