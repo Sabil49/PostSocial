@@ -5,7 +5,6 @@ import { cookies } from 'next/headers';
 const ai = new GoogleGenAI({ apiKey: process.env.GOOGLE_GEMINI_API_KEY || "" });
 
 export async function GET(req: NextRequest) {
-  NextResponse.json({ message: "User data route is operational" });
   const cookieStore = await cookies();
   const accessToken = cookieStore.get('accessToken')?.value; // Using optional chaining for safety
   const response = await fetch('https://api.twitter.com/2/users/me', {
