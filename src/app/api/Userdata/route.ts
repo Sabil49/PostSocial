@@ -7,7 +7,7 @@ const ai = new GoogleGenAI({ apiKey: process.env.GOOGLE_GEMINI_API_KEY || "" });
 export async function GET(req: NextRequest) {
   const cookieStore = await cookies();
   const accessToken = cookieStore.get('accessToken')?.value; // Using optional chaining for safety
-  const response = await fetch('https://api.twitter.com/2/users/me', {
+  const response = await fetch('https://api.x.com/2/users/me', {
     headers: {
       'Authorization': `Bearer ${accessToken}`,
     },
@@ -16,7 +16,7 @@ export async function GET(req: NextRequest) {
        if (!userData.data.id) {
         return new Response(JSON.stringify({ error: 'User ID not found' }), { status: 401 });
        }
-       const twitterResponse = await fetch(`https://api.twitter.com/2/users/${userData.data.id}/tweets`, {
+       const twitterResponse = await fetch(`https://api.x.com/2/users/${userData.data.id}/tweets`, {
       headers: {
         Authorization: `Bearer ${accessToken}`,
       },
