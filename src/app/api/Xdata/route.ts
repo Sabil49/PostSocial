@@ -1,19 +1,19 @@
-import { NextRequest,NextResponse } from 'next/server';
-import { GoogleGenAI } from "@google/genai";
+import { NextResponse } from 'next/server';
+//import { GoogleGenAI } from "@google/genai";
 import { cookies } from 'next/headers';
 
 //const ai = new GoogleGenAI({ apiKey: process.env.GOOGLE_GEMINI_API_KEY || "" });
 
-export async function GET(req: NextRequest) {
+export async function GET() {
   const cookieStore = await cookies();
   const accessToken = cookieStore.get('accessToken')?.value; // Using optional chaining for safety
-  const response = await fetch('https://api.twitter.com/2/users/me', {
-    headers: {
-      'Authorization': `Bearer ${accessToken}`,
-    },
-  });
-   const userData = await response.json();
-   return NextResponse.json(userData.data.id);
+  return NextResponse.json({ accessToken: accessToken || null });
+  // const response = await fetch('https://api.twitter.com/2/users/me', {
+  //   headers: {
+  //     'Authorization': `Bearer ${accessToken}`,
+  //   },
+  // });
+  //  const userData = await response.json();
   // if (!userData.data.id) {
   //   return new Response(JSON.stringify({ error: 'User ID not found' }), { status: 401 });
   // }
