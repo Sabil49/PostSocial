@@ -16,7 +16,7 @@ export async function GET(req: NextRequest) {
        if (!userData.data.id) {
         return new Response(JSON.stringify({ error: 'User ID not found' }), { status: 401 });
        }
-       const twitterResponse = await fetch(`https://api.x.com/2/users/${userData.data.id}/tweets`, {
+       const twitterResponse = await fetch(`https://api.x.com/2/users/${userData.data.id}/tweets?max_results=100&expansions=author_id&tweet.fields=created_at,public_metrics&user.fields=created_at,username`, {
       headers: {
         Authorization: `Bearer ${accessToken}`,
       },
