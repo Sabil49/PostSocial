@@ -14,7 +14,7 @@
 
     function ConnectXButton() {
       const handleConnectX = () => {
-        window.location.href = '/api/twitterdata'; // Redirect to the API route
+        window.location.href = '/api/tweetdata'; // Redirect to the API route
       };
 
       return (
