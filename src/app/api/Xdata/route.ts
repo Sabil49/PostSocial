@@ -14,7 +14,7 @@ export async function GET(req: NextRequest) {
             });
        const userData = await response.json();
             if (userData.status === 429) {
-             const errorRedirect = NextResponse.redirect(new URL('/SocialAccount?error=' + userData.detail, req.url));
+             const errorRedirect = NextResponse.redirect(new URL('/SocialAccount?error=' + userData.detail + ' from userData', req.url));
              return errorRedirect;
             }
             //return NextResponse.json({ userData });
@@ -28,7 +28,7 @@ export async function GET(req: NextRequest) {
     });
        const tweetData = await twitterResponse.json();
       if (tweetData.status === 429) {
-             const errorRedirect = NextResponse.redirect(new URL('/SocialAccount?error=' + tweetData.detail, req.url));
+             const errorRedirect = NextResponse.redirect(new URL('/SocialAccount?error=' + tweetData.detail + ' from tweetData', req.url));
              return errorRedirect;
             }
           //return NextResponse.json(tweetData);
