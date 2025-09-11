@@ -14,7 +14,7 @@
 
     function ConnectXButton() {
       const handleConnectX = () => {
-        window.location.href = process.env.NEXT_PUBLIC_X_AUTH_URL ?? '';
+        window.location.href = '/api/twitterdata'; // Redirect to the API route
       };
 
       return (
