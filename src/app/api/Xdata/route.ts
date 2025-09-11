@@ -14,9 +14,8 @@ export async function GET(req: NextRequest) {
             });
        const userData = await response.json();
             if (userData.status === 429) {
-             //const errorRedirect = NextResponse.redirect(new URL('/SocialAccount?error=Please try after 10 minutes', req.url));
-             //return errorRedirect;
-             return NextResponse.json(userData);
+             const errorRedirect = NextResponse.redirect(new URL('/SocialAccount?error=' + userData.detail, req.url));
+             return errorRedirect;
             }
             //return NextResponse.json({ userData });
        if (!userData.data || !userData.data.id) {
@@ -29,7 +28,7 @@ export async function GET(req: NextRequest) {
     });
        const tweetData = await twitterResponse.json();
       if (tweetData.status === 429) {
-             const errorRedirect = NextResponse.redirect(new URL('/SocialAccount?error=Please try after 10 minutes', req.url));
+             const errorRedirect = NextResponse.redirect(new URL('/SocialAccount?error=' + tweetData.detail, req.url));
              return errorRedirect;
             }
           //return NextResponse.json(tweetData);
