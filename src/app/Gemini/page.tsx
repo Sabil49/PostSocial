@@ -7,6 +7,10 @@ import { useSearchParams } from 'next/navigation';
       const geminiData = searchParams.get('data');
       console.log("geminiData");
       console.log(geminiData);
+      //geminiData?.replace('\n', ""); // Return the generated content as JSON
+      //geminiData?.replace("\"", ""); // Return the generated content as JSON
+      geminiData?.replace("```", ""); // Return the generated content as JSON
+      // Parse the JSON string into an object
       const geminiDataObj = JSON.parse(JSON.stringify(geminiData));
       console.log("geminiDataObj:");
       console.log(geminiDataObj.sentiment_summary);
