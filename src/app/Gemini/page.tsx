@@ -9,7 +9,7 @@ import { useSearchParams } from 'next/navigation';
       console.log(geminiData);
       const geminiDataObj = JSON.parse(JSON.stringify(geminiData));
       console.log("geminiDataObj:");
-      console.log(geminiDataObj);
+      console.log(geminiDataObj.sentiment_summary);
       console.log(typeof geminiDataObj);
       return <div>{geminiData ? geminiData : 'Loading...'}</div>;
        }
