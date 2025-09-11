@@ -8,20 +8,16 @@ export default async function Responsedata({ searchParams }: Props) {
 
     const resolvedSearchParams = await searchParams;
     const Geminidata = resolvedSearchParams.data;
-    const GeminidataStr =
-      typeof Geminidata === 'string'
-        ? Geminidata
-        : Array.isArray(Geminidata)
-        ? Geminidata[0] || ''
-        : '';
-    // const GeminidataDecoded = decodeURIComponent(GeminidataStr);
-    const GeminidataParsed = JSON.parse(GeminidataStr || '{}');
-    console.log('Geminidata::::');
-    console.log(JSON.parse(JSON.stringify(Geminidata)));
+    // const GeminidataStr =
+    //   typeof Geminidata === 'string' ? Geminidata : Array.isArray(Geminidata) ? Geminidata[0] || '' : '';
+    // // const GeminidataDecoded = decodeURIComponent(GeminidataStr);
+    // const GeminidataParsed = JSON.parse(GeminidataStr || '{}');
+    // console.log('Geminidata::::');
+    // console.log(JSON.parse(JSON.stringify(Geminidata)));
       return (
         <div>
            {
-            GeminidataParsed.sentiment_summary ? GeminidataParsed.sentiment_summary : 'Loading...'
+            Geminidata ? Geminidata : 'Loading...'
           } 
         </div>
       );
