@@ -14,7 +14,8 @@ export async function GET(req: NextRequest) {
             });
        const userData = await response.json();
             if (userData.status === 429) {
-             return new Response(JSON.stringify({ error: 'Please try after 15 minutes' }), { status: 401 });
+             const errorRedirect = NextResponse.redirect(new URL('/SocialAccount?error=Please try after 10 minutes', req.url));
+             return errorRedirect;
             }
             //return NextResponse.json({ userData });
        if (!userData.data || !userData.data.id) {
@@ -27,7 +28,8 @@ export async function GET(req: NextRequest) {
     });
        const tweetData = await twitterResponse.json();
       if (tweetData.status === 429) {
-             return new Response(JSON.stringify({ error: 'Please try after 15 minutes' }), { status: 401 });
+             const errorRedirect = NextResponse.redirect(new URL('/SocialAccount?error=Please try after 10 minutes', req.url));
+             return errorRedirect;
             }
           return NextResponse.json(tweetData);
 
