@@ -18,7 +18,7 @@ export default async function Responsedata({ searchParams }: Props) {
     const GeminidataParsed = JSON.parse(GeminidataDecoded || '{}');
     console.log('GeminidataDecoded:');
     console.log(GeminidataDecoded);
-    console.log('Geminidata:');
+    console.log('Geminidata::::');
     console.log(JSON.parse(JSON.stringify(Geminidata)));
       return (
         <div>
