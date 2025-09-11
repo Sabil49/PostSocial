@@ -1,18 +1,21 @@
 "use client";
 import { useSearchParams } from 'next/navigation';
-export default function Responsedata() {
+   import { Suspense } from 'react';
 
-    // Example for Next.js Server Components
-
-     const searchParams = useSearchParams();
+   function MyGeminiComponent() {
+         const searchParams = useSearchParams();
       const geminiData = searchParams.get('data');
       console.log("geminiData");
       console.log(geminiData);
-      return (
+      return <div>{geminiData ? geminiData : 'Loading...'}</div>;
+       }
+export default function Responsedata() {
+
+    return (
         <div>
-           {
-            geminiData ? geminiData : 'Loading...'
-          } 
+          <Suspense fallback={<div>Loading error...</div>}>
+                      <MyGeminiComponent />
+          </Suspense>
         </div>
       );
     }
