@@ -8,6 +8,8 @@ export default async function Responsedata({ searchParams }: Props) {
 
     const resolvedSearchParams = await searchParams;
     const Geminidata = resolvedSearchParams.data;
+    console.log('Geminidata:');
+    console.log(JSON.parse(JSON.stringify(Geminidata)));
       return (
         <div>
            {
