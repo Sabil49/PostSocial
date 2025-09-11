@@ -31,23 +31,24 @@ export async function GET(req: NextRequest) {
              const errorRedirect = NextResponse.redirect(new URL('/SocialAccount?error=Please try after 10 minutes', req.url));
              return errorRedirect;
             }
-          return NextResponse.json(tweetData);
+          //return NextResponse.json(tweetData);
 
     
-    //     //return NextResponse.json(tweetData);
-    //    const GeminiResponse = await ai.models.generateContent({
-    //        model: "gemini-2.5-flash",
-    //        contents: "Do sentiment analysis for tweet. use 'Text' field as tweet from provided data. return result in separate field as 'sentiment'." + JSON.stringify(tweetData),
-    //      });
-    //     // Access the generated content from GeminiResponse
-    //     const GeminiResponseData = GeminiResponse.text;
-    //      if (!GeminiResponseData) {
-    //        return new Response(JSON.stringify({ error: 'Failed to generate content' }), { status: 500 });
-    //      } 
-    //      //return NextResponse.json({ GeminiResponseData });
-    //      const responseRedirect = NextResponse.redirect(new URL('/Gemini?data=' + encodeURIComponent(JSON.stringify(GeminiResponseData)), req.url));
-    //      //responseRedirect.cookies.set('Geminidata', JSON.stringify(GeminiResponseData), { httpOnly: true, secure: true });
-    //      //responseRedirect.cookies.set('twitterData', JSON.stringify(tweetData), { httpOnly: true, secure: true });
+        //return NextResponse.json(tweetData);
+       const GeminiResponse = await ai.models.generateContent({
+           model: "gemini-2.5-flash",
+           contents: "Do sentiment analysis for tweets and How people feel after looking tweets. Use 'Text' fields as tweets to provided data. and analyze for the points. No pre text, No after text and do not use 'provided data' related text as I need to show this data on a web page. 1) Return result with Positive, Neutral, Negative percentage and overall feelings in a 'result' field and suggestions in a separate 'suggestion' field within their specific niche to post tweets for more engagement. 2) Find out success full Trend, Hashtag, keywords and popular discussion within their specific niche in a separate field 3) Analyze tweet performance and add field 'well' or 'fail' regarding that tweet. 4) Analyze success full strategy within their specific niche and collect data like( tweet insight, Trends, hashtags, keywords, Discussion he use usually, Tweets format, Tweet strategy(post day count, post schedule). " + JSON.stringify(tweetData),
+         });
+        // Access the generated content from GeminiResponse
+        const GeminiResponseData = GeminiResponse.text;
+         if (!GeminiResponseData) {
+           return new Response(JSON.stringify({ error: 'Failed to generate content' }), { status: 500 });
+         } 
+          return NextResponse.json({ GeminiResponseData });
+         //return NextResponse.json({ GeminiResponseData });
+         //const responseRedirect = NextResponse.redirect(new URL('/Gemini?data=' + encodeURIComponent(JSON.stringify(GeminiResponseData)), req.url));
+         //responseRedirect.cookies.set('Geminidata', JSON.stringify(GeminiResponseData), { httpOnly: true, secure: true });
+         //responseRedirect.cookies.set('twitterData', JSON.stringify(tweetData), { httpOnly: true, secure: true });
 
-    //      return responseRedirect;
+        // return responseRedirect;
 }
