@@ -1,13 +1,11 @@
-
-type Props = {
-      searchParams: Promise<{ [key: string]: string | string[] | undefined; }>;
-    };
-export default async function Responsedata({ searchParams }: Props) {
+"use client";
+import { useSearchParams } from 'next/navigation';
+export default function Responsedata() {
 
     // Example for Next.js Server Components
 
-    const resolvedSearchParams = await searchParams;
-    const Geminidata = resolvedSearchParams.data;
+     const searchParams = useSearchParams();
+      const geminiData = searchParams.get('data');
     // const GeminidataStr =
     //   typeof Geminidata === 'string' ? Geminidata : Array.isArray(Geminidata) ? Geminidata[0] || '' : '';
     // // const GeminidataDecoded = decodeURIComponent(GeminidataStr);
@@ -17,7 +15,7 @@ export default async function Responsedata({ searchParams }: Props) {
       return (
         <div>
            {
-            Geminidata ? Geminidata : 'Loading...'
+            geminiData ? geminiData : 'Loading...'
           } 
         </div>
       );
