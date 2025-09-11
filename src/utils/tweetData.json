@@ -1,0 +1,146 @@
+{
+    "data": [
+        {
+            "text": "From blue bird to bold X 🚀 https://t.co/5i7DTLKjvb",
+            "author_id": "1965810901300162561",
+            "created_at": "2025-09-10T16:47:00.000Z",
+            "attachments": {
+                "media_keys": ["3_1963708830803714048"]
+            },
+            "id": "1965819305188274464",
+            "entities": {
+                "urls": [
+                    {
+                        "start": 27,
+                        "end": 50,
+                        "url": "https://t.co/5i7DTLKjvb",
+                        "expanded_url": "https://x.com/Sabiltechbusi/status/1963708833139937342/photo/1",
+                        "display_url": "pic.x.com/5i7DTLKjvb",
+                        "media_key": "3_1963708830803714048"
+                    }
+                ]
+            },
+            "public_metrics": {
+                "retweet_count": 0,
+                "reply_count": 0,
+                "like_count": 0,
+                "quote_count": 0,
+                "bookmark_count": 0,
+                "impression_count": 0
+            },
+            "edit_history_tweet_ids": ["1965819305188274464"]
+        },
+        {
+            "text": "Good night",
+            "author_id": "1965810901300162561",
+            "created_at": "2025-09-10T16:46:47.000Z",
+            "id": "1965819253849768185",
+            "public_metrics": {
+                "retweet_count": 0,
+                "reply_count": 0,
+                "like_count": 0,
+                "quote_count": 0,
+                "bookmark_count": 0,
+                "impression_count": 0
+            },
+            "edit_history_tweet_ids": ["1965819253849768185"]
+        },
+        {
+            "text": "still learning and integrate ai model in app",
+            "author_id": "1965810901300162561",
+            "created_at": "2025-09-10T16:46:31.000Z",
+            "entities": {
+                "annotations": [
+                    {
+                        "start": 29,
+                        "end": 30,
+                        "probability": 0.5127,
+                        "type": "Other",
+                        "normalized_text": "ai"
+                    },
+                    {
+                        "start": 41,
+                        "end": 43,
+                        "probability": 0.4857,
+                        "type": "Other",
+                        "normalized_text": "app"
+                    }
+                ]
+            },
+            "id": "1965819184862081205",
+            "public_metrics": {
+                "retweet_count": 0,
+                "reply_count": 0,
+                "like_count": 0,
+                "quote_count": 0,
+                "bookmark_count": 0,
+                "impression_count": 0
+            },
+            "edit_history_tweet_ids": ["1965819184862081205"]
+        },
+        {
+            "text": "Can i deserve a remote job?🙄",
+            "author_id": "1965810901300162561",
+            "created_at": "2025-09-10T16:46:21.000Z",
+            "id": "1965819142956789786",
+            "public_metrics": {
+                "retweet_count": 0,
+                "reply_count": 0,
+                "like_count": 0,
+                "quote_count": 0,
+                "bookmark_count": 0,
+                "impression_count": 0
+            },
+            "edit_history_tweet_ids": ["1965819142956789786"]
+        },
+        {
+            "text": "Learning on how to integrate ai model.",
+            "author_id": "1965810901300162561",
+            "created_at": "2025-09-10T16:46:09.000Z",
+            "entities": {
+                "annotations": [
+                    {
+                        "start": 29,
+                        "end": 30,
+                        "probability": 0.6148,
+                        "type": "Other",
+                        "normalized_text": "ai"
+                    }
+                ]
+            },
+            "id": "1965819094726488252",
+            "public_metrics": {
+                "retweet_count": 0,
+                "reply_count": 0,
+                "like_count": 0,
+                "quote_count": 0,
+                "bookmark_count": 0,
+                "impression_count": 0
+            },
+            "edit_history_tweet_ids": ["1965819094726488252"]
+        }
+    ],
+    "includes": {
+        "media": [
+            {
+                "media_key": "3_1963708830803714048",
+                "type": "photo",
+                "url": "https://pbs.twimg.com/media/G0B-xwZaYAAh2Nf.jpg"
+            }
+        ],
+        "users": [
+            {
+                "id": "1965810901300162561",
+                "username": "saifi035",
+                "name": "Saifi",
+                "profile_image_url": "https://abs.twimg.com/sticky/default_profile_images/default_profile_normal.png"
+            }
+        ]
+    },
+    "meta": {
+        "next_token": "7140dibdnow9c7btw4e26byicydt0oo7hbq5w24w9egqa",
+        "result_count": 5,
+        "newest_id": "1965819305188274464",
+        "oldest_id": "1965819094726488252"
+    }
+}
