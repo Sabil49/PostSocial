@@ -1,8 +1,8 @@
 
-export default async function Responsedata() {
+export default async function Responsedata(req: Request) {
 
-    const params = new URLSearchParams(window.location.search);
-    const Geminidata = params.get('data');
+    const { searchParams } = new URL(req.url);
+    const Geminidata = searchParams.get('data');
       return (
         <div>
            {
