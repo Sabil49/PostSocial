@@ -16,6 +16,7 @@ export async function GET(req: NextRequest) {
             if (userData.error) {
              return new Response(JSON.stringify({ error: 'Please try after 15 minutes' }), { status: 401 });
             }
+            return NextResponse.json({ userData });
     //    if (!userData.data || !userData.data.id) {
     //     return new Response(JSON.stringify({ error: 'User ID not found' }), { status: 401 });
     //    }
