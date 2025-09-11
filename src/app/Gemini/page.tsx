@@ -8,7 +8,7 @@ import { useSearchParams } from 'next/navigation';
       console.log("geminiData");
       console.log(geminiData);
       const geminiDataObj = JSON.parse(JSON.stringify(geminiData));
-      console.log("geminiDataObj");
+      console.log("geminiDataObj:");
       console.log(geminiDataObj);
       console.log(typeof geminiDataObj);
       return <div>{geminiData ? geminiData : 'Loading...'}</div>;
