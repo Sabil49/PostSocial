@@ -27,17 +27,17 @@ export async function GET(req: NextRequest) {
         //return NextResponse.json(tweetData);
        const GeminiResponse = await ai.models.generateContent({
            model: "gemini-2.5-flash",
-           contents: "Do sentiment analysis for 'How people feel about something after looking tweet'. use 'Text' field as tweet from provided data. " + JSON.stringify(tweetData),
+           contents: "Do sentiment analysis for 'How people feel about something after looking tweet'. use 'Text' field as tweet from provided data. return data in json format. " + JSON.stringify(tweetData),
          });
         // Access the generated content from GeminiResponse
         const GeminiResponseData = GeminiResponse.text;
          if (!GeminiResponseData) {
            return new Response(JSON.stringify({ error: 'Failed to generate content' }), { status: 500 });
          } 
-         return NextResponse.json({ GeminiResponseData });
-        //  const responseRedirect = NextResponse.redirect(new URL('/Gemini', req.url));
-        //  responseRedirect.cookies.set('Geminidata', JSON.stringify(GeminiResponseData), { httpOnly: true, secure: true });
-        //  responseRedirect.cookies.set('twitterData', JSON.stringify(tweetData), { httpOnly: true, secure: true });
+         //return NextResponse.json({ GeminiResponseData });
+         const responseRedirect = NextResponse.redirect(new URL('/Gemini?data=' + encodeURIComponent(JSON.stringify(GeminiResponseData)), req.url));
+         //responseRedirect.cookies.set('Geminidata', JSON.stringify(GeminiResponseData), { httpOnly: true, secure: true });
+         //responseRedirect.cookies.set('twitterData', JSON.stringify(tweetData), { httpOnly: true, secure: true });
 
-        //  return responseRedirect;
+         return responseRedirect;
 }
