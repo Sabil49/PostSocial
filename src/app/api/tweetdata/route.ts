@@ -40,18 +40,19 @@ export async function GET(req: NextRequest) {
       }
        const GeminiResponse = await ai.models.generateContent({
            model: "gemini-2.5-flash",
-           contents: "Do sentiment analysis for tweets and How people feel after looking tweets. Use 'Text' fields as tweets to provided data. No pre text, No after text and do not use 'provided data' related text as I need to show this data on a web page. return text data only in json object. 1) Return result with Positive, Neutral, Negative percentage, overall feelings and suggestions in a separate 'suggestion' field within their specific niche to post tweets for more engagement. 2) Find out success full Trend, Hashtag, keywords and popular discussion within their specific niche in a separate field 3) Analyze tweet performance and add field 'well' or 'fail' regarding that tweet. 4) Analyze success full strategy within their specific niche and collect data like( tweet insight, Trends, hashtags, keywords, Discussion, Tweets format, Tweet strategy(post day count, post schedule). " + JSON.stringify(tweetDataArray),
+           contents: "Do sentiment analysis for tweets and How people feel after looking tweets. Use 'Text' fields as tweets to provided data. No pre text, No after text and do not use 'provided data' related text as I need to show this data on a web page. Do not add '\n', '\' or '```' in text data only return valid json format data. 1) Return result with Positive, Neutral, Negative percentage, overall feelings and suggestions in a separate 'suggestion' field within their specific niche to post tweets for more engagement. 2) Find out success full Trend, Hashtag, keywords and popular discussion within their specific niche in a separate field 3) Analyze tweet performance and add field 'well' or 'fail' regarding that tweet. 4) Analyze success full strategy within their specific niche and collect data like( tweet insight, Trends, hashtags, keywords, Discussion, Tweets format, Tweet strategy(post day count, post schedule). " + JSON.stringify(tweetDataArray),
          });
         // Access the generated content from GeminiResponse
         const GeminiResponseData = GeminiResponse.text;
          if (!GeminiResponseData) {
            return new Response(JSON.stringify({ error: 'Failed to generate content' }), { status: 500 });
          }
-
-          const responseRedirect = NextResponse.redirect(new URL('/Gemini?data=' + encodeURIComponent(JSON.stringify(GeminiResponseData)), req.url));
+         return NextResponse.json(GeminiResponseData);
+          // Return the generated content as JSON
+         // const responseRedirect = NextResponse.redirect(new URL('/Gemini?data=' + encodeURIComponent(JSON.stringify(GeminiResponseData)), req.url));
          //responseRedirect.cookies.set('Geminidata', JSON.stringify(GeminiResponseData), { httpOnly: true, secure: true });
          //responseRedirect.cookies.set('twitterData', JSON.stringify(tweetData), { httpOnly: true, secure: true });
 
-        return responseRedirect;
+        //return responseRedirect;
 
 }
