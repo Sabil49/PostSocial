@@ -47,7 +47,7 @@ export async function GET(req: NextRequest) {
          if (!GeminiResponseData) {
            return new Response(JSON.stringify({ error: 'Failed to generate content' }), { status: 500 });
          }
-          return NextResponse.json(typeof(JSON.parse(GeminiResponse.text)));
+          return NextResponse.json(typeof(JSON.parse(JSON.stringify(GeminiResponse.text))));
          //return NextResponse.json({ GeminiResponseData });
          //const responseRedirect = NextResponse.redirect(new URL('/Gemini?data=' + encodeURIComponent(JSON.stringify(GeminiResponseData)), req.url));
          //responseRedirect.cookies.set('Geminidata', JSON.stringify(GeminiResponseData), { httpOnly: true, secure: true });
