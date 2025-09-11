@@ -6,12 +6,8 @@ export default function Responsedata() {
 
      const searchParams = useSearchParams();
       const geminiData = searchParams.get('data');
-    // const GeminidataStr =
-    //   typeof Geminidata === 'string' ? Geminidata : Array.isArray(Geminidata) ? Geminidata[0] || '' : '';
-    // // const GeminidataDecoded = decodeURIComponent(GeminidataStr);
-    // const GeminidataParsed = JSON.parse(GeminidataStr || '{}');
-    // console.log('Geminidata::::');
-    // console.log(JSON.parse(JSON.stringify(Geminidata)));
+      console.log("geminiData");
+      console.log(geminiData);
       return (
         <div>
            {
