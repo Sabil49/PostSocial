@@ -16,17 +16,22 @@ export async function GET(req: NextRequest) {
             if (userData.error) {
              return new Response(JSON.stringify({ error: 'Please try after 15 minutes' }), { status: 401 });
             }
-            return NextResponse.json({ userData });
-    //    if (!userData.data || !userData.data.id) {
-    //     return new Response(JSON.stringify({ error: 'User ID not found' }), { status: 401 });
-    //    }
-    //    const twitterResponse = await fetch(`https://api.x.com/2/users/${userData.data.id}/tweets?max_results=5&expansions=author_id,referenced_tweets.id,attachments.media_keys&tweet.fields=created_at,public_metrics,entities,source&user.fields=username,name,profile_image_url&media.fields=url`, {
-    //   headers: {
-    //     Authorization: `Bearer ${accessToken}`,
-    //   },
-    // });
+            //return NextResponse.json({ userData });
+       if (!userData.data || !userData.data.id) {
+        return new Response(JSON.stringify({ error: 'User ID not found' }), { status: 401 });
+       }
+       const twitterResponse = await fetch(`https://api.x.com/2/users/${userData.data.id}/tweets?max_results=5&expansions=author_id,referenced_tweets.id,attachments.media_keys&tweet.fields=created_at,public_metrics,entities,source&user.fields=username,name,profile_image_url&media.fields=url`, {
+      headers: {
+        Authorization: `Bearer ${accessToken}`,
+      },
+    });
+       const tweetData = await twitterResponse.json();
+      if (tweetData.error) {
+             return new Response(JSON.stringify({ error: 'Please try after 15 minutes' }), { status: 401 });
+            }
+          return NextResponse.json(tweetData);
 
-    //    const tweetData = await twitterResponse.json();
+    
     //     //return NextResponse.json(tweetData);
     //    const GeminiResponse = await ai.models.generateContent({
     //        model: "gemini-2.5-flash",
