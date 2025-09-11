@@ -13,7 +13,7 @@ export async function GET(req: NextRequest) {
     },
             });
        const userData = await response.json();
-            if (userData.error) {
+            if (userData.status === 429) {
              return new Response(JSON.stringify({ error: 'Please try after 15 minutes' }), { status: 401 });
             }
             //return NextResponse.json({ userData });
@@ -26,7 +26,7 @@ export async function GET(req: NextRequest) {
       },
     });
        const tweetData = await twitterResponse.json();
-      if (tweetData.error) {
+      if (tweetData.status === 429) {
              return new Response(JSON.stringify({ error: 'Please try after 15 minutes' }), { status: 401 });
             }
           return NextResponse.json(tweetData);
