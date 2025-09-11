@@ -51,7 +51,7 @@ export async function GET(req: NextRequest) {
           GeminiResponseData?.replace('\n', ''); // Return the generated content as JSON
           GeminiResponseData?.replace("\"", ""); // Return the generated content as JSON
           GeminiResponseData?.replace("```", ""); // Return the generated content as JSON
-          return NextResponse.json({ GeminiResponseData });
+          return NextResponse.json(GeminiResponseData);
          //const responseRedirect = NextResponse.redirect(new URL('/Gemini?data=' + encodeURIComponent(JSON.stringify(GeminiResponseData)), req.url));
          //responseRedirect.cookies.set('Geminidata', JSON.stringify(GeminiResponseData), { httpOnly: true, secure: true });
          //responseRedirect.cookies.set('twitterData', JSON.stringify(tweetData), { httpOnly: true, secure: true });
