@@ -7,12 +7,13 @@ import { useSearchParams } from 'next/navigation';
       const geminiData = searchParams.get('data');
       console.log("geminiData");
       console.log(geminiData);
-      const geminiDataDecoded = decodeURIComponent(geminiData || '');
+      /* decodeURIComponent uri malformed error */ 
+      //const geminiDataDecoded = decodeURIComponent(geminiData || '');
       // const geminiDataString= JSON.stringify(geminiData);
       // console.log("geminiDataString:");
       // console.log(geminiDataString);
       //const geminiDataObj = JSON.parse(geminiDataDecoded || '{}');
-      const geminiDataObj = JSON.parse(geminiDataDecoded || '{}');
+      const geminiDataObj = JSON.parse(geminiData || '{}');
       console.log("geminiDataObj:");
       console.log(geminiDataObj);
 
