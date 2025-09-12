@@ -46,7 +46,7 @@ export async function GET(req: NextRequest) {
            model: "gemini-2.5-flash",
            contents: "Do sentiment analysis for tweets and How people feel after looking tweets. Use 'Text' fields as tweets to provided data. No pre text, No after text and do not use 'provided data' related text as I need to show this data on a web page. 1) Return result with Positive, Neutral, Negative percentage, overall feelings and suggestions in a separate 'suggestion' field within their specific niche to post tweets for more engagement. 2) Find out success full Trend, Hashtag, keywords and popular discussion within their specific niche in a separate field 3) Analyze tweet performance and add field 'well' or 'fail' regarding that tweet. 4) Analyze success full strategy within their specific niche and collect data like( tweet insight, Trends, hashtags, keywords, Discussion, Tweets format, Tweet strategy(post day count, post schedule). " + JSON.stringify(tweetDataArray),
            config: {
-               responseMimeType: "application/json",
+               responseMimeType: "application/json"
 //                responseJsonSchema: {
 //   "request_schema": {
 //     "type": "object",
