@@ -55,13 +55,13 @@ export async function GET(req: NextRequest) {
          if (!GeminiResponseData) {
            return new Response(JSON.stringify({ error: 'Failed to generate content' }), { status: 500 });
          }
-         const parsedData = JSON.parse(GeminiResponseData);
-         return NextResponse.json(parsedData);
+         //const parsedData = JSON.parse(GeminiResponseData);
+         //return NextResponse.json(parsedData);
           // Return the generated content as JSON
-         // const responseRedirect = NextResponse.redirect(new URL('/Gemini?data=' + encodeURIComponent(JSON.stringify(GeminiResponseData)), req.url));
+         const responseRedirect = NextResponse.redirect(new URL('/Gemini?data=' + encodeURIComponent(JSON.stringify(GeminiResponseData)), req.url));
          //responseRedirect.cookies.set('Geminidata', JSON.stringify(GeminiResponseData), { httpOnly: true, secure: true });
          //responseRedirect.cookies.set('twitterData', JSON.stringify(tweetData), { httpOnly: true, secure: true });
 
-        //return responseRedirect;
+        return responseRedirect;
 
 }
