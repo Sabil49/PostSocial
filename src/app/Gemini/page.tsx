@@ -34,7 +34,8 @@ import { useSearchParams } from 'next/navigation';
       console.log(geminiDataNestedObjInner);
       console.log(typeof(geminiDataNestedObjInner));
       console.log("geminiDataObj:");
-      console.log(Object.values(geminiDataObj));
+      const check=JSON.parse(geminiDataObj);
+      console.log(typeof(check));
       return <div>{geminiDataObj ? geminiDataObj : 'Loading...'}</div>;
        }
 export default function Responsedata() {
