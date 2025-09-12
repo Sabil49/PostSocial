@@ -15,13 +15,19 @@ import { useSearchParams } from 'next/navigation';
       const geminiDataObj = JSON.parse(geminiDataDecoded || '{}');
       console.log("geminiDataObj:");
       console.log(geminiDataObj);
+
+      const geminiDataNestedObj = JSON.parse(geminiDataObj.data || '{}');
       // const myObject = geminiDataObj[0];
       // const keys = Object.keys(myObject);
       // const values = Object.values(myObject);
       // console.log("keys:" + keys[0]);
       // console.log("values:" + values[0]);
-      console.log(geminiDataObj.overall_sentiment_analysis);
+      console.log("geminiDataObj:");
+      console.log(geminiDataObj);
       console.log(typeof(geminiDataObj));
+      console.log("geminiDataNestedObj:");
+      console.log(geminiDataNestedObj);
+      console.log(typeof(geminiDataNestedObj));
       return <div>{geminiDataObj ? geminiDataObj : 'Loading...'}</div>;
        }
 export default function Responsedata() {
