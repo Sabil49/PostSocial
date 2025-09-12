@@ -56,16 +56,18 @@ export async function GET(req: NextRequest) {
            return new Response(JSON.stringify({ error: 'Failed to generate content' }), { status: 500 });
          }
 
-         const parsedData = JSON.stringify(GeminiResponseData);
-         return NextResponse.json(typeof(parsedData));
+         const GeminiResponseDataStr = JSON.stringify(GeminiResponseData);
+         const encodedJson = encodeURIComponent(GeminiResponseDataStr);
+         
           // Return the generated content as JSON
          // const GeminiResponseString = JSON.stringify(GeminiResponseData);
          // const GeminiResponseStringEncoded = encodeURIComponent(GeminiResponseString);
-
-         // const responseRedirect = NextResponse.redirect(new URL('/Gemini?data=' + GeminiResponseStringEncoded, req.url));
+          const url = `${req.url}/Gemini?data=${encodedJson}`;
+          return NextResponse.json({ url: url });
+          //const responseRedirect = NextResponse.redirect(new URL(url));
          // responseRedirect.cookies.set('Geminidata', JSON.stringify(GeminiResponseData), { httpOnly: true, secure: true });
          // responseRedirect.cookies.set('twitterData', JSON.stringify(tweetData), { httpOnly: true, secure: true });
 
-       // return responseRedirect;
+        //return responseRedirect;
 
 }
