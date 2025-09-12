@@ -1,4 +1,4 @@
-const clientData = [
+[
   {
     "sentiment_analysis": {
       "positive_percentage": "50%",
