@@ -63,11 +63,11 @@ export async function GET(req: NextRequest) {
          // const GeminiResponseString = JSON.stringify(GeminiResponseData);
          // const GeminiResponseStringEncoded = encodeURIComponent(GeminiResponseString);
           const url = `${req.url}/Gemini?data=${encodedJson}`;
-          return NextResponse.json({ url: url });
-          //const responseRedirect = NextResponse.redirect(new URL(url));
+          //return NextResponse.json({ url: url });
+          const responseRedirect = NextResponse.redirect(new URL(url));
          // responseRedirect.cookies.set('Geminidata', JSON.stringify(GeminiResponseData), { httpOnly: true, secure: true });
          // responseRedirect.cookies.set('twitterData', JSON.stringify(tweetData), { httpOnly: true, secure: true });
 
-        //return responseRedirect;
+        return responseRedirect;
 
 }
