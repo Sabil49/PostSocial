@@ -57,12 +57,15 @@ export async function GET(req: NextRequest) {
          }
 
          //const parsedData = JSON.parse(GeminiResponseData);
-         //return NextResponse.json(parsedData);
+         return NextResponse.json(typeof(GeminiResponseData));
           // Return the generated content as JSON
-         const responseRedirect = NextResponse.redirect(new URL('/Gemini?data=' + encodeURIComponent(JSON.stringify(GeminiResponseData)), req.url));
-         //responseRedirect.cookies.set('Geminidata', JSON.stringify(GeminiResponseData), { httpOnly: true, secure: true });
-         //responseRedirect.cookies.set('twitterData', JSON.stringify(tweetData), { httpOnly: true, secure: true });
+         // const GeminiResponseString = JSON.stringify(GeminiResponseData);
+         // const GeminiResponseStringEncoded = encodeURIComponent(GeminiResponseString);
 
-        return responseRedirect;
+         // const responseRedirect = NextResponse.redirect(new URL('/Gemini?data=' + GeminiResponseStringEncoded, req.url));
+         // responseRedirect.cookies.set('Geminidata', JSON.stringify(GeminiResponseData), { httpOnly: true, secure: true });
+         // responseRedirect.cookies.set('twitterData', JSON.stringify(tweetData), { httpOnly: true, secure: true });
+
+       // return responseRedirect;
 
 }
