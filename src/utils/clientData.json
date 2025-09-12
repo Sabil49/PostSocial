@@ -1,0 +1,53 @@
+const clientData = [
+  {
+    "sentiment_analysis": {
+      "positive_percentage": "50%",
+      "neutral_percentage": "50%",
+      "negative_percentage": "0%",
+      "overall_feeling": "The overall feeling is mixed, leaning positive. One tweet expresses an optimistic view on a platform transition, while the other is a neutral, polite greeting.",
+      "suggestion": "To increase engagement within the inferred tech/business niche, focus on content that provides value, sparks conversation, and aligns with brand identity. For the 'From blue bird to bold X' tweet, consider asking a question to encourage replies, or elaborate on the 'bold X' vision. For general greetings like 'Good night', either infuse them with industry relevance (e.g., 'Good night to all the innovators building the future!') or consider if they fit the professional tone of the account. Always include relevant hashtags and engaging visuals/media where appropriate."
+    },
+    "successful_elements": {
+      "trends": [
+        "Platform re-branding and evolution (e.g., Twitter to X transition)"
+      ],
+      "hashtags": [],
+      "keywords": [
+        "blue bird",
+        "bold X",
+        "rocket",
+        "Good night"
+      ],
+      "popular_discussions": [
+        "Discussions surrounding major technology platform changes and brand identity shifts."
+      ]
+    },
+    "successful_strategy_analysis": {
+      "niche": "Technology, Business, Branding",
+      "tweet_insights": "Successful tweets in this niche typically offer valuable insights, news updates, or foster community discussion. They often incorporate strong visuals or calls to action to drive engagement. Content that simplifies complex tech concepts or provides a unique perspective on industry trends performs well.",
+      "trends_and_hashtags": "To leverage trends, monitor industry news for emerging technologies, market shifts, and platform updates. Use trending, relevant hashtags (e.g., #TechNews, #Innovation, #DigitalTransformation, #BrandIdentity) to improve discoverability and connect with broader conversations. Create content that directly responds to or expands upon these trends.",
+      "keywords_for_engagement": "Identify high-impact keywords specific to the target audience (e.g., 'AI', 'SaaS', 'cloud computing', 'cybersecurity', 'marketing strategy'). Integrate these naturally into tweet text, as questions, or as part of a thread to attract users searching for related topics.",
+      "discussion_topics": "Engage the audience with questions about industry challenges, invite opinions on new tech developments, share polls on future trends, or host live Q&A sessions with industry experts. Topics around digital transformation, entrepreneurship, and future technologies are often popular.",
+      "tweet_formats": "Vary tweet formats to keep content fresh and engaging. Utilize a mix of: short, impactful text updates; images/infographics for data visualization; short videos for demonstrations or explainers; polls for audience interaction; and threads for deeper dives into complex subjects.",
+      "tweet_strategy": {
+        "post_frequency": "Aim for consistent posting, ideally 1-3 times per day, to maintain visibility and reinforce brand presence. Avoid long periods of inactivity.",
+        "post_schedule": "Analyze audience engagement data to identify peak activity times (often mid-morning and mid-afternoon on weekdays for business audiences) and schedule tweets accordingly. Experiment with different times to find the optimal schedule for your specific followers."
+      }
+    },
+    "tweet_performance_details": [
+      {
+        "id": "1965819305188274464",
+        "text": "From blue bird to bold X 🚀 https://t.co/5i5DTLKjvb",
+        "sentiment": "Positive",
+        "performance": "fail"
+      },
+      {
+        "id": "1965819253849768185",
+        "text": "Good night",
+        "sentiment": "Neutral",
+        "performance": "fail"
+      }
+    ]
+  }
+]
+

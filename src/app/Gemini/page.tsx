@@ -10,7 +10,8 @@ import { useSearchParams } from 'next/navigation';
       const geminiDataObj = JSON.parse(geminiData || '{}');
       console.log("geminiDataObj:");
       console.log(geminiDataObj);
-      console.log(geminiDataObj.overall_feelings);
+      console.log(geminiDataObj[0].overall_sentiment_analysis);
+      console.log(geminiDataObj[0].overall_sentiment_analysis.overall_feeling);
       console.log(typeof geminiDataObj);
       return <div>{geminiDataObj ? geminiDataObj : 'Loading...'}</div>;
        }
