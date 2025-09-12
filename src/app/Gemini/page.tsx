@@ -8,12 +8,12 @@ import { useSearchParams } from 'next/navigation';
       console.log("geminiData");
       console.log(geminiData);
       /* decodeURIComponent uri malformed error */ 
-      //const geminiDataDecoded = decodeURIComponent(geminiData || '');
+      const geminiDataDecoded = decodeURIComponent(geminiData || '');
       // const geminiDataString= JSON.stringify(geminiData);
       // console.log("geminiDataString:");
       // console.log(geminiDataString);
-      //const geminiDataObj = JSON.parse(geminiDataDecoded || '{}');
-      const geminiDataObj = JSON.parse(geminiData || '{}');
+      const geminiDataObj = JSON.parse(geminiDataDecoded || '{}');
+     // const geminiDataObj = JSON.parse(geminiData || '{}');
       console.log("geminiDataObj:");
       console.log(geminiDataObj);
 
@@ -34,7 +34,7 @@ import { useSearchParams } from 'next/navigation';
       console.log(geminiDataNestedObjInner);
       console.log(typeof(geminiDataNestedObjInner));
       console.log("geminiDataObj:");
-      console.log(geminiDataObj.data);
+      console.log(Object.keys(geminiDataObj));
       return <div>{geminiDataObj ? geminiDataObj : 'Loading...'}</div>;
        }
 export default function Responsedata() {
