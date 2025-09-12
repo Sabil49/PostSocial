@@ -20,6 +20,7 @@ import { useSearchParams } from 'next/navigation';
       // const values = Object.values(myObject);
       // console.log("keys:" + keys[0]);
       // console.log("values:" + values[0]);
+      console.log(geminiDataObj.overall_sentiment_analysis);
       console.log(typeof(geminiDataObj));
       return <div>{geminiDataObj ? geminiDataObj : 'Loading...'}</div>;
        }
