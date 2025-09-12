@@ -56,8 +56,8 @@ export async function GET(req: NextRequest) {
            return new Response(JSON.stringify({ error: 'Failed to generate content' }), { status: 500 });
          }
 
-         //const parsedData = JSON.parse(GeminiResponseData);
-         return NextResponse.json(typeof(GeminiResponseData));
+         const parsedData = JSON.parse(GeminiResponseData);
+         return NextResponse.json(typeof(parsedData));
           // Return the generated content as JSON
          // const GeminiResponseString = JSON.stringify(GeminiResponseData);
          // const GeminiResponseStringEncoded = encodeURIComponent(GeminiResponseString);
