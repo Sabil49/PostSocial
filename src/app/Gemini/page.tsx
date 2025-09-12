@@ -7,7 +7,8 @@ import { useSearchParams } from 'next/navigation';
       const geminiData = searchParams.get('data');
       console.log("geminiData");
       console.log(geminiData);
-      const geminiDataObj = JSON.parse(geminiData || '{}');
+      const geminiDataDecoded = decodeURIComponent(geminiData || '');
+      const geminiDataObj = JSON.parse(geminiDataDecoded || '{}');
       console.log("geminiDataObj:");
       console.log(geminiDataObj);
       const myObject = geminiDataObj[0];
@@ -15,7 +16,7 @@ import { useSearchParams } from 'next/navigation';
       const values = Object.values(myObject);
       console.log("keys:" + keys[0]);
       console.log("values:" + values[0]);
-      console.log(typeof geminiDataObj);
+      console.log(typeof(geminiDataObj));
       return <div>{geminiDataObj ? geminiDataObj : 'Loading...'}</div>;
        }
 export default function Responsedata() {
