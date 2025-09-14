@@ -8,7 +8,7 @@ export default async function Testdata() {
         Superblog
       </h1>
       <ol className="list-decimal list-inside font-[family-name:var(--font-geist-sans)]">
-        {users.map((user: { id: string; name: string }) => (
+        {users.map((user: { id: string; name: string | null }) => (
           <li key={user.id} className="mb-2">
             {user.name}
           </li>
