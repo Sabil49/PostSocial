@@ -2,7 +2,8 @@
 import { useActionState } from 'react';
 import { authenticate } from '../api/auth/actions';
 import { useSearchParams } from 'next/navigation';
- 
+import { signIn } from '@/app/api/auth/auth';
+
 export default function LoginForm() {
   const searchParams = useSearchParams();
   const callbackUrl = searchParams.get('callbackUrl') || '/SocialAccount';
@@ -12,6 +13,7 @@ export default function LoginForm() {
   );
  
   return (
+    <div>
     <form action={formAction} className="space-y-3">
       <div className="flex-1 rounded-lg bg-gray-50 px-6 pb-4 pt-8">
         <h1 className='mb-3 text-2xl'>
@@ -73,5 +75,9 @@ export default function LoginForm() {
         </div>
       </div>
     </form>
+    <button onClick={() => signIn('google')}>
+          Sign in with Google
+    </button>
+    </div>
   );
 }
