@@ -5,7 +5,7 @@ import { useSearchParams } from 'next/navigation';
  
 export default function LoginForm() {
   const searchParams = useSearchParams();
-  const callbackUrl = searchParams.get('callbackUrl') || '/SocialAccount';
+  const callbackUrl = searchParams.get('callbackUrl') || '/Testdata';
   const [errorMessage, formAction, isPending] = useActionState(
     authenticate,
     undefined,
