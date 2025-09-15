@@ -2,7 +2,7 @@
 import { useActionState } from 'react';
 import { authenticate } from '../api/auth/actions';
 import { useSearchParams } from 'next/navigation';
-import { signIn } from '@/app/api/auth/auth';
+import {signIn} from 'next-auth/react';
 
 export default function LoginForm() {
   const searchParams = useSearchParams();
@@ -75,6 +75,9 @@ export default function LoginForm() {
         </div>
       </div>
     </form>
+    <button onClick={() => signIn('google')}>
+          Sign in with Google
+    </button>
     </div>
   );
 }
