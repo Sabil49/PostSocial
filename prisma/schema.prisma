@@ -23,4 +23,5 @@ model User {
   createdAt      DateTime  @default(now())
   updatedAt      DateTime  @updatedAt
   loginAt        DateTime?
+  accessToken    String?
  }

@@ -44,6 +44,26 @@ export const { auth, signIn, signOut } = NextAuth({
             }
             return true;
         },
+        async jwt({ token, account, profile }) {
+         if (account) {
+            token.accessToken = account.access_token;
+            if (profile) {
+              token.id = profile.id;
+         }
+        }
+      return token;
+    },
+    async session({ session, token }) {
+      if (token) {
+        session.accessToken = token.accessToken as string;
+        session.user.id = token.id as string;
+      }
+      return session;
+    },
+    async signIn({ user, account, profile }) {
+      console.log("User signed in:", user);
+      return true;
+    },
     },
     providers: [
         Credentials({
