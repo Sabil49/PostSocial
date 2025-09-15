@@ -1,5 +1,6 @@
 import LoginForm from './login-form';
 import { Suspense } from 'react';
+import { signIn } from '../api/auth/auth';
  
 export default function LoginPage() {
   return (
@@ -8,6 +9,9 @@ export default function LoginPage() {
         <Suspense>
           <LoginForm />
         </Suspense>
+         <button onClick={() => signIn('google')}>
+          Sign in with Google
+        </button>
       </div>
     </main>
   );
