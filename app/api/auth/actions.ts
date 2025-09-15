@@ -1,8 +1,11 @@
 'use server';
  
-import { signIn } from './auth';
+import { signIn,signOut } from './auth';
 import { AuthError } from 'next-auth';
- 
+
+export const signOutUser = async () => {
+   await signOut({ redirectTo: '/' });
+}
 
 export async function authenticate(
   prevState: string | undefined,
