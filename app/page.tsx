@@ -1,11 +1,9 @@
-import ConnectXButton from "./SocialAccount/page";
-import Testdata from "./Testdata/page";
+import LoginPage from "./login/page";
 
 export default function Home() {
   return (
     <div className="">
-      <ConnectXButton />
-      <Testdata />
+      <LoginPage />
     </div>
   );
 }
