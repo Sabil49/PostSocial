@@ -28,7 +28,7 @@ async function getUser(email: string): Promise<User | null> {
     }
 }
 
-export const { auth, signIn, signOut } = NextAuth({
+export const { handlers: { GET, POST }, auth, signIn, signOut } = NextAuth({
     pages: {
         signIn: "/login",
     },
