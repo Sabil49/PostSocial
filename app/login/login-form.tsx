@@ -75,9 +75,6 @@ export default function LoginForm() {
         </div>
       </div>
     </form>
-    <button onClick={() => signIn('google')}>
-          Sign in with Google
-    </button>
     </div>
   );
 }
