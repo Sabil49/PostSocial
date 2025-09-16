@@ -6,8 +6,11 @@ import { NextRequest,NextResponse } from "next/server";
 export default async function handler(req: NextRequest, res: NextResponse) {
   if (req.method === 'POST') {
     const data = await req.json();
-    if (!data) return null;
-    const parsedData = z.object({ email: z.string().email(), password: z.string().min(8), name: z.string().min(2).max(100)}).safeParse(data);
+    console.log("Received data:", data);
+    const dataObject = JSON.parse(data);
+    console.log("Parsed data object:", dataObject);
+    if (!dataObject) return null;
+    const parsedData = z.object({ email: z.string().email(), password: z.string().min(8), name: z.string().min(2).max(100)}).safeParse(dataObject);
     if (!parsedData.success) {
         console.log("Validation failed", parsedData.error);
         return null;
@@ -26,9 +29,9 @@ export default async function handler(req: NextRequest, res: NextResponse) {
                     // Store user in the database
                     const user = await prisma.user.create({
                         data: {
-                            email,
+                            email: email,
                             password: hashedPassword,
-                            name,
+                            name: name,
                         },
                     });
                     console.log("User registered successfully:", user);

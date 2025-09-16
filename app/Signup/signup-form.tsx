@@ -1,5 +1,7 @@
 "use client";
 import React, { useState } from 'react';
+import OAuth from '../Components/Oauth';
+import Link from 'next/link';
 
 function CreateUserForm() {
   const [name, setName] = useState('');
@@ -34,12 +36,16 @@ function CreateUserForm() {
   };
 
   return (
+    <div> 
     <form onSubmit={handleSubmit}>
       <input type="text" placeholder="Name" value={name} required minLength={2} maxLength={100} onChange={(e) => setName(e.target.value)} />
       <input type="email" placeholder="Email" value={email} required onChange={(e) => setEmail(e.target.value)} />
       <input type="password" placeholder="Password" value={password} required minLength={8} onChange={(e) => setPassword(e.target.value)} />
       <button type="submit">Create User</button>
     </form>
+    <Link href="/login">Already have an account? Log in</Link>
+    <OAuth />
+    </div>
   );
 }
 
