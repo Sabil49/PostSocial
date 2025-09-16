@@ -28,7 +28,7 @@ async function getUser(email: string): Promise<User | null> {
         throw new Error("Failed to fetch user.");
     }
 }
-
+const newDate = new Date(); // The new Date object you want to set
 export const { handlers: { GET, POST }, auth, signIn, signOut } = NextAuth({
     pages: {
         signIn: "/login",
@@ -58,7 +58,8 @@ export const { handlers: { GET, POST }, auth, signIn, signOut } = NextAuth({
                 id : user.id,
                 name: user.name,
                 email: user.email,
-                image: user.image
+                image: user.image,
+                loginAt: newDate
             }
         })
       }
@@ -94,7 +95,16 @@ export const { handlers: { GET, POST }, auth, signIn, signOut } = NextAuth({
                     if (user && user.password) {
                         //const passwordsMatch = await bcrypt.compare(password, user.password);
                         const passwordsMatch = password === user.password; // For testing purposes only
-                        if (passwordsMatch) return user;
+                        if (passwordsMatch) {
+                            await prisma.user.update({
+                                where: {
+                                 id: user.id, // Specify the record to update using a unique identifier
+                                },
+                                data: {
+                                 loginAt: newDate // Provide the new value for the field you want to update
+                                },
+                             });   
+                        }
                     }
                 }
                 console.log("Invalid credentials");
