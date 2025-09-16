@@ -66,7 +66,7 @@ export const { handlers: { GET, POST }, auth, signIn, signOut } = NextAuth({
       if(userData){
         await prisma.user.update({
                                 where: {
-                                 id: user.id, // Specify the record to update using a unique identifier
+                                 email: userData.email, // Specify the record to update using a unique identifier
                                 },
                                 data: {
                                  loginAt: newDate // Provide the new value for the field you want to update
@@ -110,7 +110,7 @@ export const { handlers: { GET, POST }, auth, signIn, signOut } = NextAuth({
                         if (passwordsMatch) {
                             await prisma.user.update({
                                 where: {
-                                 id: user.id, // Specify the record to update using a unique identifier
+                                 email: user.email, // Specify the record to update using a unique identifier
                                 },
                                 data: {
                                  loginAt: newDate // Provide the new value for the field you want to update
