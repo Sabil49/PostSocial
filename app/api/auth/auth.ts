@@ -1,10 +1,11 @@
 import GoogleProvider from "next-auth/providers/google";
 import NextAuth from "next-auth";
-import Credentials from "next-auth/providers/credentials";
+import CredentialsProvider from 'next-auth/providers/credentials';
 import { z } from "zod";
 import type { User } from "@/lib/types/userType";
 import bcrypt from "bcrypt";
 import prisma from "@/lib/prisma";
+import session from "express-session";
 
 // Fetch user by email
 async function getUser(email: string): Promise<User | null> {
@@ -66,7 +67,12 @@ export const { handlers: { GET, POST }, auth, signIn, signOut } = NextAuth({
         },
     },
     providers: [
-        Credentials({
+        CredentialsProvider({
+            name: 'Credentials',
+            credentials: {
+            email: { label: 'Email', type: 'text' },
+            password: { label: 'Password', type: 'password' },
+          },
             async authorize(credentials) {
                 if (!credentials) return null;
                 const parsedCredentials = z.object({ email: z.string().email(), password: z.string().min(6) }).safeParse(credentials);
