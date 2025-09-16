@@ -2,7 +2,7 @@ import GoogleProvider from "next-auth/providers/google";
 import NextAuth from "next-auth";
 import Credentials from "next-auth/providers/credentials";
 import { z } from "zod";
-import type { User } from "@/lib/definitions";
+import type { User } from "@/lib/types/userType";
 import bcrypt from "bcrypt";
 import prisma from "@/lib/prisma";
 
@@ -32,18 +32,7 @@ export const { handlers: { GET, POST }, auth, signIn, signOut } = NextAuth({
     pages: {
         signIn: "/login",
     },
-    callbacks: {
-        authorized({ auth, request: { nextUrl } }) {
-            const isLoggedIn = auth?.user;
-            const isOnSocialAccount = nextUrl.pathname.startsWith("/SocialAccount");
-            if (isOnSocialAccount) {
-                if (isLoggedIn) return true;
-                return false; // Redirect unauthenticated users to login page
-            } else if (isLoggedIn) {
-                return Response.redirect(new URL("/SocialAccount", nextUrl));
-            }
-            return true;
-        },
+    callbacks: {        
         async jwt({ token, account, profile }) {
          if (account) {
             token.accessToken = account.access_token;
@@ -64,6 +53,17 @@ export const { handlers: { GET, POST }, auth, signIn, signOut } = NextAuth({
       console.log("User signed in:", user);
       return true;
     },
+    authorized({ auth, request: { nextUrl } }) {
+            const isLoggedIn = auth?.user;
+            const isOnSocialAccount = nextUrl.pathname.startsWith("/SocialAccount");
+            if (isOnSocialAccount) {
+                if (isLoggedIn) return true;
+                return false; // Redirect unauthenticated users to login page
+            } else if (isLoggedIn) {
+                return Response.redirect(new URL("/SocialAccount", nextUrl));
+            }
+            return true;
+        },
     },
     providers: [
         Credentials({
