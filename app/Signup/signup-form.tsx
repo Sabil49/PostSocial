@@ -75,12 +75,12 @@ export default function SignupForm() {
               />
               </div>
           </div>
-          <div className="mt-4">
+          {/* <div className="mt-4">
             <label
               className="mb-3 mt-5 block text-xs font-medium text-gray-900"
               htmlFor="image"
             >
-              Name
+              Image
             </label>
             <div className="relative">
               <input
@@ -91,7 +91,7 @@ export default function SignupForm() {
                 placeholder="Choose image"
               />
               </div>
-          </div>
+          </div> */}
         </div>
         <button className="mt-4 w-full border" aria-disabled={isPending}>
           Register
