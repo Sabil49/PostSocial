@@ -15,7 +15,11 @@ function CreateUserForm() {
     const userData = { name, email, password };
 
     try {
-      const response = await axios.post('/api/users', userData);
+      const response = await axios.post('/api/users', userData, {
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      });
 
       if (response.status === 201) {
         const newUser = response.data;
