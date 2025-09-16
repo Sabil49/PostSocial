@@ -17,7 +17,7 @@ function CreateUserForm() {
     console.log('Sending user data:', userData);
 
     try {
-      const response = await axios.post('/api/users', userData, {
+      const response = await axios.post('/api/register', userData, {
         headers: {
           'Content-Type': 'application/json',
         },
