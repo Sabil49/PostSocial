@@ -8,7 +8,6 @@ interface User {
   createdAt: Date;
   updatedAt: Date;
   loginAt: Date | null;
-  accessToken: string | null;
 }
 
 export type { User };
