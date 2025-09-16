@@ -31,6 +31,12 @@ export async function authenticate(
 
 /* start registration function */
 
+interface MyFormState {
+  email: string;
+  password: string;
+  name: string;
+}
+
 async function registerUser(data: FormData) {
                 if (!data) return null;
                 const parsedData = z.object({ email: z.string().email(), password: z.string().min(8), name: z.string().min(2).max(100)}).safeParse(data);
@@ -50,22 +56,24 @@ async function registerUser(data: FormData) {
                     // Hash the password before storing it
                     const hashedPassword = await hashPassword(password);
                     // Store user in the database
-                    await prisma.user.create({
+                    const user = await prisma.user.create({
                         data: {
                             email,
                             password: hashedPassword,
                             name,
                         },
                     });
-                    return true; // Registration successful
+                    console.log("User registered successfully:", user);
+                    return user; // Registration successful
                 }
                 console.log("Something went wrong during registration process. try again.");
                 return null;
             }
 
-export async function registration(formData: FormData) {
+export async function registration(state: MyFormState, formData: FormData) {
   try {
-    await registerUser(formData);
+    const user = await registerUser(formData);
+    return user;
   } catch (error) {
     throw new Error("Registration error: " + error);
   }

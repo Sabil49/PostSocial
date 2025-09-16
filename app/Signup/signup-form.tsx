@@ -1,116 +1,46 @@
-'use client';
-import { useFormState } from 'react-dom';
-import { registration } from '../api/auth/actions';
-import OAuth from '../Components/Oauth';
-import Link from 'next/link';
+"use client";
+import React, { useState } from 'react';
 
-export default function SignupForm() {
-  const [errorMessage, formAction, isPending] = useFormState<string | null, FormData>(
-    async (_state: string | null, formData: FormData) => {
-      const result = await registration(formData);
-      return typeof result === 'string' ? result : null;
-    },
-    null,
-  );
- 
+function CreateUserForm() {
+  const [name, setName] = useState('');
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+
+  const handleSubmit = async (event : React.FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+
+    const userData = { name, email, password };
+
+    try {
+      const response = await fetch('/api/register', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(userData),
+      });
+
+      if (response.ok) {
+        const newUser = await response.json();
+        console.log('User created:', newUser);
+        // Clear form or show success message
+      } else {
+        const errorData = await response.json();
+        console.error('Error creating user:', errorData.message);
+      }
+    } catch (error) {
+      console.error('Network error:', error);
+    }
+  };
+
   return (
-    <div>
-    <form action={formAction} className="space-y-3">
-      <div className="flex-1 rounded-lg bg-gray-50 px-6 pb-4 pt-8">
-        <h1 className='mb-3 text-2xl'>
-          Please register to continue.
-        </h1>
-        <div className="w-full">
-          <div>
-            <label
-              className="mb-3 mt-5 block text-xs font-medium text-gray-900"
-              htmlFor="email"
-            >
-              Email
-            </label>
-            <div className="relative">
-              <input
-                className="peer block w-full rounded-md border border-gray-200 py-[9px] pl-10 text-sm outline-2 placeholder:text-gray-500"
-                id="email"
-                type="email"
-                name="email"
-                placeholder="Enter your email address"
-                required
-              />
-              </div>
-          </div>
-          <div className="mt-4">
-            <label
-              className="mb-3 mt-5 block text-xs font-medium text-gray-900"
-              htmlFor="password"
-            >
-              Password
-            </label>
-            <div className="relative">
-              <input
-                className="peer block w-full rounded-md border border-gray-200 py-[9px] pl-10 text-sm outline-2 placeholder:text-gray-500"
-                id="password"
-                type="password"
-                name="password"
-                placeholder="Enter password"
-                required
-                minLength={8}
-              />
-              </div>
-          </div>
-          <div className="mt-4">
-            <label
-              className="mb-3 mt-5 block text-xs font-medium text-gray-900"
-              htmlFor="name"
-            >
-              Name
-            </label>
-            <div className="relative">
-              <input
-                className="peer block w-full rounded-md border border-gray-200 py-[9px] pl-10 text-sm outline-2 placeholder:text-gray-500"
-                id="name"
-                type="text"
-                name="password"
-                placeholder="Enter name"
-              />
-              </div>
-          </div>
-          {/* <div className="mt-4">
-            <label
-              className="mb-3 mt-5 block text-xs font-medium text-gray-900"
-              htmlFor="image"
-            >
-              Image
-            </label>
-            <div className="relative">
-              <input
-                className="peer block w-full rounded-md border border-gray-200 py-[9px] pl-10 text-sm outline-2 placeholder:text-gray-500"
-                id="image"
-                type="file"
-                name="image"
-                placeholder="Choose image"
-              />
-              </div>
-          </div> */}
-        </div>
-        <button className="mt-4 w-full border" aria-disabled={isPending}>
-          Register
-        </button>
-        <div
-          className="flex h-8 items-end space-x-1"
-          aria-live="polite"
-          aria-atomic="true"
-        >
-          {errorMessage && (
-            <>
-              <p className="text-sm text-red-500">{errorMessage}</p>
-            </>
-          )}
-        </div>
-      </div>
+    <form onSubmit={handleSubmit}>
+      <input type="text" placeholder="Name" value={name} required minLength={2} maxLength={100} onChange={(e) => setName(e.target.value)} />
+      <input type="email" placeholder="Email" value={email} required onChange={(e) => setEmail(e.target.value)} />
+      <input type="password" placeholder="Password" value={password} required minLength={8} onChange={(e) => setPassword(e.target.value)} />
+      <button type="submit">Create User</button>
     </form>
-   <OAuth />
-    <Link href="/login">Already have an account? Log in</Link>
-    </div>
   );
 }
+
+export default CreateUserForm;
