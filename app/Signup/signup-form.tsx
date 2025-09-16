@@ -2,7 +2,7 @@
 import { useFormState } from 'react-dom';
 import { registration } from '../api/auth/actions';
 import OAuth from '../Components/Oauth';
-
+import Link from 'next/link';
 
 export default function SignupForm() {
   const [errorMessage, formAction, isPending] = useFormState<string | null, FormData>(
@@ -110,6 +110,7 @@ export default function SignupForm() {
       </div>
     </form>
    <OAuth />
+    <Link href="/login">Already have an account? Log in</Link>
     </div>
   );
 }
