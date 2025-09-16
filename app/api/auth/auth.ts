@@ -54,8 +54,8 @@ export const { handlers: { GET, POST }, auth, signIn, signOut } = NextAuth({
       console.log("User signed in:", user);
       return true;
     },
-    authorized({ auth, request: { nextUrl } }) {
-            const isLoggedIn = auth?.user;
+    authorized({ auth, request: { nextUrl }}) {
+            const isLoggedIn = auth?.user.id;
             const isOnSocialAccount = nextUrl.pathname.startsWith("/SocialAccount");
             if (isOnSocialAccount) {
                 if (isLoggedIn) return true;
