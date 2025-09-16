@@ -12,7 +12,9 @@ function CreateUserForm() {
   const handleSubmit = async (event : React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
 
+    console.log('Form submitted:', { name, email, password });
     const userData = { name, email, password };
+    console.log('Sending user data:', userData);
 
     try {
       const response = await axios.post('/api/users', userData, {
