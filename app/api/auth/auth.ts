@@ -4,9 +4,8 @@ import NextAuth from "next-auth";
 import CredentialsProvider from 'next-auth/providers/credentials';
 import { z } from "zod";
 import type { User } from "@/lib/types/userType";
-import bcrypt from "bcrypt";
 import prisma from "@/lib/prisma";
-import session from "express-session";
+import { verifyPassword } from "@/utils/bcrypt";
 
 // Fetch user by email
 async function getUser(email: string): Promise<User | null> {
@@ -106,8 +105,7 @@ export const { handlers: { GET, POST }, auth, signIn, signOut } = NextAuth({
                     const { email, password } = parsedCredentials.data;
                     const user = await getUser(email);
                     if (user && user.password) {
-                        //const passwordsMatch = await bcrypt.compare(password, user.password);
-                        const passwordsMatch = password === user.password; // For testing purposes only
+                        const passwordsMatch = await verifyPassword(password, user.password);
                         if (passwordsMatch) {
                             await prisma.user.update({
                                 where: {

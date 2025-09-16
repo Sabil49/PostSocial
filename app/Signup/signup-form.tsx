@@ -1,17 +1,12 @@
 'use client';
 import { useActionState } from 'react';
-import { authenticate } from '../api/auth/actions';
-import { useSearchParams } from 'next/navigation';
+import { registration } from '../api/auth/actions';
 import OAuth from '../Components/Oauth';
-import Link from 'next/link';
 
-export default function SignupForm() {
-  const searchParams = useSearchParams();
-  console.log("searchParams => "+ searchParams);
-  const callbackUrl = searchParams.get('callbackUrl') || '/SocialAccount';
-  console.log("callbackUrl => "+ callbackUrl);
+
+export default function LoginForm() {
   const [errorMessage, formAction, isPending] = useActionState(
-    authenticate,
+    registration,
     undefined,
   );
  
@@ -95,7 +90,6 @@ export default function SignupForm() {
               </div>
           </div>
         </div>
-        <input type="hidden" name="redirectTo" value={callbackUrl} />
         <button className="mt-4 w-full border" aria-disabled={isPending}>
           Register
         </button>
@@ -113,7 +107,6 @@ export default function SignupForm() {
       </div>
     </form>
    <OAuth />
-   <Link href="/Login">Login</Link>
     </div>
   );
 }
