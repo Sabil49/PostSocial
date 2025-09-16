@@ -3,8 +3,8 @@ import { z } from "zod";
 import { hashPassword } from "@/utils/bcrypt";
 import { NextRequest,NextResponse } from "next/server";
 
-export default async function handler(req: NextRequest, res: NextResponse) {
-  if (req.method === 'POST') {
+export default async function POST(req: NextRequest, res: NextResponse) {
+     try {
     const data = await req.json();
     console.log("Received data:", data);
     const dataObject = JSON.parse(data);
@@ -39,7 +39,8 @@ export default async function handler(req: NextRequest, res: NextResponse) {
                 }
                 console.log("Something went wrong during registration process. try again.");
                 return null;
-  } else {
-    return NextResponse.json({ message: 'Method Not Allowed' }, { status: 405 });
+              } catch (error) {
+    console.error('Error handling POST request:', error);
+    return NextResponse.json({ message: 'Error processing request' }, { status: 500 });
   }
 }
