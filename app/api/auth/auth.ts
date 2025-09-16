@@ -1,4 +1,5 @@
 import GoogleProvider from "next-auth/providers/google";
+import GitHubProvider from "next-auth/providers/github";
 import NextAuth from "next-auth";
 import CredentialsProvider from 'next-auth/providers/credentials';
 import { z } from "zod";
@@ -128,6 +129,10 @@ export const { handlers: { GET, POST }, auth, signIn, signOut } = NextAuth({
             clientId: process.env.GOOGLE_CLIENT_ID,
             clientSecret: process.env.GOOGLE_CLIENT_SECRET,
         }),
+        GitHubProvider({
+                clientId: process.env.GITHUB_CLIENT_ID,
+                clientSecret: process.env.GITHUB_CLIENT_SECRET,
+            })
     ], // Add providers with an empty array for now
     secret: process.env.NEXTAUTH_SECRET,
 });
