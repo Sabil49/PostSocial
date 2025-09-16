@@ -3,7 +3,7 @@ import { z } from "zod";
 import { hashPassword } from "@/utils/bcrypt";
 import { NextRequest,NextResponse } from "next/server";
 
-export default async function POST(req: NextRequest, res: NextResponse) {
+export async function POST(req: NextRequest, res: NextResponse) {
      try {
     const data = await req.json();
     console.log("Received data:", data);
