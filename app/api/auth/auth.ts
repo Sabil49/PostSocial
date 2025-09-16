@@ -63,16 +63,16 @@ export const { handlers: { GET, POST }, auth, signIn, signOut } = NextAuth({
             }
         })
       }
-      else{
-        await prisma.user.update({
-                                where: {
-                                 id: user.id, // Specify the record to update using a unique identifier
-                                },
-                                data: {
-                                 loginAt: newDate // Provide the new value for the field you want to update
-                                },
-       });  
-      }
+    //   else{
+    //     await prisma.user.update({
+    //                             where: {
+    //                              id: user.id, // Specify the record to update using a unique identifier
+    //                             },
+    //                             data: {
+    //                              loginAt: newDate // Provide the new value for the field you want to update
+    //                             },
+    //    });  
+    //   }
        
       // Return true to allow sign in, false to deny
       return true;
