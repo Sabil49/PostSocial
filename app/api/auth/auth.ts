@@ -104,6 +104,7 @@ export const { handlers: { GET, POST }, auth, signIn, signOut } = NextAuth({
                                  loginAt: newDate // Provide the new value for the field you want to update
                                 },
                              });   
+                             return user;
                         }
                     }
                 }
