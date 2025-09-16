@@ -51,7 +51,18 @@ export const { handlers: { GET, POST }, auth, signIn, signOut } = NextAuth({
       return session;
     },
     async signIn({ user, account, profile }) {
-      console.log("User signed in:", user);
+      const userData = await getUser(user.email || '');
+      if (!userData) {
+        await prisma.user.create({
+            data: {
+                id : user.id,
+                name: user.name,
+                email: user.email,
+                image: user.image
+            }
+        })
+      }
+      // Return true to allow sign in, false to deny
       return true;
     },
     authorized({ auth, request: { nextUrl }}) {
