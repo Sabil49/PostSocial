@@ -6,7 +6,9 @@ import {signIn} from 'next-auth/react';
 
 export default function LoginForm() {
   const searchParams = useSearchParams();
+  console.log("searchParams => "+ searchParams);
   const callbackUrl = searchParams.get('callbackUrl') || '/SocialAccount';
+  console.log("callbackUrl => "+ callbackUrl);
   const [errorMessage, formAction, isPending] = useActionState(
     authenticate,
     undefined,
@@ -58,7 +60,7 @@ export default function LoginForm() {
               </div>
           </div>
         </div>
-        <input type="hidden" name="redirectTo" value={callbackUrl} />
+        <input type="text" name="redirectTo" value={callbackUrl} />
         <button className="mt-4 w-full border" aria-disabled={isPending}>
           Log in
         </button>
