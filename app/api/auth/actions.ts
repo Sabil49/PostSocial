@@ -63,10 +63,7 @@ async function registerUser(data: FormData) {
                 return null;
             }
 
-export async function registration(
-  prevState: string | undefined,
-  formData: FormData,
-) {
+export async function registration(formData: FormData) {
   try {
     await registerUser(formData);
   } catch (error) {

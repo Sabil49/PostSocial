@@ -1,13 +1,16 @@
 'use client';
-import { useActionState } from 'react';
+import { useFormState } from 'react-dom';
 import { registration } from '../api/auth/actions';
 import OAuth from '../Components/Oauth';
 
 
-export default function LoginForm() {
-  const [errorMessage, formAction, isPending] = useActionState(
-    registration,
-    undefined,
+export default function SignupForm() {
+  const [errorMessage, formAction, isPending] = useFormState<string | null, FormData>(
+    async (_state: string | null, formData: FormData) => {
+      const result = await registration(formData);
+      return typeof result === 'string' ? result : null;
+    },
+    null,
   );
  
   return (
