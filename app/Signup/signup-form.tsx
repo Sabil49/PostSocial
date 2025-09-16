@@ -2,6 +2,7 @@
 import React, { useState } from 'react';
 import OAuth from '../Components/Oauth';
 import Link from 'next/link';
+import axios from 'axios';
 
 function CreateUserForm() {
   const [name, setName] = useState('');
@@ -14,21 +15,14 @@ function CreateUserForm() {
     const userData = { name, email, password };
 
     try {
-      const response = await fetch('/api/register', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(userData),
-      });
+      const response = await axios.post('/api/users', userData);
 
-      if (response.ok) {
-        const newUser = await response.json();
+      if (response.status === 201) {
+        const newUser = response.data;
         console.log('User created:', newUser);
         // Clear form or show success message
       } else {
-        const errorData = await response.json();
-        console.error('Error creating user:', errorData.message);
+        console.error('Error creating user:', response.data.message);
       }
     } catch (error) {
       console.error('Network error:', error);
