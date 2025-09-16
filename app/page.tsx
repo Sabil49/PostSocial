@@ -1,4 +1,4 @@
-import LoginPage from "./Login/page";
+import LoginPage from "./login/page";
 import Testdata from "./Testdata/page";
 export default function Home() {
   return (
