@@ -3,7 +3,7 @@ import { useSearchParams } from 'next/navigation';
 import { Suspense } from 'react';
 import clientData from '@/utils/clientData.json';
 
-       function displayJson(data: Record<string, undefined>, parentElement: HTMLElement) {
+       function displayJson(data : Record<string, unknown>, parentElement: HTMLElement) {
         for (const key in data) {
             if (data.hasOwnProperty(key)) {
                 const value = data[key];
@@ -14,7 +14,7 @@ import clientData from '@/utils/clientData.json';
                     itemElement.appendChild(keyElement);
                     const nestedContainer = document.createElement('div');
                     nestedContainer.style.marginLeft = '20px'; // Indent nested content
-                    displayJson(value, nestedContainer); // Recursive call
+                    displayJson(value as Record<string, unknown>, nestedContainer); // Recursive call
                     itemElement.appendChild(nestedContainer);
                 } else {
                     itemElement.textContent = `${key}: ${value}`;
@@ -47,7 +47,7 @@ import clientData from '@/utils/clientData.json';
     const jsonOutputElement = document.getElementById('json-output');
     if (jsonOutputElement) {
       console.log("jsonOutputElement is not null");
-      displayJson(geminiDataObjParseagain, jsonOutputElement);
+      displayJson(clientData, jsonOutputElement);
     }
     else{
       console.log("jsonOutputElement is null");
