@@ -50,17 +50,15 @@ import { useSearchParams } from 'next/navigation';
     }
     else{
       console.log("jsonOutputElement is null");
-    }
-      return(
-        <div id="json-output"></div>
-      )
-
+    }  
+    return null;
 
        }
 export default function Responsedata() {
 
     return (
         <div>
+          <div id="json-output"></div>
           <Suspense fallback={<div>Loading error...</div>}>
                       <MyGeminiComponent />
           </Suspense>
