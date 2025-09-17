@@ -6,8 +6,10 @@ import clientData from '@/utils/clientData.json';
        function displayJson(data : Record<string, unknown>, parentElement: HTMLElement) {
         debugger;
         for (const key in data) {
+          console.log("Key: " + key);
             if (data.hasOwnProperty(key)) {
                 const value = data[key];
+                console.log("Key: " + key + " Value: " + value);
                 const itemElement = document.createElement('div');
                 if (typeof value === 'object' && value !== null) {
                     const keyElement = document.createElement('strong');
