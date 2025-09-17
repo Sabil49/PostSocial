@@ -1,10 +1,11 @@
 "use client";
 import { useSearchParams } from 'next/navigation';
-   import { Suspense } from 'react';
+import { Suspense } from 'react';
+import clientData from '@/utils/clientData.json';
 
-       function displayJson(data: Record<string, undefined>, parentElement: HTMLElement) {
+       function displayJson(data: Record<string, unknown>, parentElement: HTMLElement) {
         for (const key in data) {
-            if (data.hasOwnProperty(key)) {
+            if (Object.prototype.hasOwnProperty.call(data, key)) {
                 const value = data[key];
                 const itemElement = document.createElement('div');
                 if (typeof value === 'object' && value !== null) {
@@ -13,10 +14,13 @@ import { useSearchParams } from 'next/navigation';
                     itemElement.appendChild(keyElement);
                     const nestedContainer = document.createElement('div');
                     nestedContainer.style.marginLeft = '20px'; // Indent nested content
-                    displayJson(value, nestedContainer); // Recursive call
+                    // Type guard to ensure value is Record<string, unknown>
+                    if (typeof value === 'object' && !Array.isArray(value)) {
+                        displayJson(value as Record<string, unknown>, nestedContainer); // Recursive call
+                    }
                     itemElement.appendChild(nestedContainer);
                 } else {
-                    itemElement.textContent = `${key}: ${value}`;
+                    itemElement.textContent = `${key}: ${String(value)}`;
                 }
                 parentElement.appendChild(itemElement);
             }
@@ -26,27 +30,27 @@ import { useSearchParams } from 'next/navigation';
 
 
    function MyGeminiComponent() {
-      const searchParams = useSearchParams();
-      const geminiData = searchParams.get('data');
-      console.log("geminiData");
-      console.log(geminiData);
-      const geminiDataDecoded = decodeURIComponent(geminiData || '');
-      const geminiDataObj = JSON.parse(geminiDataDecoded || '{}');
-      console.log("geminiDataObj:");
-      console.log(geminiDataObj);
-      const geminiDataObjParseagain=JSON.parse(geminiDataObj);
-      console.log("geminiDataObjParseagain:");
-      console.log(geminiDataObjParseagain);
-      console.log(typeof(geminiDataObjParseagain));
-       const keys = Object.keys(geminiDataObjParseagain);
-       const values = Object.values(geminiDataObjParseagain);
-       console.log("keys:" + keys[0]);
-       console.log("values:" + values[0]);
+      // const searchParams = useSearchParams();
+      // const geminiData = searchParams.get('data');
+      // console.log("geminiData");
+      // console.log(geminiData);
+      // const geminiDataDecoded = decodeURIComponent(geminiData || '');
+      // const geminiDataObj = JSON.parse(geminiDataDecoded || '{}');
+      // console.log("geminiDataObj:");
+      // console.log(geminiDataObj);
+      // const geminiDataObjParseagain=JSON.parse(geminiDataObj);
+      // console.log("geminiDataObjParseagain:");
+      // console.log(geminiDataObjParseagain);
+      // console.log(typeof(geminiDataObjParseagain));
+      //  const keys = Object.keys(geminiDataObjParseagain);
+      //  const values = Object.values(geminiDataObjParseagain);
+      //  console.log("keys:" + keys[0]);
+      //  console.log("values:" + values[0]);
     // Call the function with your data and a target HTML element
     const jsonOutputElement = document.getElementById('json-output');
     if (jsonOutputElement) {
       console.log("jsonOutputElement is not null");
-      displayJson(geminiDataObjParseagain, jsonOutputElement);
+      displayJson(clientData, jsonOutputElement);
     }
     else{
       console.log("jsonOutputElement is null");
@@ -57,8 +61,8 @@ import { useSearchParams } from 'next/navigation';
 export default function Responsedata() {
 
     return (
-        <div>
-          <div id="json-output" className='grid grid-cols-2 gap-4 *:border'></div>
+        <div className=' max-w-4xl mx-auto p-4 m-[10px_auto] border bg-white shadow-md'>
+          <div id="json-output" className='grid grid-cols-2 gap-4 border p-2.5 rounded-md'></div>
           <Suspense fallback={<div>Loading error...</div>}>
                       <MyGeminiComponent />
           </Suspense>

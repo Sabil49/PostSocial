@@ -1,81 +1,72 @@
 {
-  "overall_sentiment_analysis": {
-    "positive_percentage": 50,
-    "neutral_percentage": 50,
-    "negative_percentage": 0,
-    "overall_feelings": "Mixed, with one tweet expressing a positive take on a brand transition and the other being a neutral greeting. Both tweets received zero engagement, indicating no measurable public feeling or interaction.",
-    "suggestion": {
-      "tech_rebranding_niche": "To boost engagement for tech/rebranding content, move beyond simple announcements. Focus on analytical posts that discuss the 'why' and 'how' of changes, or the 'what's next' impact on users/businesses. Incorporate visuals, polls, and clear calls-to-action (e.g., 'What are your thoughts on this change?'). Utilize relevant hashtags like #TechTrends, #SocialMediaUpdate, #DigitalTransformation, and consider live Q&A sessions.",
-      "general_posts_niche": "Generic greetings like 'Good night' are unlikely to drive engagement for a business or informational account. If the goal is community building, integrate personal touches within a relevant, niche-specific context (e.g., 'Reflecting on a day of tech innovation, good night! What's one tech trend you're excited about?'). Otherwise, focus all content on the core niche to maintain brand consistency and value proposition."
-    }
-  },
-  "successful_trends_analysis": {
-    "niche": "Technology / Social Media Business (focus on platform changes and digital communication)",
-    "successful_trend": "No successful trends observed directly from the provided data due to zero engagement.",
-    "successful_hashtag": "No successful hashtags observed directly from the provided data due to zero engagement.",
-    "successful_keywords": "No successful keywords observed directly from the provided data due to zero engagement.",
-    "popular_discussion": "No popular discussion observed directly from the provided data due to zero engagement.",
-    "potential_trends_for_niche": [
-      "Social Media Platform Evolution & Rebranding Impact",
-      "Future of Digital Communication",
-      "User Experience in Redesigned Platforms",
-      "Innovation in Social Tech"
-    ],
-    "potential_hashtags_for_niche": [
-      "#TwitterX",
-      "#SocialMediaMarketing",
-      "#TechNews",
-      "#PlatformUpdate",
-      "#DigitalTransformation",
-      "#FutureOfSocial"
-    ],
-    "potential_keywords_for_niche": [
-      "Twitter",
-      "X",
-      "Rebrand",
-      "Social Media",
-      "Platform",
-      "Engagement",
-      "Digital Marketing",
-      "Innovation",
-      "Tech",
-      "Strategy"
-    ],
-    "potential_discussions_for_niche": [
-      "The strategic implications of major platform rebrands for businesses and creators.",
-      "How new platform features and names affect user adoption, content strategy, and brand loyalty.",
-      "Best practices for navigating continuous social media platform changes and updates."
-    ]
-  },
-  "successful_strategy_analysis": {
-    "niche": "Technology / Social Media Business",
-    "tweet_insight_for_niche": "Successful tweets in this niche often provide value through analysis, predictions, how-to guides, or behind-the-scenes insights. They provoke thought, offer solutions to common challenges related to platform changes or tech usage, and invite interaction. Content with engaging visuals (infographics, short videos) and clear calls-to-action performs significantly better than simple announcements.",
-    "trends_for_niche": "Actively participating in real-time tech news, new feature rollouts, and industry-wide discussions (e.g., AI ethics, data privacy, future of the internet) with an expert perspective is crucial for visibility. Leveraging trending topics when relevant and offering unique insights can boost engagement.",
-    "hashtags_for_niche": "An effective hashtag strategy involves a mix of broad industry hashtags (#Tech, #SocialMedia), niche-specific tags (#AIinMarketing, #Web3, #PlatformStrategy), and trending hashtags that align with content. Researching current popular tags and using them judiciously (2-5 per tweet) is key.",
-    "keywords_for_niche": "Strategic use of keywords related to platform names, specific technologies, industry roles (e.g., 'Marketers', 'Developers', 'Founders'), problem/solution terms ('Optimize', 'Grow', 'Innovate'), and future-oriented concepts ('Innovation', 'Future of X') should be integrated naturally into tweet copy for discoverability.",
-    "discussion_topics_for_niche": "Engaging discussions frequently revolve around future predictions, common challenges faced by users/businesses due to tech changes, ethical considerations of new technologies, or comparative analyses of different platforms/tools. Utilizing polls, open-ended questions, and inviting opinions can initiate and sustain these conversations.",
-    "tweets_format_for_niche": "Highly effective formats include: multi-tweet threads for in-depth analysis or storytelling; infographics and short videos for quick, digestible information; interactive polls to gather opinions and increase engagement; and short, punchy statements with a strong hook or question. Experiment with platform-specific features like carousels or Spaces.",
-    "tweet_strategy_for_niche": {
-      "post_day_count": "Consistent daily posting (e.g., 2-5 times) is generally recommended for maintaining audience presence, but quality and relevance should always take precedence over quantity. Distribute evergreen content throughout the week and prioritize immediate posting for breaking news or time-sensitive updates.",
-      "post_schedule": "Analyze your target audience's demographics and existing engagement patterns to pinpoint peak activity times. For a global tech audience, consider staggered posting or scheduling for different time zones. Generally, mid-morning to early afternoon on weekdays often yields good results for professional and informational content, but specific audience data is best for fine-tuning."
-    }
-  },
-  "tweet_performance_analysis": [
-    {
-      "id": "1965819305188274464",
-      "text": "From blue bird to bold X 🚀 https://t.co/5i7DTLKjvb",
-      "sentiment": "Positive",
-      "performance": "fail",
-      "reason": "This tweet received zero engagement (retweets, replies, likes, quotes, bookmarks, impressions). Despite its positive sentiment and relevance to a significant tech event, the lack of interaction indicates it did not effectively capture audience attention or inspire a response.",
-      "niche_relevance": "Highly relevant to the technology/social media business niche, specifically regarding platform rebranding and industry shifts."
+    "sentiment_analysis": {
+        "positive_percentage": 10000,
+        "neutral_percentage": 50,
+        "negative_percentage": 0,
+        "overall_feelings": "Overall neutral to mildly positive, with a recognition of platform changes.",
+        "suggestion": "To boost engagement, incorporate questions that prompt discussion around industry changes. Utilize trending hashtags to increase visibility and reach. For general greetings, add a personalized touch or a subtle call to action. Actively respond to comments to foster community interaction."
     },
-    {
-      "id": "1965819253849768185",
-      "text": "Good night",
-      "sentiment": "Neutral",
-      "performance": "fail",
-      "reason": "This tweet also received zero engagement. As a generic greeting, it inherently has low potential for interaction, especially from a non-personal or brand account. It fails to provide value or a reason for engagement within a specific niche.",
-      "niche_relevance": "Very low relevance to any specific business or tech niche; it appears to be a general, personal post that does not align with a professional content strategy."
+    "trending_insights": {
+        "successful_trend": [
+            "Social Media Platform Rebranding",
+            "Tech Updates and Innovation",
+            "Digital Transformation in Online Communication"
+        ],
+        "successful_hashtag": [
+            "#X",
+            "#TwitterMigration",
+            "#SocialMedia",
+            "#TechNews",
+            "#PlatformUpdates"
+        ],
+        "keywords": [
+            "blue bird",
+            "X",
+            "platform update",
+            "social media",
+            "branding",
+            "innovation",
+            "digital evolution"
+        ],
+        "popular_discussion": [
+            "Impact of major platform changes on users and businesses",
+            "Future directions of social media platforms",
+            "Branding and identity in the digital space"
+        ]
+    },
+    "tweet_performance_analysis": [
+        {
+            "id": "1965819305188274464",
+            "text": "From blue bird to bold X 🚀 https://t.co/5i7DTLKjvb",
+            "performance": "fail"
+        },
+        {
+            "id": "1965819253849768185",
+            "text": "Good night",
+            "performance": "fail"
+        }
+    ],
+    "successful_strategy_analysis": {
+        "tweet_insight": "Tweets that address significant industry-specific events, like platform rebranding, have potential for higher engagement. Simple, generic greetings typically result in low organic reach unless part of a broader, well-established personal branding strategy.",
+        "trends": [
+            "Actively participate in and leverage current events within the technology and business sectors.",
+            "Engage with ongoing discussions about digital transformation and social media platform evolution."
+        ],
+        "hashtags": [
+            "Strategically employ 1-3 relevant and specific hashtags per post to enhance discoverability (e.g., #TechUpdates, #SocialMediaStrategy, #BusinessNews)."
+        ],
+        "keywords": [
+            "Incorporate industry-specific keywords like 'innovation', 'digital transformation', 'platform insights', and 'business growth' to attract a targeted and engaged audience."
+        ],
+        "discussion": [
+            "Cultivate interaction by posing open-ended questions, soliciting opinions, and actively responding to comments to build a strong community."
+        ],
+        "tweets_format": [
+            "Vary content formats to maintain audience interest, including text-only posts, text with engaging images or videos, and external links to valuable resources. Use emojis to convey tone and personality effectively."
+        ],
+        "tweet_strategy": {
+            "post_day_count": "Maintain consistency in posting frequency. A regular schedule helps build audience expectations and engagement over time.",
+            "post_schedule": "Analyze audience demographics and historical engagement data to identify optimal posting times for maximum reach and interaction (e.g., peak hours for professionals on weekdays for B2B content)."
+        }
     }
-  ]
 }
