@@ -2,6 +2,7 @@
 import { useSearchParams } from 'next/navigation';
 import { Suspense } from 'react';
 import clientData from '@/utils/clientData.json';
+import { array } from 'zod/v4';
 
        function displayJson(data : Record<string, unknown>, parentElement: HTMLElement) {
         debugger;
@@ -11,13 +12,32 @@ import clientData from '@/utils/clientData.json';
                 const value = data[key];
                 console.log("Key: " + key + " Value: " + value);
                 const itemElement = document.createElement('div');
-                if (typeof value === 'object' && value !== null) {
+                if (typeof value === 'object' && !Array.isArray(value) && value !== null) {
                     const keyElement = document.createElement('strong');
                     keyElement.textContent = `${key}: `;
                     itemElement.appendChild(keyElement);
                     const nestedContainer = document.createElement('div');
                     nestedContainer.style.marginLeft = '20px'; // Indent nested content
                     displayJson(value as Record<string, unknown>, nestedContainer); // Recursive call
+                    itemElement.appendChild(nestedContainer);
+                }
+                else if (Array.isArray(value)) {
+                    const keyElement = document.createElement('strong');
+                    keyElement.textContent = `${key}: `;
+                    itemElement.appendChild(keyElement);
+                    const nestedContainer = document.createElement('div');
+                    nestedContainer.style.marginLeft = '20px'; // Indent nested content
+                    value.forEach((item, index) => {
+                        const arrayItemElement = document.createElement('div');
+                        arrayItemElement.style.marginLeft = '20px';
+                        arrayItemElement.textContent = `[${index}]: `;
+                        if (typeof item === 'object' && item !== null) {
+                            displayJson(item as Record<string, unknown>, arrayItemElement);
+                        } else {
+                            arrayItemElement.textContent += String(item);
+                        }
+                        nestedContainer.appendChild(arrayItemElement);
+                    });
                     itemElement.appendChild(nestedContainer);
                 } else {
                     itemElement.textContent = `${key}: ${value}`;
