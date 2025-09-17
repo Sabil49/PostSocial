@@ -49,7 +49,7 @@ import clientData from '@/utils/clientData.json';
     // Call the function with your data and a target HTML element
     const jsonOutputElement = document.getElementById('json-output');
     if (jsonOutputElement) {
-      console.log("jsonOutputElement is not null");
+      console.log("jsonOutputElement is not null.........");
       displayJson(clientData, jsonOutputElement);
     }
     else{
