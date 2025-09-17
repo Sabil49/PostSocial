@@ -4,6 +4,8 @@ import { hashPassword } from "@/utils/bcrypt";
 import { NextRequest,NextResponse } from "next/server";
 import { S3Client, PutObjectCommand } from "@aws-sdk/client-s3";
 import fs from "fs";
+import { zfd } from "zod-form-data";
+
 
 const { AWS_REGION, AWS_ACCESS_KEY_ID, AWS_SECRET_ACCESS_KEY, S3_BUCKET_NAME } = process.env;
 
@@ -21,7 +23,11 @@ const s3Client = new S3Client({
 
 export async function POST(req: NextRequest) {
   try {
-    const data = await req.formData();
+    const formData = await req.formData();
+    const data: { [key: string]: unknown } = {};
+    formData.forEach(function(value, key){
+        data[key] = value;
+    });
     console.log("Received data:", data);
     if (!data) {
       return NextResponse.json({ message: "No data provided" }, { status: 400 });
@@ -41,20 +47,20 @@ export async function POST(req: NextRequest) {
               })
             ),
           })
-        })         
-        .safeParse(data);
+        }).safeParse(data)
     if (!parsedData.success) {
       console.log("Validation failed", parsedData.error);
       return NextResponse.json({ message: "Validation failed", error: parsedData.error }, { status: 400 });
     }
+
     const { email, password, name, files } = parsedData.data;
 
     const imageFile = files?.image?.[0];
 
     const fileContent = await fs.promises.readFile(imageFile.filepath);
     const s3Key = `user-images/${email}/${Date.now()}-${imageFile.originalFilename}`;
-    
-            const uploadParams = {
+
+    const uploadParams = {
               Bucket: process.env.S3_BUCKET_NAME,
               Key: s3Key,
               Body: fileContent,
@@ -69,7 +75,7 @@ export async function POST(req: NextRequest) {
           console.log("Image uploaded successfully:", imageUrl);
     // Check if user already exists
     const existingUser = await prisma.user.findUnique({
-      where: { email },
+      where: { email: email },
     });
     if (existingUser) {
       console.log("User already exists with email:", email);
