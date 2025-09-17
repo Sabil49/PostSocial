@@ -2,6 +2,29 @@
 import { useSearchParams } from 'next/navigation';
    import { Suspense } from 'react';
 
+       function displayJson(data: Record<string, undefined>, parentElement: HTMLElement) {
+        for (const key in data) {
+            if (data.hasOwnProperty(key)) {
+                const value = data[key];
+                const itemElement = document.createElement('div');
+                if (typeof value === 'object' && value !== null) {
+                    const keyElement = document.createElement('strong');
+                    keyElement.textContent = `${key}: `;
+                    itemElement.appendChild(keyElement);
+                    const nestedContainer = document.createElement('div');
+                    nestedContainer.style.marginLeft = '20px'; // Indent nested content
+                    displayJson(value, nestedContainer); // Recursive call
+                    itemElement.appendChild(nestedContainer);
+                } else {
+                    itemElement.textContent = `${key}: ${value}`;
+                }
+                parentElement.appendChild(itemElement);
+            }
+        }
+    }
+
+
+
    function MyGeminiComponent() {
       const searchParams = useSearchParams();
       const geminiData = searchParams.get('data');
@@ -19,7 +42,16 @@ import { useSearchParams } from 'next/navigation';
        const values = Object.values(geminiDataObjParseagain);
        console.log("keys:" + keys[0]);
        console.log("values:" + values[0]);
-      return <div>{geminiDataObj ? geminiDataObj : 'Loading...'}</div>;
+    // Call the function with your data and a target HTML element
+    const jsonOutputElement = document.getElementById('json-output');
+    if (jsonOutputElement) {
+      displayJson(geminiDataObjParseagain, jsonOutputElement);
+    }
+      return(
+        <div id="json-output"></div>
+      )
+
+
        }
 export default function Responsedata() {
 
