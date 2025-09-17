@@ -39,7 +39,7 @@ export async function POST(req: NextRequest) {
         name: z.string().min(2).max(100),
         files: z
           .object({
-            image: z.object({
+            File: z.object({
                 filepath: z.string(),
                 originalFilename: z.string(),
                 mimetype: z.string(),
@@ -53,7 +53,7 @@ export async function POST(req: NextRequest) {
 
     const { email, password, name, files } = parsedData.data;
 
-    const imageFile = files.image;
+    const imageFile = files.File;
 
     const fileContent = await fs.promises.readFile(imageFile.filepath);
     const s3Key = `user-images/${email}/${Date.now()}-${imageFile.originalFilename}`;
