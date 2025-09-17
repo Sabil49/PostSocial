@@ -18,6 +18,7 @@ import { array } from 'zod/v4';
                     itemElement.appendChild(keyElement);
                     const nestedContainer = document.createElement('div');
                     nestedContainer.style.marginLeft = '20px'; // Indent nested content
+                    nestedContainer.style.marginTop = '5px'; 
                     displayJson(value as Record<string, unknown>, nestedContainer); // Recursive call
                     itemElement.appendChild(nestedContainer);
                 }
@@ -27,7 +28,7 @@ import { array } from 'zod/v4';
                     itemElement.appendChild(keyElement);
                     const nestedContainer = document.createElement('div');
                     nestedContainer.style.marginLeft = '20px'; // Indent nested content
-                    nestedContainer.style.marginBottom = '10px'; 
+                    nestedContainer.style.marginBottom = '15px'; 
                     value.forEach((item, index) => {
                         const arrayItemElement = document.createElement('div');
                         arrayItemElement.style.marginLeft = '20px';
