@@ -4,9 +4,6 @@ import { Suspense } from 'react';
 import clientData from '@/utils/clientData.json';
 import { array } from 'zod/v4';
 
-function capitalizeFirstLetter(val:string) {
-    return String(val).charAt(0).toUpperCase() + String(val).slice(1);
-}
        function displayJson(data : Record<string, unknown>, parentElement: HTMLElement) {
         debugger;
         for (const key in data) {
@@ -14,11 +11,13 @@ function capitalizeFirstLetter(val:string) {
             if (data.hasOwnProperty(key)) {
                 const value = data[key];
                 console.log("Key: " + key + " Value: " + value);
+                const keyReplaced = key.replace(/_/g, ' ');
+                const keyCapitalized = keyReplaced.charAt(0).toUpperCase() + keyReplaced.slice(1);
+                console.log("Key Capitalized: " + keyCapitalized);
                 const itemElement = document.createElement('div');
                 if (typeof value === 'object' && !Array.isArray(value) && value !== null) {
                     const keyElement = document.createElement('strong');
-                    const keyReplaced = key.replace(/_/g, ' ');
-                    keyElement.textContent = `${capitalizeFirstLetter(keyReplaced)}: `;
+                    keyElement.textContent = `${keyCapitalized}: `;
                     itemElement.appendChild(keyElement);
                     const nestedContainer = document.createElement('div');
                     nestedContainer.style.marginLeft = '20px'; // Indent nested content
@@ -28,7 +27,7 @@ function capitalizeFirstLetter(val:string) {
                 }
                 else if (Array.isArray(value)) {
                     const keyElement = document.createElement('strong');
-                    keyElement.textContent = `${key}: `;
+                    keyElement.textContent = `${keyCapitalized}: `;
                     itemElement.appendChild(keyElement);
                     const nestedContainer = document.createElement('div');
                     nestedContainer.style.marginLeft = '20px'; // Indent nested content
@@ -47,7 +46,7 @@ function capitalizeFirstLetter(val:string) {
                     itemElement.appendChild(nestedContainer);
                 } else {
                     const keyElement = document.createElement('strong');
-                    keyElement.textContent = `${key}. `;
+                    keyElement.textContent = `${keyCapitalized}. `;
                     itemElement.appendChild(keyElement);
                     const keyElement2 = document.createElement('span');
                     keyElement2.textContent = `${value}. `;
