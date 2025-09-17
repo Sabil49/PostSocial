@@ -14,7 +14,8 @@ import { array } from 'zod/v4';
                 const itemElement = document.createElement('div');
                 if (typeof value === 'object' && !Array.isArray(value) && value !== null) {
                     const keyElement = document.createElement('strong');
-                    keyElement.textContent = `${key}: `;
+                    const keyReplaced = key.replace(/_/g, ' ').replace(/\b\w/g, char => char.toWellFormed());
+                    keyElement.textContent = `${keyReplaced}: `;
                     itemElement.appendChild(keyElement);
                     const nestedContainer = document.createElement('div');
                     nestedContainer.style.marginLeft = '20px'; // Indent nested content
