@@ -21,9 +21,8 @@ const s3Client = new S3Client({
 
 export async function POST(req: NextRequest) {
   try {
-    const data = await req.json();
+    const data = await req.formData();
     console.log("Received data:", data);
-
     if (!data) {
       return NextResponse.json({ message: "No data provided" }, { status: 400 });
     }
