@@ -15,6 +15,10 @@ import { useSearchParams } from 'next/navigation';
       console.log("geminiDataObjParseagain:");
       console.log(geminiDataObjParseagain);
       console.log(typeof(geminiDataObjParseagain));
+       const keys = Object.keys(geminiDataObjParseagain);
+       const values = Object.values(geminiDataObjParseagain);
+       console.log("keys:" + keys[0]);
+       console.log("values:" + values[0]);
       return <div>{geminiDataObj ? geminiDataObj : 'Loading...'}</div>;
        }
 export default function Responsedata() {
