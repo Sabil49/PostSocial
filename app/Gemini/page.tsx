@@ -1,5 +1,5 @@
 "use client";
-import { useSearchParams } from 'next/navigation';
+//import { useSearchParams } from 'next/navigation';
 import { Suspense } from 'react';
 import clientData from '@/utils/clientData.json';
 
