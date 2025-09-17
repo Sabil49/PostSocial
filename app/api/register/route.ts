@@ -5,11 +5,11 @@ import { NextRequest,NextResponse } from "next/server";
 import { S3Client, PutObjectCommand } from "@aws-sdk/client-s3";
 import fs from "fs";
 
-export const config = {
-      api: {
-        bodyParser: false,
-      },
-    };
+// export const config = {
+//       api: {
+//         bodyParser: false,
+//       },
+//     };
 
     // Multer and classic req/res are not used in Next.js app router API routes.
     // File uploads should be handled using the formData() API from NextRequest.
