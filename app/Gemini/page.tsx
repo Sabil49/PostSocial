@@ -18,6 +18,7 @@ import { array } from 'zod/v4';
                 if (typeof value === 'object' && !Array.isArray(value) && value !== null) {
                     const keyElement = document.createElement('strong');
                     keyElement.textContent = `${keyCapitalized}: `;
+                    keyElement.style.fontSize = '1em';
                     itemElement.appendChild(keyElement);
                     const nestedContainer = document.createElement('div');
                     nestedContainer.style.marginLeft = '20px'; // Indent nested content
@@ -32,6 +33,7 @@ import { array } from 'zod/v4';
                     const nestedContainer = document.createElement('div');
                     nestedContainer.style.marginLeft = '20px'; // Indent nested content
                     nestedContainer.style.marginBottom = '15px'; 
+                    nestedContainer.style.marginTop = '5px'; 
                     value.forEach((item, index) => {
                         const arrayItemElement = document.createElement('div');
                         arrayItemElement.style.marginLeft = '20px';
