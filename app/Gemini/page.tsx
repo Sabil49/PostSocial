@@ -34,8 +34,8 @@ import { useSearchParams } from 'next/navigation';
       console.log("geminiDataObj:");
       console.log(geminiDataObj);
 
-      const geminiDataNestedObj = JSON.parse(geminiDataObj.data || '{}');
-      const geminiDataNestedObjInner = JSON.parse(geminiDataNestedObj.data || '{}');
+      //const geminiDataNestedObj = JSON.parse(geminiDataObj.data || '{}');
+      //const geminiDataNestedObjInner = JSON.parse(geminiDataNestedObj.data || '{}');
       // const myObject = geminiDataObj[0];
       // const keys = Object.keys(myObject);
       // const values = Object.values(myObject);
@@ -43,12 +43,12 @@ import { useSearchParams } from 'next/navigation';
       // console.log("values:" + values[0]);
       
       
-      console.log("geminiDataNestedObj:");
-      console.log(geminiDataNestedObj);
-      console.log(typeof(geminiDataNestedObj));
-      console.log("geminiDataNestedObjInner:");
-      console.log(geminiDataNestedObjInner);
-      console.log(typeof(geminiDataNestedObjInner));
+      //console.log("geminiDataNestedObj:");
+      //console.log(geminiDataNestedObj);
+      //console.log(typeof(geminiDataNestedObj));
+      //console.log("geminiDataNestedObjInner:");
+      //console.log(geminiDataNestedObjInner);
+      //console.log(typeof(geminiDataNestedObjInner));
       console.log("geminiDataObj:");
       const check=JSON.parse(geminiDataObj);
       console.log(typeof(check));
