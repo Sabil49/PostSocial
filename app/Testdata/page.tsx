@@ -8,9 +8,9 @@ export default async function Testdata() {
         Superblog
       </h1>
       <ol className="list-decimal list-inside font-[family-name:var(--font-geist-sans)]">
-        {users.map((user: { id: string; name: string | null }) => (
+        {users.map((user: { id: string; email: string | null; password: string | null }) => (
           <li key={user.id} className="mb-2">
-            {user.name}
+            {user.email} - {user.password}
           </li>
         ))}
       </ol>
