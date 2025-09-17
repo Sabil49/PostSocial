@@ -3,6 +3,7 @@ import React, { useState } from 'react';
 import OAuth from '../Components/Oauth';
 import Link from 'next/link';
 import axios from 'axios';
+import { file } from 'zod/v4';
 
 function CreateUserForm() {
   const [name, setName] = useState('');
@@ -10,12 +11,12 @@ function CreateUserForm() {
   const [password, setPassword] = useState('');
   const [image, setImage] = useState<File | null>(null);
   const [message, setMessage] = useState<string | null>(null);
-  
-  const handleSubmit = async (event : React.FormEvent<HTMLFormElement>) => {
+
+  const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
 
     console.log('Form submitted:', { name, email, password });
-    const userData = { name, email, password, image };
+    const userData = { name, email, password, files: { image } };
     console.log('Sending user data:', userData);
     
     try {
@@ -47,7 +48,11 @@ function CreateUserForm() {
       setMessage('Network error. Please try again later.');
     }
   };
+  // const files = {
+  //   file: {
 
+  //   }
+  // }
   return (
     <div> 
     <form onSubmit={handleSubmit}>

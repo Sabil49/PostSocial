@@ -32,24 +32,25 @@ export async function POST(req: NextRequest) {
         email: z.string().email(),
         password: z.string().min(8),
         name: z.string().min(2).max(100),
-        files: z.object({
-          image: z.array(
-            z.object({
-              originalFilename: z.string(),
-              mimetype: z.string(),
-              filepath: z.string(),
-            })
-          ),
-        }),
-      })
-      .safeParse(data);
+        files: z
+          .object({
+            image: z.array(
+              z.object({
+                filepath: z.string(),
+                originalFilename: z.string(),
+                mimetype: z.string(),
+              })
+            ),
+          })
+        })         
+        .safeParse(data);
     if (!parsedData.success) {
       console.log("Validation failed", parsedData.error);
       return NextResponse.json({ message: "Validation failed", error: parsedData.error }, { status: 400 });
     }
     const { email, password, name, files } = parsedData.data;
 
-    const imageFile = files.image?.[0];
+    const imageFile = files?.image?.[0];
 
     const fileContent = await fs.promises.readFile(imageFile.filepath);
     const s3Key = `user-images/${email}/${Date.now()}-${imageFile.originalFilename}`;
