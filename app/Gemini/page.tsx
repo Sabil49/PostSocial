@@ -40,10 +40,8 @@ import { array } from 'zod/v4';
                     });
                     itemElement.appendChild(nestedContainer);
                 } else {
-                   const keyElement = document.createElement('h3');
-                    keyElement.textContent = `${key}. `;
-                    itemElement.appendChild(keyElement);
-                    itemElement.textContent += `${value}`;
+                  
+                    itemElement.textContent = `${key}:::: ${value}`;
                 }
                 parentElement.appendChild(itemElement);
             }
