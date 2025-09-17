@@ -4,6 +4,9 @@ import { Suspense } from 'react';
 import clientData from '@/utils/clientData.json';
 import { array } from 'zod/v4';
 
+function capitalizeFirstLetter(val) {
+    return String(val).charAt(0).toUpperCase() + String(val).slice(1);
+}
        function displayJson(data : Record<string, unknown>, parentElement: HTMLElement) {
         debugger;
         for (const key in data) {
@@ -14,8 +17,8 @@ import { array } from 'zod/v4';
                 const itemElement = document.createElement('div');
                 if (typeof value === 'object' && !Array.isArray(value) && value !== null) {
                     const keyElement = document.createElement('strong');
-                    const keyReplaced = key.replace(/_/g, ' ').replace(/\b\w/g, char => char.toWellFormed());
-                    keyElement.textContent = `${keyReplaced}: `;
+                    const keyReplaced = key.replace(/_/g, ' ');
+                    keyElement.textContent = `${capitalizeFirstLetter(keyReplaced)}: `;
                     itemElement.appendChild(keyElement);
                     const nestedContainer = document.createElement('div');
                     nestedContainer.style.marginLeft = '20px'; // Indent nested content
