@@ -45,7 +45,11 @@ import { useSearchParams } from 'next/navigation';
     // Call the function with your data and a target HTML element
     const jsonOutputElement = document.getElementById('json-output');
     if (jsonOutputElement) {
+      console.log("jsonOutputElement is not null");
       displayJson(geminiDataObjParseagain, jsonOutputElement);
+    }
+    else{
+      console.log("jsonOutputElement is null");
     }
       return(
         <div id="json-output"></div>
