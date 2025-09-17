@@ -4,7 +4,7 @@ import { Suspense } from 'react';
 import clientData from '@/utils/clientData.json';
 import { array } from 'zod/v4';
 
-function capitalizeFirstLetter(val) {
+function capitalizeFirstLetter(val:string) {
     return String(val).charAt(0).toUpperCase() + String(val).slice(1);
 }
        function displayJson(data : Record<string, unknown>, parentElement: HTMLElement) {
