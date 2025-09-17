@@ -24,7 +24,7 @@ function CreateUserForm() {
       formData.append('email', email);
       formData.append('password', password);
       if (image) {
-        formData.append('image', image);
+        formData.append('files', image);
       }
 
       const response = await axios.post('/api/register', formData, {
