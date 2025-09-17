@@ -39,13 +39,11 @@ export async function POST(req: NextRequest) {
         name: z.string().min(2).max(100),
         files: z
           .object({
-            image: z.array(
-              z.object({
+            image: z.object({
                 filepath: z.string(),
                 originalFilename: z.string(),
                 mimetype: z.string(),
               })
-            ),
           })
         }).safeParse(data)
     if (!parsedData.success) {
@@ -55,7 +53,7 @@ export async function POST(req: NextRequest) {
 
     const { email, password, name, files } = parsedData.data;
 
-    const imageFile = files?.image?.[0];
+    const imageFile = files.image;
 
     const fileContent = await fs.promises.readFile(imageFile.filepath);
     const s3Key = `user-images/${email}/${Date.now()}-${imageFile.originalFilename}`;
