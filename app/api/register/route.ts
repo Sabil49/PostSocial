@@ -4,7 +4,16 @@ import { hashPassword } from "@/utils/bcrypt";
 import { NextRequest,NextResponse } from "next/server";
 import { S3Client, PutObjectCommand } from "@aws-sdk/client-s3";
 import fs from "fs";
-import { zfd } from "zod-form-data";
+
+export const config = {
+      api: {
+        bodyParser: false,
+      },
+    };
+
+    // Multer and classic req/res are not used in Next.js app router API routes.
+    // File uploads should be handled using the formData() API from NextRequest.
+
 
 
 const { AWS_REGION, AWS_ACCESS_KEY_ID, AWS_SECRET_ACCESS_KEY, S3_BUCKET_NAME } = process.env;
@@ -23,11 +32,7 @@ const s3Client = new S3Client({
 
 export async function POST(req: NextRequest) {
   try {
-    const formData = await req.formData();
-    const data: { [key: string]: unknown } = {};
-    formData.forEach(function(value, key){
-        data[key] = value;
-    });
+    const data = await req.formData();
     console.log("Received data:", data);
     if (!data) {
       return NextResponse.json({ message: "No data provided" }, { status: 400 });
@@ -39,11 +44,13 @@ export async function POST(req: NextRequest) {
         name: z.string().min(2).max(100),
         files: z
           .object({
-            File: z.object({
+            image: z.array(
+              z.object({
                 filepath: z.string(),
                 originalFilename: z.string(),
                 mimetype: z.string(),
               })
+            ),
           })
         }).safeParse(data)
     if (!parsedData.success) {
@@ -53,7 +60,7 @@ export async function POST(req: NextRequest) {
 
     const { email, password, name, files } = parsedData.data;
 
-    const imageFile = files.File;
+    const imageFile = files?.image?.[0];
 
     const fileContent = await fs.promises.readFile(imageFile.filepath);
     const s3Key = `user-images/${email}/${Date.now()}-${imageFile.originalFilename}`;
