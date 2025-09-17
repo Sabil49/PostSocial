@@ -30,7 +30,7 @@ import { array } from 'zod/v4';
                     value.forEach((item, index) => {
                         const arrayItemElement = document.createElement('div');
                         arrayItemElement.style.marginLeft = '20px';
-                        arrayItemElement.textContent = `[${index}]: `;
+                        arrayItemElement.textContent = `${index + 1}. `;
                         if (typeof item === 'object' && item !== null) {
                             displayJson(item as Record<string, unknown>, arrayItemElement);
                         } else {
@@ -40,7 +40,10 @@ import { array } from 'zod/v4';
                     });
                     itemElement.appendChild(nestedContainer);
                 } else {
-                    itemElement.textContent = `${key}: ${value}`;
+                   const keyElement = document.createElement('strong');
+                    keyElement.textContent = `${key}. `;
+                    itemElement.appendChild(keyElement);
+                    itemElement.textContent += `${value}`;
                 }
                 parentElement.appendChild(itemElement);
             }
