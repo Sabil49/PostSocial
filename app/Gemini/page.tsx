@@ -18,7 +18,7 @@ import { array } from 'zod/v4';
                 if (typeof value === 'object' && !Array.isArray(value) && value !== null) {
                     const keyElement = document.createElement('strong');
                     keyElement.textContent = `${keyCapitalized}: `;
-                    keyElement.style.fontSize = '1em';
+                    keyElement.style.fontSize = '1.1em';
                     itemElement.appendChild(keyElement);
                     const nestedContainer = document.createElement('div');
                     nestedContainer.style.marginLeft = '20px'; // Indent nested content
