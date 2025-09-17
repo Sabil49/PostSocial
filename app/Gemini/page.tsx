@@ -27,6 +27,7 @@ import { array } from 'zod/v4';
                     itemElement.appendChild(keyElement);
                     const nestedContainer = document.createElement('div');
                     nestedContainer.style.marginLeft = '20px'; // Indent nested content
+                    nestedContainer.style.marginBottom = '10px'; 
                     value.forEach((item, index) => {
                         const arrayItemElement = document.createElement('div');
                         arrayItemElement.style.marginLeft = '20px';
