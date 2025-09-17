@@ -4,6 +4,7 @@ import { Suspense } from 'react';
 import clientData from '@/utils/clientData.json';
 
        function displayJson(data : Record<string, unknown>, parentElement: HTMLElement) {
+        debugger;
         for (const key in data) {
             if (data.hasOwnProperty(key)) {
                 const value = data[key];
