@@ -27,22 +27,22 @@ import clientData from '@/utils/clientData.json';
 
 
    function MyGeminiComponent() {
-      // const searchParams = useSearchParams();
-      // const geminiData = searchParams.get('data');
-      // console.log("geminiData");
-      // console.log(geminiData);
-      // const geminiDataDecoded = decodeURIComponent(geminiData || '');
-      // const geminiDataObj = JSON.parse(geminiDataDecoded || '{}');
-      // console.log("geminiDataObj:");
-      // console.log(geminiDataObj);
-      // const geminiDataObjParseagain=JSON.parse(geminiDataObj);
-      // console.log("geminiDataObjParseagain:");
-      // console.log(geminiDataObjParseagain);
-      // console.log(typeof(geminiDataObjParseagain));
-      //  const keys = Object.keys(geminiDataObjParseagain);
-      //  const values = Object.values(geminiDataObjParseagain);
-      //  console.log("keys:" + keys[0]);
-      //  console.log("values:" + values[0]);
+      const searchParams = useSearchParams();
+      const geminiData = searchParams.get('data');
+      console.log("geminiData");
+      console.log(geminiData);
+      const geminiDataDecoded = decodeURIComponent(geminiData || '');
+      const geminiDataObj = JSON.parse(geminiDataDecoded || '{}');
+      console.log("geminiDataObj:");
+      console.log(geminiDataObj);
+      const geminiDataObjParseagain=JSON.parse(geminiDataObj);
+      console.log("geminiDataObjParseagain:");
+      console.log(geminiDataObjParseagain);
+      console.log(typeof(geminiDataObjParseagain));
+       const keys = Object.keys(geminiDataObjParseagain);
+       const values = Object.values(geminiDataObjParseagain);
+       console.log("keys:" + keys[0]);
+       console.log("values:" + values[0]);
     // Call the function with your data and a target HTML element
     const jsonOutputElement = document.getElementById('json-output');
     if (jsonOutputElement) {
