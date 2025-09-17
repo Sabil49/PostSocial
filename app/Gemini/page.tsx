@@ -43,7 +43,9 @@ import { array } from 'zod/v4';
                     const keyElement = document.createElement('strong');
                     keyElement.textContent = `${key}. `;
                     itemElement.appendChild(keyElement);
-                    //itemElement.textContent += `${value}`;
+                    const keyElement2 = document.createElement('span');
+                    keyElement2.textContent = `${value}. `;
+                    itemElement.appendChild(keyElement2);
                 }
                 parentElement.appendChild(itemElement);
             }
