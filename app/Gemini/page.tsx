@@ -58,7 +58,7 @@ export default function Responsedata() {
 
     return (
         <div>
-          <div id="json-output"></div>
+          <div id="json-output" className='grid grid-cols-2 gap-4 *:border'></div>
           <Suspense fallback={<div>Loading error...</div>}>
                       <MyGeminiComponent />
           </Suspense>
