@@ -1,10 +1,10 @@
 import prisma from "@/lib/prisma";
-import { z } from "zod";
 import { hashPassword } from "@/utils/bcrypt";
 import { NextRequest,NextResponse } from "next/server";
 import { S3Client, PutObjectCommand } from "@aws-sdk/client-s3";
 import fs from "fs";
-import { zfd } from 'zod-form-data';
+import * as zfd from 'zod-form-data';
+import { z } from 'zod';
 import { minLength } from "zod/v4";
 
 // export const config = {
@@ -41,10 +41,12 @@ export async function POST(req: NextRequest) {
     }
     
     const uploadSchema = zfd.formData({
-      name: zfd.text(), // Validates a text field
+      name: zfd.text(),
       email: zfd.text(), // Validates email format
-      files: zfd.file(), // Validates an optional file upload
-      password: zfd.numeric(), // Validates a numeric field
+      files: zfd.file()
+        .refine((file) => file.size < 5000000, `Max image size is 5MB.`) // Example: file size validation
+        .refine((file) => ['image/jpeg', 'image/png'].includes(file.type), 'Only .jpg and .png formats are supported.'), // Example: file type validation
+      password: zfd.text(),
     });
 
     const parsedData = uploadSchema.safeParse(data);
@@ -52,54 +54,50 @@ export async function POST(req: NextRequest) {
       console.log("Validation failed", parsedData.error);
       return NextResponse.json({ message: "Validation failed", error: parsedData.error }, { status: 400 });
     }
-    else {
-      console.log("Validation succeeded", parsedData.data);
-      return NextResponse.json({ message: "Validation succeeded", data: parsedData.data }, { status: 200 });
+
+    const { email, password, name, files } = parsedData.data as { email: string; password: string; name: string; files: File };
+
+    const imageFile = files as File; // Explicitly type as File
+
+    const fileContent = Buffer.from(await imageFile.arrayBuffer());
+    const s3Key = `user-images/${email}/${Date.now()}-${imageFile.name}`;
+
+    const uploadParams = {
+              Bucket: process.env.S3_BUCKET_NAME,
+              Key: s3Key,
+              Body: fileContent,
+              ContentType: imageFile.type,
+            };
+    
+          const imageUpload= await s3Client.send(new PutObjectCommand(uploadParams));
+          if(!imageUpload){
+            return NextResponse.json({ message: 'Image upload failed' }, { status: 500 });
+          }
+          const imageUrl = `https://${process.env.S3_BUCKET_NAME}.s3.${process.env.AWS_REGION}.amazonaws.com/${s3Key}`;
+          console.log("Image uploaded successfully:", imageUrl);
+    // Check if user already exists
+    const existingUser = await prisma.user.findUnique({
+      where: { email: email },
+    });
+    if (existingUser) {
+      console.log("User already exists with email:", email);
+      return NextResponse.json({ message: "User already exists" }, { status: 409 });
     }
-
-  //   const { email, password, name, files } = parsedData.data;
-
-  //   const imageFile = files?.[0]; // Get the first file if it exists
-
-  //   const fileContent = await fs.promises.readFile(imageFile.filepath);
-  //   const s3Key = `user-images/${email}/${Date.now()}-${imageFile.originalFilename}`;
-
-  //   const uploadParams = {
-  //             Bucket: process.env.S3_BUCKET_NAME,
-  //             Key: s3Key,
-  //             Body: fileContent,
-  //             ContentType: imageFile.mimetype,
-  //           };
+    // Hash the password before storing it
+    const hashedPassword = await hashPassword(password);
+    // Store user in the database
+    const user = await prisma.user.create({
+      data: {
+        email: email,
+        password: hashedPassword,
+        name: name,
+        image: imageUrl,
+      },
+    });
+    console.log("User registered successfully:", user);
+    // Do not return the password in the response
     
-  //         const imageUpload= await s3Client.send(new PutObjectCommand(uploadParams));
-  //         if(!imageUpload){
-  //           return NextResponse.json({ message: 'Image upload failed' }, { status: 500 });
-  //         }
-  //         const imageUrl = `https://${process.env.S3_BUCKET_NAME}.s3.${process.env.AWS_REGION}.amazonaws.com/${s3Key}`;
-  //         console.log("Image uploaded successfully:", imageUrl);
-  //   // Check if user already exists
-  //   const existingUser = await prisma.user.findUnique({
-  //     where: { email: email },
-  //   });
-  //   if (existingUser) {
-  //     console.log("User already exists with email:", email);
-  //     return NextResponse.json({ message: "User already exists" }, { status: 409 });
-  //   }
-  //   // Hash the password before storing it
-  //   const hashedPassword = await hashPassword(password);
-  //   // Store user in the database
-  //   const user = await prisma.user.create({
-  //     data: {
-  //       email: email,
-  //       password: hashedPassword,
-  //       name: name,
-  //       image: imageUrl,
-  //     },
-  //   });
-  //   console.log("User registered successfully:", user);
-  //   // Do not return the password in the response
-    
-  //   return NextResponse.json({ user }, { status: 201 });
+    return NextResponse.json({ user }, { status: 201 });
   } catch (error) {
     console.error('Error handling POST request:', error);
     return NextResponse.json({ message: 'Error processing request' }, { status: 500 });
