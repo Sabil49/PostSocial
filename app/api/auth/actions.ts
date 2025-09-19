@@ -5,6 +5,7 @@ import { signIn, signOut } from './auth';
 import { AuthError } from 'next-auth';
 import {hashPassword} from '@/utils/bcrypt';
 import prisma from '@/lib/prisma';
+import { NextResponse } from "next/server";
 
 export const signOutUser = async () => {
    await signOut({ redirectTo: '/' });
@@ -41,8 +42,8 @@ async function registerUser(data: FormData) {
                 if (!data) return null;
                 const parsedData = z.object({ email: z.string().email(), password: z.string().min(8), name: z.string().min(2).max(100)}).safeParse(data);
                 if (!parsedData.success) {
-                    console.log("Validation failed", parsedData.error);
-                    return null;
+                    console.log("Invalid form data:", parsedData.error);
+                    return NextResponse.json({ error: 'Invalid form data' }, { status: 400 });
                 }
                 if (parsedData.success) {
                     const { email, password, name } = parsedData.data;
@@ -51,7 +52,7 @@ async function registerUser(data: FormData) {
                     });
                     if (existingUser) {
                         console.log("User already exists with email:", email);
-                        return null; // User already exists
+                        return NextResponse.json({ error: 'User already exists' }, { status: 409 });
                     }
                     // Hash the password before storing it
                     const hashedPassword = await hashPassword(password);
@@ -67,7 +68,7 @@ async function registerUser(data: FormData) {
                     return user; // Registration successful
                 }
                 console.log("Something went wrong during registration process. try again.");
-                return null;
+                return NextResponse.json({ error: 'Something went wrong' }, { status: 500 });
             }
 
 export async function registration(state: MyFormState, formData: FormData) {
