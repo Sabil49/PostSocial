@@ -42,16 +42,7 @@ export async function POST(req: NextRequest) {
         email: z.string().email(),
         password: z.string().min(8),
         name: z.string().min(2).max(100),
-        files: z
-          .object({
-            image: z.array(
-              z.object({
-                filepath: z.string(),
-                originalFilename: z.string(),
-                mimetype: z.string(),
-              })
-            ),
-          })
+        files: z.any().optional(),
         }).safeParse(data)
     if (!parsedData.success) {
       console.log("Validation failed", parsedData.error);
