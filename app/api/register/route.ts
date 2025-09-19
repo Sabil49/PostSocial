@@ -56,6 +56,18 @@ export async function POST(req: NextRequest) {
     }
 
     const { email, password, name, files } = parsedData.data as { email: string; password: string; name: string; files: File };
+    if(!email.includes('@')){
+      return NextResponse.json({ message: "Invalid email format" }, { status: 400 });
+    }
+    if(password.length < 8){
+      return NextResponse.json({ message: "Password must be at least 8 characters long" }, { status: 400 });
+    }
+    if(name.length < 2 || name.length > 100){
+      return NextResponse.json({ message: "Name must be between 2 and 100 characters long" }, { status: 400 });
+    }
+    if(!files){
+      return NextResponse.json({ message: "Image file is required" }, { status: 400 });
+    }
 
     const imageFile = files as File; // Explicitly type as File
 
