@@ -81,21 +81,20 @@ function displayJson(data : Record<string, unknown>, parentElement: HTMLElement)
       //  console.log("keys:" + keys[0]);
       //  console.log("values:" + values[0]);
     // Call the function with your data and a target HTML element
-    // const jsonOutputElement = document.getElementById('json-output');
-    // if (jsonOutputElement) {
-    //   console.log("jsonOutputElement is not null.........");
-    //   displayJson(clientData, jsonOutputElement);
-    // }
-    // else{
-    //   console.log("jsonOutputElement is null");
-    // }  
+    const jsonOutputElement = document.getElementById('json-output');
+    if (jsonOutputElement) {
+      console.log("jsonOutputElement is not null.........");
+      displayJson(clientData, jsonOutputElement);
+    }
+    else{
+      console.log("jsonOutputElement is null");
+    }  
     return <PieChart
-          series={[
-            {
-              data: geminiDataObjParseagain.sentiment_analysis,
-              highlightScope: { fade: 'global', highlight: 'item' },
-              faded: { innerRadius: 30, additionalRadius: -30, color: 'gray' },
-              valueFormatter,
+          series={[{
+            data: geminiDataObjParseagain.sentiment_analysis,
+            highlightScope: { fade: 'global', highlight: 'item' },
+            faded: { innerRadius: 30, additionalRadius: -30, color: 'gray' },
+            valueFormatter,
             },
           ]}
           height={200}
@@ -107,10 +106,11 @@ export default function Responsedata() {
 
     return (
         <div className=' max-w-[90%] mx-auto p-4 m-[10px_auto] bg-white shadow-md'>
-          <div id="json-output" className='grid grid-cols-2 gap-4 *:border *:p-2.5 *:rounded-md'></div>
           <Suspense fallback={<div>Loading error...</div>}>
                       <MyGeminiComponent />
           </Suspense>
+          <div id="json-output" className='grid grid-cols-2 gap-4 *:border *:p-2.5 *:rounded-md'></div>
+          
         </div>
       );
     }
