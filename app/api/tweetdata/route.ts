@@ -78,8 +78,8 @@ export async function GET(req: NextRequest) {
           //  config: {
           //      responseMimeType: "application/json"
           //  }
-          });
-
+  }
+       });
         // Access the generated content from GeminiResponse
         const GeminiResponseData = GeminiResponse.text;
          if (!GeminiResponseData) {
