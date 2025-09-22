@@ -2,7 +2,7 @@
 import { PieChart } from '@mui/x-charts/PieChart';
 import { desktopOS, valueFormatter } from './webUsageStats';
 
-export default function PieActiveArc() {
+export default function Piechart() {
   return (
     <PieChart
       series={[
