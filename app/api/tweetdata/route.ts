@@ -45,41 +45,33 @@ export async function GET(req: NextRequest) {
        const GeminiResponse = await ai.models.generateContent({
            model: "gemini-2.5-flash",
              contents:
-      "Do sentiment analysis for tweets and how people feel after looking at them. Use 'Text' fields as tweets. No pre text, no after text, and do not use special characters. Only return below specified responseSchema json format. Return Positive, Neutral, Negative percentage (without % sign), overall feelings, and suggestions in a separate 'suggestion' field within their niche to post tweets for more engagement." + JSON.stringify(tweetDataArray),
+      "Do sentiment analysis for tweets and how people feel after looking at them. Use 'Text' fields as tweets. No pre text, no after text, and do not use special characters. Only return below specified responseSchema json format. Return Positive, Neutral, Negative percentage (without percentage text or % sign), overall feelings, and suggestions in a separate 'suggestion' field within their niche to post tweets for more engagement." + JSON.stringify(tweetDataArray),
     config: {
       responseMimeType: "application/json",
       responseSchema: {
   type: Type.OBJECT,
   properties: {
     sentiment_analysis: {
-      type: Type.OBJECT,
-      properties: {
-        positive_percentage: {
-          type: Type.NUMBER,
+      type: Type.ARRAY,
+      items: {
+        type: Type.OBJECT,
+        properties: {
+          label: {
+            type: Type.STRING,
+          },
+          value: {
+            type: Type.NUMBER,
+          },
         },
-        neutral_percentage: {
-          type: Type.NUMBER,
-        },
-        negative_percentage: {
-          type: Type.NUMBER,
-        },
-        overall_feelings: {
-          type: Type.STRING,
-        },
-        suggestion: {
-          type: Type.STRING,
-        }
       },
-      propertyOrdering: [
-        "positive_percentage",
-        "neutral_percentage",
-        "negative_percentage",
-        "overall_feelings",
-        "suggestion"
-      ]
-    }
-  }
-}
+    },
+    overall_feelings: {
+      type: Type.STRING,
+    },
+    suggestion: {
+      type: Type.STRING,
+    },
+  },
 
     },
           //  contents: "Do sentiment analysis for tweets and How people feel after looking tweets. Use 'Text' fields as tweets to provided data. No pre text, No after text and do not use 'provided data' related text or \"%~!*()'```\n\\\" like special characters as I need to show this data on a web page. only return valid json format data. 1) Return result with Positive, Neutral, Negative percentage(do not include % sign), overall feelings and suggestions in a separate 'suggestion' field within their specific niche to post tweets for more engagement. 2) Find out success full Trend, Hashtag, keywords and popular discussion within their specific niche in a separate field 3) Analyze tweet performance and add field 'well' or 'fail' regarding that tweet. 4) Analyze success full strategy within their specific niche and collect data like( tweet insight, Trends, hashtags, keywords, Discussion, Tweets format, Tweet strategy(post day count, post schedule). " + JSON.stringify(tweetDataArray),

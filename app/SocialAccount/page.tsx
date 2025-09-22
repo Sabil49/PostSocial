@@ -4,7 +4,7 @@
     import { useSearchParams } from 'next/navigation';
     import {signOutUser,} from '@/app/api/auth/actions';
     import { useSession } from "next-auth/react";
-import Piechart from '../Charts/Piechart/Piechart';
+
 
 
     function MyErrorComponent() {
@@ -54,8 +54,7 @@ import Piechart from '../Charts/Piechart/Piechart';
        
       </div>
     </div>
-    <SessionComponent />    
-      <Piechart />
+    <SessionComponent />   
         </div>
         
       );

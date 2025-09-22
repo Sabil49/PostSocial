@@ -2,8 +2,11 @@
 import { useSearchParams } from 'next/navigation';
 import { Suspense } from 'react';
 import clientData from '@/utils/clientData.json';
+import { PieChart } from '@mui/x-charts/PieChart';
 
-       function displayJson(data : Record<string, unknown>, parentElement: HTMLElement) {
+export const valueFormatter = (item: { value: number }) => `${item.value}%`;
+
+function displayJson(data : Record<string, unknown>, parentElement: HTMLElement) {
         debugger;
         for (const key in data) {
           console.log("Key: " + key);
@@ -33,7 +36,7 @@ import clientData from '@/utils/clientData.json';
                     nestedContainer.style.marginLeft = '20px'; // Indent nested content
                     nestedContainer.style.marginBottom = '15px'; 
                     nestedContainer.style.marginTop = '5px'; 
-                    value.forEach((item, index) => {
+                    value.forEach((item) => {
                         const arrayItemElement = document.createElement('div');
                         arrayItemElement.style.marginLeft = '20px';
                         //arrayItemElement.textContent = `${index + 1}. `;
@@ -73,20 +76,31 @@ import clientData from '@/utils/clientData.json';
       console.log("geminiDataObjParseagain:");
       console.log(geminiDataObjParseagain);
       console.log(typeof(geminiDataObjParseagain));
-       const keys = Object.keys(geminiDataObjParseagain);
-       const values = Object.values(geminiDataObjParseagain);
+       //const keys = Object.keys(geminiDataObjParseagain);
+       //const values = Object.values(geminiDataObjParseagain);
       //  console.log("keys:" + keys[0]);
       //  console.log("values:" + values[0]);
     // Call the function with your data and a target HTML element
-    const jsonOutputElement = document.getElementById('json-output');
-    if (jsonOutputElement) {
-      console.log("jsonOutputElement is not null.........");
-      displayJson(clientData, jsonOutputElement);
-    }
-    else{
-      console.log("jsonOutputElement is null");
-    }  
-    return null;
+    // const jsonOutputElement = document.getElementById('json-output');
+    // if (jsonOutputElement) {
+    //   console.log("jsonOutputElement is not null.........");
+    //   displayJson(clientData, jsonOutputElement);
+    // }
+    // else{
+    //   console.log("jsonOutputElement is null");
+    // }  
+    return <PieChart
+          series={[
+            {
+              data: geminiDataObjParseagain.sentiment_analysis,
+              highlightScope: { fade: 'global', highlight: 'item' },
+              faded: { innerRadius: 30, additionalRadius: -30, color: 'gray' },
+              valueFormatter,
+            },
+          ]}
+          height={200}
+          width={200}
+        />
 
        }
 export default function Responsedata() {
