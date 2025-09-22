@@ -51,7 +51,7 @@ export async function GET(req: NextRequest) {
       responseSchema: {
   type: Type.OBJECT,
   properties: {
-    sentiment_analysis: {
+    sentiment_analysissssssssssss: {
       type: Type.OBJECT,
       properties: {
         positive_percentage: {
