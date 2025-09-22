@@ -89,17 +89,18 @@ function displayJson(data : Record<string, unknown>, parentElement: HTMLElement)
     else{
       console.log("jsonOutputElement is null");
     }  
-    return <PieChart
-          series={[{
-            data: geminiDataObjParseagain.sentiment_analysis,
-            highlightScope: { fade: 'global', highlight: 'item' },
-            faded: { innerRadius: 30, additionalRadius: -30, color: 'gray' },
-            valueFormatter,
-            },
-          ]}
-          height={200}
-          width={200}
-        />
+    return null;
+    // return <PieChart
+    //       series={[{
+    //         data: geminiDataObjParseagain.sentiment_analysis,
+    //         highlightScope: { fade: 'global', highlight: 'item' },
+    //         faded: { innerRadius: 30, additionalRadius: -30, color: 'gray' },
+    //         valueFormatter,
+    //         },
+    //       ]}
+    //       height={200}
+    //       width={200}
+    //     />
 
        }
 export default function Responsedata() {
