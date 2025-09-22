@@ -87,7 +87,7 @@ export async function GET(req: NextRequest) {
          }
 
          const GeminiResponseDataStr = JSON.stringify(GeminiResponseData);
-         const encodedJson = encodeURIComponent(GeminiResponseDataStr);
+         const encodedJson =  Buffer.from(GeminiResponseDataStr).toString("base64");
          
           // Return the generated content as JSON
          // const GeminiResponseString = JSON.stringify(GeminiResponseData);

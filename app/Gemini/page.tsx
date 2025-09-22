@@ -68,7 +68,7 @@ function displayJson(data : Record<string, unknown>, parentElement: HTMLElement)
       const geminiData = searchParams.get('data');
       console.log("geminiData");
       console.log(geminiData);
-      const geminiDataDecoded = decodeURIComponent(geminiData || '');
+      const geminiDataDecoded = JSON.parse(Buffer.from(geminiData || '', "base64").toString("utf8"));
       const geminiDataObj = JSON.parse(geminiDataDecoded || '{}');
       console.log("geminiDataObj:");
       console.log(geminiDataObj);
