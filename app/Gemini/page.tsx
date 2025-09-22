@@ -4,7 +4,7 @@ import { Suspense } from 'react';
 import clientData from '@/utils/clientData.json';
 import { PieChart } from '@mui/x-charts/PieChart';
 
-export const valueFormatter = (item: { value: number }) => `${item.value}%`;
+const valueFormatter = (item: { value: number }) => `${item.value}%`;
 
 function displayJson(data : Record<string, unknown>, parentElement: HTMLElement) {
         debugger;
