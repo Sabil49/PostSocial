@@ -2,7 +2,6 @@
 import { useSearchParams } from 'next/navigation';
 import { Suspense } from 'react';
 import clientData from '@/utils/clientData.json';
-import { array } from 'zod/v4';
 
        function displayJson(data : Record<string, unknown>, parentElement: HTMLElement) {
         debugger;
@@ -76,8 +75,8 @@ import { array } from 'zod/v4';
       console.log(typeof(geminiDataObjParseagain));
        const keys = Object.keys(geminiDataObjParseagain);
        const values = Object.values(geminiDataObjParseagain);
-       console.log("keys:" + keys[0]);
-       console.log("values:" + values[0]);
+      //  console.log("keys:" + keys[0]);
+      //  console.log("values:" + values[0]);
     // Call the function with your data and a target HTML element
     const jsonOutputElement = document.getElementById('json-output');
     if (jsonOutputElement) {
