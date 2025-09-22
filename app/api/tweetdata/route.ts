@@ -45,25 +45,33 @@ export async function GET(req: NextRequest) {
        const GeminiResponse = await ai.models.generateContent({
            model: "gemini-2.5-flash",
              contents:
-      "List a few popular cookie recipes, and include the amounts of ingredients.",
+      "Do sentiment analysis for tweets and How people feel after looking tweets. Use 'Text' fields as tweets to provided data. No pre text, No after text and do not use 'provided data' related text or \"%~!*()'```\n\\\" like special characters as I need to show this data on a web page. only return valid json format data. 1) Return result with Positive, Neutral, Negative percentage(do not include % sign), overall feelings and suggestions in a separate 'suggestion' field within their specific niche to post tweets for more engagement. " + JSON.stringify(tweetDataArray),
     config: {
       responseMimeType: "application/json",
       responseSchema: {
-        type: Type.ARRAY,
+        type: Type.OBJECT,
         items: {
-          type: Type.OBJECT,
+          sentiment_analysis: {
+              type: Type.OBJECT,
+            },
           properties: {
-            recipeName: {
+            positive_percentage: {
+              type: Type.NUMBER,
+            },
+            neutral_percentage: {
+              type: Type.NUMBER,
+            },  
+            negative_percentage: {
+              type: Type.NUMBER,
+            },
+            overall_feelings: {
               type: Type.STRING,
             },
-            ingredients: {
-              type: Type.ARRAY,
-              items: {
-                type: Type.STRING,
-              },
+            suggestion: {
+              type: Type.STRING,
             },
           },
-          propertyOrdering: ["recipeName", "ingredients"],
+          propertyOrdering: ["positive_percentage", "neutral_percentage", "negative_percentage", "overall_feelings", "suggestion"],
         },
       },
     },
