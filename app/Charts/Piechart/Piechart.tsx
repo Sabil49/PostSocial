@@ -4,7 +4,9 @@ import { desktopOS, valueFormatter } from './webUsageStats';
 
 export default function Piechart() {
   return (
-    <PieChart
+    <div>
+      <h2>Desktop Operating System Market Share</h2>    
+      <PieChart
       series={[
         {
           data: desktopOS,
@@ -16,5 +18,6 @@ export default function Piechart() {
       height={200}
       width={200}
     />
+    </div>
   );
 }
