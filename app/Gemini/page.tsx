@@ -2,10 +2,23 @@
 import { useSearchParams } from 'next/navigation';
 import { Suspense } from 'react';
 import { PieChart } from '@mui/x-charts/PieChart';
+import { BarChart } from '@mui/x-charts/BarChart';
 
 const valueFormatterPiechart = (item: { value: number }) => `${item.value}%`;
 
 const valueFormatterHistogram = (value: number | null) => `${value}mm`;
+
+const chartSetting = {
+  yAxis: [
+    {
+      label: 'count',
+      width: 60,
+    },
+  ],
+  series: [{ dataKey: 'count', label: '', valueFormatter: valueFormatterHistogram }],
+  height: 300,
+  margin: { left: 0 },
+};
 
 function displayJson(data : Record<string, unknown>, parentElement: HTMLElement) {
         debugger;
@@ -74,6 +87,16 @@ function displayJson(data : Record<string, unknown>, parentElement: HTMLElement)
           <h2 className="text-2xl font-bold mb-4 text-center">{geminiDataObj.sentiment_percentage.title}</h2>
           <PieChart series={[{ data: geminiDataObj.sentiment_percentage.data, highlightScope: { fade: 'global', highlight: 'item' }, faded: { innerRadius: 30, additionalRadius: -30, color: 'gray' }, valueFormatter: valueFormatterPiechart, }, ]} height={200}
         width={200} />
+        </div>
+        <div>
+          <div style={{ width: '100%' }}>
+            <h2 className="text-2xl font-bold mb-4 text-center">{geminiDataObj.histogram_data.title}</h2>
+                <BarChart
+                  dataset={geminiDataObj.histogram_data.data}
+                  xAxis={[{ dataKey: 'score_range' }]}
+                  {...chartSetting}
+                />
+          </div>
         </div>
       </div>
     )

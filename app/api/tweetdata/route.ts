@@ -77,17 +77,21 @@ export async function GET(req: NextRequest) {
     },propertyOrdering: ["title", "data"]
   },  
     histogram_data: {
-      type: Type.ARRAY,
-
-      items: {
-        type: Type.OBJECT,
-        properties: {
-          score_range: { type: Type.STRING },
-          count: { type: Type.INTEGER },
-        },
-        propertyOrdering: ["score_range", "count"],
+      type: Type.OBJECT,
+      properties: {
+        title: { type: Type.STRING },
+        data: { type: Type.ARRAY,
+          items: {
+             type: Type.OBJECT,
+             properties: {
+               score_range: { type: Type.STRING },
+               count: { type: Type.NUMBER },
+             },
+             propertyOrdering: ["score_range", "count"],
+           },
       },
-    },
+    },propertyOrdering: ["title", "data"]
+  },  
     scatterplot_data: {
       type: Type.ARRAY,
       items: {
