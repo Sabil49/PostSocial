@@ -2,6 +2,7 @@ import { NextRequest,NextResponse } from 'next/server';
 import { GoogleGenAI, Type } from "@google/genai";
 // import { cookies } from 'next/headers';
 import tweetData from '@/utils/tweetData.json';
+import { title } from 'process';
 
 const ai = new GoogleGenAI({ apiKey: process.env.GOOGLE_GEMINI_API_KEY || "" });
 
@@ -62,14 +63,20 @@ export async function GET(req: NextRequest) {
     sentiment_percentage: {
       type: Type.OBJECT,
       properties: {
-        positive_percent: { type: Type.NUMBER },
-        neutral_percent: { type: Type.NUMBER },
-        negative_percent: { type: Type.NUMBER },
+        type: Type.ARRAY,
+        items: {
+          type: Type.OBJECT,
+          properties: {
+            label: { type: Type.STRING },
+            value: { type: Type.NUMBER },
+          },
+        },
       },
       propertyOrdering: ["positive_percent", "neutral_percent", "negative_percent"],
     },
     histogram_data: {
       type: Type.ARRAY,
+
       items: {
         type: Type.OBJECT,
         properties: {

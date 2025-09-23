@@ -9,13 +9,13 @@ const valueFormatter = (item: { value: number }) => `${item.value}%`;
 function displayJson(data : Record<string, unknown>, parentElement: HTMLElement) {
         debugger;
         for (const key in data) {
-          console.log("Key: " + key);
+          //console.log("Key: " + key);
             if (data.hasOwnProperty(key)) {
                 const value = data[key];
-                console.log("Key: " + key + " Value: " + value);
+                //console.log("Key: " + key + " Value: " + value);
                 const keyReplaced = key.replace(/_/g, ' ');
                 const keyCapitalized = keyReplaced.charAt(0).toUpperCase() + keyReplaced.slice(1);
-                console.log("Key Capitalized: " + keyCapitalized);
+                //console.log("Key Capitalized: " + keyCapitalized);
                 const itemElement = document.createElement('div');
                 if (typeof value === 'object' && !Array.isArray(value) && value !== null) {
                     const keyElement = document.createElement('strong');
@@ -84,23 +84,22 @@ function displayJson(data : Record<string, unknown>, parentElement: HTMLElement)
     const jsonOutputElement = document.getElementById('json-output');
     if (jsonOutputElement) {
       console.log("jsonOutputElement is not null.........");
-      displayJson(clientData, jsonOutputElement);
+      displayJson(geminiDataObj, jsonOutputElement);
     }
     else{
       console.log("jsonOutputElement is null");
     }  
-    return null;
-    // return <PieChart
-    //       series={[{
-    //         data: geminiDataObjParseagain.sentiment_analysis,
-    //         highlightScope: { fade: 'global', highlight: 'item' },
-    //         faded: { innerRadius: 30, additionalRadius: -30, color: 'gray' },
-    //         valueFormatter,
-    //         },
-    //       ]}
-    //       height={200}
-    //       width={200}
-    //     />
+    return <PieChart
+          series={[{
+            data: geminiDataObj.sentiment_percentage,
+            highlightScope: { fade: 'global', highlight: 'item' },
+            faded: { innerRadius: 30, additionalRadius: -30, color: 'gray' },
+            valueFormatter,
+            },
+          ]}
+          height={200}
+          width={200}
+        />
 
        }
 export default function Responsedata() {
