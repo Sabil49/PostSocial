@@ -89,9 +89,11 @@ function displayJson(data : Record<string, unknown>, parentElement: HTMLElement)
     else{
       console.log("jsonOutputElement is null");
     }  
-    return <PieChart
+    return <div>
+      <h2 className='text-2xl font-bold mb-4 text-center'>{geminiDataObj.sentiment_percentage.title}</h2>
+      <PieChart
           series={[{
-            data: geminiDataObj.sentiment_percentage,
+            data: geminiDataObj.sentiment_percentage.data,
             highlightScope: { fade: 'global', highlight: 'item' },
             faded: { innerRadius: 30, additionalRadius: -30, color: 'gray' },
             valueFormatter,
@@ -100,7 +102,7 @@ function displayJson(data : Record<string, unknown>, parentElement: HTMLElement)
           height={200}
           width={200}
         />
-
+</div>
        }
 export default function Responsedata() {
 

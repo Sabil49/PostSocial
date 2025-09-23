@@ -61,16 +61,21 @@ export async function GET(req: NextRequest) {
       propertyOrdering: ["positive_count", "neutral_count", "negative_count"],
     },
    sentiment_percentage: {
-  type: Type.ARRAY,
-  items: {
-    type: Type.OBJECT,
-    properties: {
-      label: { type: Type.STRING },
-      value: { type: Type.NUMBER },
-    },
-    propertyOrdering: ["label", "value"],
-  },
-},
+      type: Type.OBJECT,
+      properties: {
+        title: { type: Type.STRING },
+        data: { type: Type.ARRAY,
+          items: {
+             type: Type.OBJECT,
+             properties: {
+               label: { type: Type.STRING },
+               value: { type: Type.NUMBER },
+             },
+             propertyOrdering: ["label", "value"],
+           },
+      },
+    },propertyOrdering: ["title", "data"]
+  },  
     histogram_data: {
       type: Type.ARRAY,
 
@@ -152,8 +157,9 @@ export async function GET(req: NextRequest) {
     "interpretations",
   ],
 },
-  }
-        });
+    },
+         });
+
         // Access the generated content from GeminiResponse
         const GeminiResponseData = GeminiResponse.text;
          if (!GeminiResponseData) {

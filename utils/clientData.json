@@ -1,73 +1,272 @@
-
 {
-    "sentiment_analysis": {
-        "positive_percentage": 10000,
-        "neutral_percentage": 50,
-        "negative_percentage": 0,
-        "overall_feelings": "Overall neutral to mildly positive, with a recognition of platform changes.",
-        "suggestion": "To boost engagement, incorporate questions that prompt discussion around industry changes. Utilize trending hashtags to increase visibility and reach. For general greetings, add a personalized touch or a subtle call to action. Actively respond to comments to foster community interaction."
+    "sentiment_distribution": {
+        "positive_count": 21,
+        "neutral_count": 2,
+        "negative_count": 0
     },
-    "trending_insights": {
-        "successful_trend": [
-            "Social Media Platform Rebranding",
-            "Tech Updates and Innovation",
-            "Digital Transformation in Online Communication"
-        ],
-        "successful_hashtag": [
-            "#X",
-            "#TwitterMigration",
-            "#SocialMedia",
-            "#TechNews",
-            "#PlatformUpdates"
-        ],
-        "keywords": [
-            "blue bird",
-            "X",
-            "platform update",
-            "social media",
-            "branding",
-            "innovation",
-            "digital evolution"
-        ],
-        "popular_discussion": [
-            "Impact of major platform changes on users and businesses",
-            "Future directions of social media platforms",
-            "Branding and identity in the digital space"
-        ]
-    },
-    "tweet_performance_analysis": [
+    "sentiment_percentage": [
         {
-            "id": "1965819305188274464",
-            "text": "From blue bird to bold X 🚀 https://t.co/5i7DTLKjvb",
-            "performance": "fail"
+            "label": "Positive",
+            "value": 91.3
         },
         {
-            "id": "1965819253849768185",
-            "text": "Good night",
-            "performance": "fail"
+            "label": "Neutral",
+            "value": 8.7
+        },
+        {
+            "label": "Negative",
+            "value": 0
         }
     ],
-    "successful_strategy_analysis": {
-        "tweet_insight": "Tweets that address significant industry-specific events, like platform rebranding, have potential for higher engagement. Simple, generic greetings typically result in low organic reach unless part of a broader, well-established personal branding strategy.",
-        "trends": [
-            "Actively participate in and leverage current events within the technology and business sectors.",
-            "Engage with ongoing discussions about digital transformation and social media platform evolution."
-        ],
-        "hashtags": [
-            "Strategically employ 1-3 relevant and specific hashtags per post to enhance discoverability (e.g., #TechUpdates, #SocialMediaStrategy, #BusinessNews)."
-        ],
-        "keywords": [
-            "Incorporate industry-specific keywords like 'innovation', 'digital transformation', 'platform insights', and 'business growth' to attract a targeted and engaged audience."
-        ],
-        "discussion": [
-            "Cultivate interaction by posing open-ended questions, soliciting opinions, and actively responding to comments to build a strong community."
-        ],
-        "tweets_format": [
-            "Vary content formats to maintain audience interest, including text-only posts, text with engaging images or videos, and external links to valuable resources. Use emojis to convey tone and personality effectively."
-        ],
-        "tweet_strategy": {
-            "post_day_count": "Maintain consistency in posting frequency. A regular schedule helps build audience expectations and engagement over time.",
-            "post_schedule": "Analyze audience demographics and historical engagement data to identify optimal posting times for maximum reach and interaction (e.g., peak hours for professionals on weekdays for B2B content)."
+    "histogram_data": [
+        {
+            "score_range": "0.0-0.2",
+            "count": 0
+        },
+        {
+            "score_range": "0.2-0.4",
+            "count": 0
+        },
+        {
+            "score_range": "0.4-0.6",
+            "count": 2
+        },
+        {
+            "score_range": "0.6-0.8",
+            "count": 11
+        },
+        {
+            "score_range": "0.8-1.0",
+            "count": 10
         }
+    ],
+    "scatterplot_data": [
+        {
+            "tweet_id": "1966001005128374464",
+            "sentiment_score": 0.75,
+            "likes": 15,
+            "retweets": 2,
+            "replies": 1
+        },
+        {
+            "tweet_id": "1965998802987264195",
+            "sentiment_score": 0.65,
+            "likes": 8,
+            "retweets": 0,
+            "replies": 0
+        },
+        {
+            "tweet_id": "1965977502183744800",
+            "sentiment_score": 0.85,
+            "likes": 12,
+            "retweets": 1,
+            "replies": 2
+        },
+        {
+            "tweet_id": "1965971201183744702",
+            "sentiment_score": 0.7,
+            "likes": 6,
+            "retweets": 0,
+            "replies": 0
+        },
+        {
+            "tweet_id": "1965960001183744620",
+            "sentiment_score": 0.78,
+            "likes": 10,
+            "retweets": 0,
+            "replies": 1
+        },
+        {
+            "tweet_id": "1965900001183744621",
+            "sentiment_score": 0.9,
+            "likes": 14,
+            "retweets": 1,
+            "replies": 0
+        },
+        {
+            "tweet_id": "1965890001183744622",
+            "sentiment_score": 0.8,
+            "likes": 9,
+            "retweets": 0,
+            "replies": 1
+        },
+        {
+            "tweet_id": "1965880001183744623",
+            "sentiment_score": 0.68,
+            "likes": 7,
+            "retweets": 0,
+            "replies": 0
+        },
+        {
+            "tweet_id": "1965870001183744624",
+            "sentiment_score": 0.92,
+            "likes": 20,
+            "retweets": 2,
+            "replies": 1
+        },
+        {
+            "tweet_id": "1965860001183744625",
+            "sentiment_score": 0.77,
+            "likes": 11,
+            "retweets": 0,
+            "replies": 2
+        },
+        {
+            "tweet_id": "1965850001183744626",
+            "sentiment_score": 0.82,
+            "likes": 9,
+            "retweets": 1,
+            "replies": 0
+        },
+        {
+            "tweet_id": "1965840001183744627",
+            "sentiment_score": 0.91,
+            "likes": 6,
+            "retweets": 0,
+            "replies": 0
+        },
+        {
+            "tweet_id": "1965830001183744628",
+            "sentiment_score": 0.55,
+            "likes": 13,
+            "retweets": 1,
+            "replies": 1
+        },
+        {
+            "tweet_id": "1965820001183744629",
+            "sentiment_score": 0.5,
+            "likes": 5,
+            "retweets": 0,
+            "replies": 0
+        },
+        {
+            "tweet_id": "1965810001183744630",
+            "sentiment_score": 0.72,
+            "likes": 8,
+            "retweets": 0,
+            "replies": 1
+        },
+        {
+            "tweet_id": "1965800001183744631",
+            "sentiment_score": 0.88,
+            "likes": 22,
+            "retweets": 2,
+            "replies": 2
+        },
+        {
+            "tweet_id": "1965790001183744632",
+            "sentiment_score": 0.76,
+            "likes": 12,
+            "retweets": 1,
+            "replies": 0
+        },
+        {
+            "tweet_id": "1965780001183744633",
+            "sentiment_score": 0.73,
+            "likes": 10,
+            "retweets": 0,
+            "replies": 0
+        },
+        {
+            "tweet_id": "1965770001183744634",
+            "sentiment_score": 0.71,
+            "likes": 7,
+            "retweets": 0,
+            "replies": 1
+        },
+        {
+            "tweet_id": "1965760001183744635",
+            "sentiment_score": 0.67,
+            "likes": 6,
+            "retweets": 0,
+            "replies": 0
+        },
+        {
+            "tweet_id": "1965750001183744636",
+            "sentiment_score": 0.83,
+            "likes": 15,
+            "retweets": 1,
+            "replies": 1
+        },
+        {
+            "tweet_id": "1965740001183744637",
+            "sentiment_score": 0.93,
+            "likes": 8,
+            "retweets": 0,
+            "replies": 0
+        },
+        {
+            "tweet_id": "1965730001183744638",
+            "sentiment_score": 0.81,
+            "likes": 11,
+            "retweets": 0,
+            "replies": 1
+        }
+    ],
+    "heatmap_data": {
+        "sentiment_score_vs_engagement": {
+            "likes": 11.52,
+            "retweets": 0.52,
+            "replies": 0.61
+        }
+    },
+    "word_cloud": {
+        "positive_words": [
+            "consistency",
+            "ideas",
+            "wins",
+            "productive",
+            "create",
+            "recharge",
+            "grateful",
+            "fresh starts",
+            "hard work",
+            "creativity",
+            "calm",
+            "best ideas",
+            "good conversations",
+            "fuel",
+            "soul",
+            "enjoy",
+            "hustle",
+            "results",
+            "better paths",
+            "energy",
+            "focus",
+            "growth",
+            "recommend",
+            "vibe",
+            "attracts",
+            "tribe",
+            "clarity",
+            "peace",
+            "opportunities"
+        ],
+        "neutral_words": [
+            "coffee",
+            "morning routine",
+            "rest",
+            "heavy",
+            "okay",
+            "write",
+            "process",
+            "outcome",
+            "silently",
+            "noise",
+            "failure",
+            "redirection",
+            "digital detox"
+        ],
+        "negative_words": []
+    },
+    "interpretations": {
+        "overall_sentiment": "The overall sentiment is overwhelmingly positive, reflecting an optimistic and motivational tone across the tweets.",
+        "key_insights": [
+            "A vast majority (91.3%) of the tweets exhibit a positive sentiment, with 8.7% being neutral and no negative sentiments observed.",
+            "Common themes include personal growth, productivity, self-reflection, and positive affirmations.",
+            "Tweets with higher sentiment scores generally correlate with higher engagement metrics (likes, retweets, replies).",
+            "The absence of negative sentiment suggests a deliberate focus on uplifting and constructive messaging.",
+            "Neutral tweets tend to offer practical advice or acknowledge challenging situations with an accepting tone, rather than expressing indifference or negativity."
+        ]
     }
 }
