@@ -60,20 +60,17 @@ export async function GET(req: NextRequest) {
       },
       propertyOrdering: ["positive_count", "neutral_count", "negative_count"],
     },
-    sentiment_percentage: {
-      type: Type.OBJECT,
-      properties: {
-        type: Type.ARRAY,
-        items: {
-          type: Type.OBJECT,
-          properties: {
-            label: { type: Type.STRING },
-            value: { type: Type.NUMBER },
-          },
-        },
-      },
-      propertyOrdering: ["positive_percent", "neutral_percent", "negative_percent"],
+   sentiment_percentage: {
+  type: Type.ARRAY,
+  items: {
+    type: Type.OBJECT,
+    properties: {
+      label: { type: Type.STRING },
+      value: { type: Type.NUMBER },
     },
+    propertyOrdering: ["label", "value"],
+  },
+},
     histogram_data: {
       type: Type.ARRAY,
 
