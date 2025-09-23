@@ -4,7 +4,7 @@
     import { useSearchParams } from 'next/navigation';
     import {signOutUser,} from '@/app/api/auth/actions';
     import { useSession } from "next-auth/react";
-
+    import Histogram from '../Charts/Histogram/Histogram';
 
 
     function MyErrorComponent() {
@@ -40,6 +40,7 @@
 
       return (
         <div>
+          <Histogram />
           <button onClick={handleConnectX}>
             <b>Connect with Twitter</b>
           </button>

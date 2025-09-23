@@ -1,10 +1,11 @@
 "use client";
 import { useSearchParams } from 'next/navigation';
 import { Suspense } from 'react';
-import clientData from '@/utils/clientData.json';
 import { PieChart } from '@mui/x-charts/PieChart';
 
-const valueFormatter = (item: { value: number }) => `${item.value}%`;
+const valueFormatterPiechart = (item: { value: number }) => `${item.value}%`;
+
+const valueFormatterHistogram = (value: number | null) => `${value}mm`;
 
 function displayJson(data : Record<string, unknown>, parentElement: HTMLElement) {
         debugger;
@@ -17,7 +18,7 @@ function displayJson(data : Record<string, unknown>, parentElement: HTMLElement)
                 const keyCapitalized = keyReplaced.charAt(0).toUpperCase() + keyReplaced.slice(1);
                 //console.log("Key Capitalized: " + keyCapitalized);
                 const itemElement = document.createElement('div');
-                if (typeof value === 'object' && !Array.isArray(value) && value !== null) {
+                if (typeof value === 'object' && value !== null) {
                     const keyElement = document.createElement('strong');
                     keyElement.textContent = `${keyCapitalized}: `;
                     keyElement.style.fontSize = '1.1em';
@@ -28,27 +29,7 @@ function displayJson(data : Record<string, unknown>, parentElement: HTMLElement)
                     displayJson(value as Record<string, unknown>, nestedContainer); // Recursive call
                     itemElement.appendChild(nestedContainer);
                 }
-                else if (Array.isArray(value)) {
-                    const keyElement = document.createElement('strong');
-                    keyElement.textContent = `${keyCapitalized}: `;
-                    itemElement.appendChild(keyElement);
-                    const nestedContainer = document.createElement('div');
-                    nestedContainer.style.marginLeft = '20px'; // Indent nested content
-                    nestedContainer.style.marginBottom = '15px'; 
-                    nestedContainer.style.marginTop = '5px'; 
-                    value.forEach((item) => {
-                        const arrayItemElement = document.createElement('div');
-                        arrayItemElement.style.marginLeft = '20px';
-                        //arrayItemElement.textContent = `${index + 1}. `;
-                        if (typeof item === 'object' && item !== null) {
-                            displayJson(item as Record<string, unknown>, arrayItemElement);
-                        } else {
-                            arrayItemElement.textContent += String(item);
-                        }
-                        nestedContainer.appendChild(arrayItemElement);
-                    });
-                    itemElement.appendChild(nestedContainer);
-                } else {
+                 else {
                     const keyElement = document.createElement('strong');
                     keyElement.textContent = `${keyCapitalized}. `;
                     itemElement.appendChild(keyElement);
@@ -60,8 +41,6 @@ function displayJson(data : Record<string, unknown>, parentElement: HTMLElement)
             }
         }
     }
-
-
 
    function MyGeminiComponent() {
       const searchParams = useSearchParams();
@@ -89,20 +68,15 @@ function displayJson(data : Record<string, unknown>, parentElement: HTMLElement)
     else{
       console.log("jsonOutputElement is null");
     }  
-    return <div>
-      <h2 className='text-2xl font-bold mb-4 text-center'>{geminiDataObj.sentiment_percentage.title}</h2>
-      <PieChart
-          series={[{
-            data: geminiDataObj.sentiment_percentage.data,
-            highlightScope: { fade: 'global', highlight: 'item' },
-            faded: { innerRadius: 30, additionalRadius: -30, color: 'gray' },
-            valueFormatter,
-            },
-          ]}
-          height={200}
-          width={200}
-        />
-</div>
+    return (
+      <div className="grid grid-cols-2 gap-4 *:border *:p-2.5 *:rounded-md">
+        <div>
+          <h2 className="text-2xl font-bold mb-4 text-center">{geminiDataObj.sentiment_percentage.title}</h2>
+          <PieChart series={[{ data: geminiDataObj.sentiment_percentage.data, highlightScope: { fade: 'global', highlight: 'item' }, faded: { innerRadius: 30, additionalRadius: -30, color: 'gray' }, valueFormatter: valueFormatterPiechart, }, ]} height={200}
+        width={200} />
+        </div>
+      </div>
+    )
        }
 export default function Responsedata() {
 
