@@ -72,10 +72,10 @@ function displayJson(data : Record<string, unknown>, parentElement: HTMLElement)
       const geminiDataObj = JSON.parse(geminiDataDecoded || '{}');
       console.log("geminiDataObj:");
       console.log(geminiDataObj);
-      const geminiDataObjParseagain=JSON.parse(geminiDataObj);
-      console.log("geminiDataObjParseagain:");
-      console.log(geminiDataObjParseagain);
-      console.log(typeof(geminiDataObjParseagain));
+      // const geminiDataObjParseagain=JSON.parse(geminiDataObj);
+      // console.log("geminiDataObjParseagain:");
+      // console.log(geminiDataObjParseagain);
+      // console.log(typeof(geminiDataObjParseagain));
        //const keys = Object.keys(geminiDataObjParseagain);
        //const values = Object.values(geminiDataObjParseagain);
       //  console.log("keys:" + keys[0]);

@@ -44,42 +44,112 @@ export async function GET(req: NextRequest) {
       
        const GeminiResponse = await ai.models.generateContent({
            model: "gemini-2.5-flash",
-             contents:
-      "Using the text field in provided all data, generate JSON data(Don't use pre text, after text and special characters as i need to encode, decode this json data) to understand sentiment distribution and key insights and data for the charts: 1) Bar Chart – Show the count of Positive, Neutral, and Negative tweets. 2) Pie Chart – Display percentage share of each sentiment. 3) Histogram – Plot sentiment scores to observe frequency distribution. 4) Scatterplot – Visualize sentiment score vs. engagement metrics (likes, retweets, replies). 5) Heatmap – Show correlations between sentiment scores and engagement metrics. 6) Word Cloud – Generate for Positive, Negative, and Neutral tweets separately to highlight frequently used words. Ensure data are clean, well-labeled, and provide short interpretations of the findings. " + JSON.stringify(tweetDataArray),
+             contents: "Analyze the following 'text' field data as tweets and return JSON data(No pre text, after text and special characters) for sentiment analysis distribution and chart insights: " + JSON.stringify(tweetDataArray),
     config: {
       responseMimeType: "application/json",
-  //     responseSchema: {
-  // type: Type.OBJECT,
-  // properties: {
-  //   sentiment_analysis: {
-  //     type: Type.ARRAY,
-  //     items: {
-  //       type: Type.OBJECT,
-  //       properties: {
-  //         label: {
-  //           type: Type.STRING,
-  //         },
-  //         value: {
-  //           type: Type.NUMBER,
-  //         },
-  //       },
-  //     },
-  //   },
-  //   overall_feelings: {
-  //     type: Type.STRING,
-  //   },
-  //   suggestion: {
-  //     type: Type.STRING,
-  //   },
-  // },
-
-  //   },
-          //  contents: "Do sentiment analysis for tweets and How people feel after looking tweets. Use 'Text' fields as tweets to provided data. No pre text, No after text and do not use 'provided data' related text or \"%~!*()'```\n\\\" like special characters as I need to show this data on a web page. only return valid json format data. 1) Return result with Positive, Neutral, Negative percentage(do not include % sign), overall feelings and suggestions in a separate 'suggestion' field within their specific niche to post tweets for more engagement. 2) Find out success full Trend, Hashtag, keywords and popular discussion within their specific niche in a separate field 3) Analyze tweet performance and add field 'well' or 'fail' regarding that tweet. 4) Analyze success full strategy within their specific niche and collect data like( tweet insight, Trends, hashtags, keywords, Discussion, Tweets format, Tweet strategy(post day count, post schedule). " + JSON.stringify(tweetDataArray),
-          //  config: {
-          //      responseMimeType: "application/json"
-          //  }
+      responseSchema: {
+  type: Type.OBJECT,
+  properties: {
+    sentiment_distribution: {
+      type: Type.OBJECT,
+      properties: {
+        positive_count: { type: Type.INTEGER },
+        neutral_count: { type: Type.INTEGER },
+        negative_count: { type: Type.INTEGER },
+      },
+      propertyOrdering: ["positive_count", "neutral_count", "negative_count"],
+    },
+    sentiment_percentage: {
+      type: Type.OBJECT,
+      properties: {
+        positive_percent: { type: Type.NUMBER },
+        neutral_percent: { type: Type.NUMBER },
+        negative_percent: { type: Type.NUMBER },
+      },
+      propertyOrdering: ["positive_percent", "neutral_percent", "negative_percent"],
+    },
+    histogram_data: {
+      type: Type.ARRAY,
+      items: {
+        type: Type.OBJECT,
+        properties: {
+          score_range: { type: Type.STRING },
+          count: { type: Type.INTEGER },
+        },
+        propertyOrdering: ["score_range", "count"],
+      },
+    },
+    scatterplot_data: {
+      type: Type.ARRAY,
+      items: {
+        type: Type.OBJECT,
+        properties: {
+          tweet_id: { type: Type.STRING },
+          sentiment_score: { type: Type.NUMBER },
+          likes: { type: Type.INTEGER },
+          retweets: { type: Type.INTEGER },
+          replies: { type: Type.INTEGER },
+        },
+        propertyOrdering: ["tweet_id", "sentiment_score", "likes", "retweets", "replies"],
+      },
+    },
+    heatmap_data: {
+      type: Type.OBJECT,
+      properties: {
+        sentiment_score_vs_engagement: {
+          type: Type.OBJECT,
+          properties: {
+            likes: { type: Type.NUMBER },
+            retweets: { type: Type.NUMBER },
+            replies: { type: Type.NUMBER },
+          },
+          propertyOrdering: ["likes", "retweets", "replies"],
+        },
+      },
+      propertyOrdering: ["sentiment_score_vs_engagement"],
+    },
+    word_cloud: {
+      type: Type.OBJECT,
+      properties: {
+        positive_words: {
+          type: Type.ARRAY,
+          items: { type: Type.STRING },
+        },
+        neutral_words: {
+          type: Type.ARRAY,
+          items: { type: Type.STRING },
+        },
+        negative_words: {
+          type: Type.ARRAY,
+          items: { type: Type.STRING },
+        },
+      },
+      propertyOrdering: ["positive_words", "neutral_words", "negative_words"],
+    },
+    interpretations: {
+      type: Type.OBJECT,
+      properties: {
+        overall_sentiment: { type: Type.STRING },
+        key_insights: {
+          type: Type.ARRAY,
+          items: { type: Type.STRING },
+        },
+      },
+      propertyOrdering: ["overall_sentiment", "key_insights"],
+    },
+  },
+  propertyOrdering: [
+    "sentiment_distribution",
+    "sentiment_percentage",
+    "histogram_data",
+    "scatterplot_data",
+    "heatmap_data",
+    "word_cloud",
+    "interpretations",
+  ],
+},
   }
-       });
+        });
         // Access the generated content from GeminiResponse
         const GeminiResponseData = GeminiResponse.text;
          if (!GeminiResponseData) {
