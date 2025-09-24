@@ -1,38 +1,111 @@
 {
-  "sentiment_analysis": {
-    "positive_percentage": "0%",
-    "neutral_percentage": "100%",
-    "negative_percentage": "0%",
-    "overall_feeling": "Neutral. The content is primarily informative or generic, lacking elements that typically evoke strong positive or negative emotions or drive engagement.",
-    "suggestion": "To boost engagement, consider incorporating questions, calls-to-action, or content that directly addresses audience needs or concerns. For the tech/business niche, leverage trending topics with a unique perspective. For general posts, aim for more interactive or personalized content to foster connection. Visuals are a good start, but pair them with compelling copy."
-  },
-  "successful_trends_hashtags_keywords": {
-    "successful_trend": "Given the limited data, no 'successful' trends are apparent as engagement is zero. However, the 'blue bird to bold X' tweet touches on 'Platform Rebranding' (specifically Twitter to X transition), which was a significant trend. The 'Good night' tweet lacks trend relevance.",
-    "successful_hashtag": "No hashtags were used in the provided tweets. For future engagement, using relevant hashtags like #TechNews, #SocialMediaUpdate, #XPlatform for tech content, or #GoodNightVibes for personal posts could help discoverability.",
-    "successful_keywords": "For the tech niche, keywords like 'platform migration', 'digital transformation', 'social media evolution' could be successful. For general interaction, keywords are too broad to define success with current data.",
-    "popular_discussion": "The 'blue bird to bold X' tweet hints at discussions around 'Social Media Platform Changes' and 'Brand Identity Shifts'. This is a popular and often polarizing topic that could generate discussion if presented with an engaging angle (e.g., 'What are your thoughts on the X rebrand?')."
-  },
-  "tweet_performance_analysis": [
-    {
-      "tweet_text": "From blue bird to bold X 🚀 https://t.co/5i7DTLKjvb",
-      "performance": "fail",
-      "reason": "Zero engagement (retweets, replies, likes, quotes, bookmarks, impressions) indicates the tweet did not resonate or reach an audience effectively."
+    "sentiment_percentage": {
+        "title": "Sentiment Distribution",
+        "data": [
+            {
+                "label": "Positive",
+                "value": 60
+            },
+            {
+                "label": "Neutral",
+                "value": 40
+            },
+            {
+                "label": "Negative",
+                "value": 0
+            }
+        ]
     },
-    {
-      "tweet_text": "Good night",
-      "performance": "fail",
-      "reason": "Zero engagement across all metrics. While a 'Good night' tweet is often personal, its lack of reach and interaction suggests it didn't connect with any audience, even a small one."
+    "histogram_data": {
+        "title": "Engagement Distribution",
+        "data": [
+            {
+                "score_range": "0-20",
+                "count": 1
+            },
+            {
+                "score_range": "21-40",
+                "count": 1
+            },
+            {
+                "score_range": "41-60",
+                "count": 2
+            }
+        ]
+    },
+    "scatterplot_data": {
+        "title": "Engagement vs. Sentiment",
+        "data": [
+            {
+                "tweet_id": "1966001005128374464",
+                "sentiment_score": 0.8,
+                "likes": 15,
+                "retweets": 2,
+                "replies": 1
+            },
+            {
+                "tweet_id": "1965998802987264195",
+                "sentiment_score": 0.5,
+                "likes": 8,
+                "retweets": 0,
+                "replies": 0
+            },
+            {
+                "tweet_id": "1965977502183744800",
+                "sentiment_score": 0.9,
+                "likes": 12,
+                "retweets": 1,
+                "replies": 2
+            },
+            {
+                "tweet_id": "1965971201183744702",
+                "sentiment_score": 0.6,
+                "likes": 6,
+                "retweets": 0,
+                "replies": 0
+            }
+        ]
+    },
+    "heatmap_data": {
+        "sentiment_score_vs_engagement": {
+            "likes": 0.7,
+            "retweets": 0.6,
+            "replies": 0.8
+        }
+    },
+    "word_cloud": {
+        "positive_words": [
+            "Building",
+            "consistency",
+            "Coffee",
+            "ideas",
+            "Small",
+            "wins",
+            "big",
+            "results",
+            "rest",
+            "productive"
+        ],
+        "neutral_words": [
+            "harder",
+            "than",
+            "starting",
+            "morning",
+            "routine",
+            "today",
+            "tomorrow",
+            "Sometimes",
+            "most",
+            "thing"
+        ],
+        "negative_words": []
+    },
+    "interpretations": {
+        "overall_sentiment": "Positive",
+        "key_insights": [
+            "Tweets show positive sentiment related to productivity and consistency.",
+            "High engagement on posts related to productivity and building positive habits.",
+            "Most tweets are moderately positive. "
+        ]
     }
-  ],
-  "successful_strategy_analysis": {
-    "tweet_insight": "The current approach is not generating engagement. One tweet is informative about a platform change but lacks a clear call to action or question to spark interaction. The other is a generic greeting. Both have zero metrics, indicating either very low reach or no compelling reason for an audience to interact.",
-    "trends_leverage": "The topic of 'platform rebranding' in the first tweet is relevant to current events but wasn't effectively leveraged. To succeed, this trend needs to be framed with a question, a strong opinion, or a unique insight to encourage discussion.",
-    "hashtags_keywords_usage": "No hashtags were used, which is a missed opportunity for discoverability. Incorporating relevant keywords within the tweet text is good for context but without hashtags, its reach is limited. Future successful strategies must include strategic hashtag usage.",
-    "discussion_initiation": "Neither tweet actively initiated discussion. Successful strategies involve asking open-ended questions, presenting controversial takes, or sharing valuable insights that prompt replies and engagement.",
-    "tweets_format": "One tweet used text with a media link, which is generally a good format for engagement. The other was text-only. While visuals are important, the content and call-to-action within the text are equally critical. A successful format pairs compelling visuals with engaging copy.",
-    "tweet_strategy": {
-      "post_day_count": "With only two tweets posted on the same day within minutes, it's impossible to determine a 'successful' post day strategy. Consistency is generally key, but the content strategy must be solid first.",
-      "post_schedule": "The two tweets were posted very close to each other (within a minute). This could suggest a burst posting, which might overwhelm followers if not part of a larger, well-thought-out content calendar. A successful strategy involves analyzing audience activity times and scheduling posts when engagement is highest, rather than arbitrary close intervals."
-    }
-  }
 }

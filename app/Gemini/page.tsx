@@ -105,6 +105,13 @@ function displayJson(data : Record<string, unknown>, parentElement: HTMLElement)
   { "id": "data-20", "x1": 241, "y1": 476, "x2": 280, "y2": 228 }
 ];
 
+interface scatterplot_data {
+ tweet_id: string;
+ sentiment_score: number;
+ likes: number;
+ retweets: number;
+ replies: number;
+}
     return (
       <div className="grid grid-cols-2 gap-4 *:border *:p-2.5 *:rounded-md">
         <div>
@@ -123,18 +130,22 @@ function displayJson(data : Record<string, unknown>, parentElement: HTMLElement)
         <div>
             <h2 className="text-2xl font-bold mb-4 text-center">Sentiment Score vs Likes Scatterplot</h2>
                  <ScatterChart
-                   height={300}
-                   series={[
-                      {
-          label: 'Series A',
-          data: data.map((v) => ({ x: v.x1, y: v.y1, id: v.id })),
-        },
+      height={300}
+      series={[
         {
-          label: 'Series B',
-          data: data.map((v) => ({ x: v.x2, y: v.y2, id: v.id })),
+          label: "Tweets",
+          data: geminiDataObj.scatterplot_data.data.map((d: scatterplot_data) => ({
+            x: d.sentiment_score,   // X-axis → sentiment
+            y: d.likes,             // Y-axis → likes
+            id: d.tweet_id,
+            size: (d.retweets + 1) * 10, // bubble size → retweets
+            meta: d, // store full object for tooltip
+          })),
         },
-                   ]}
-                />
+      ]}
+      xAxis={[{ label: "Sentiment Score" }]}
+      yAxis={[{ label: "Likes" }]}
+    />
         </div>
       </div>
     )
