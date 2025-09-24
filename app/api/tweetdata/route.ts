@@ -44,7 +44,7 @@ export async function GET(req: NextRequest) {
 
       
        const GeminiResponse = await ai.models.generateContent({
-           model: "gemini-1.5-flash",
+           model: "gemini-2.5-flash",
              contents: "Analyze the following 'text' field data as tweets and return JSON data(No pre text, No after text and No special characters) for chart insights: " + JSON.stringify(tweetDataArray),
     config: {
       responseMimeType: "application/json",

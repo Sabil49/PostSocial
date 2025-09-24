@@ -138,7 +138,7 @@ interface scatterplot_data {
             x: d.sentiment_score,   // X-axis → sentiment
             y: d.likes,             // Y-axis → likes
             id: d.tweet_id,
-            size: (d.retweets + 1) * 10, // bubble size → retweets
+            radius: (d.retweets + 1) * 10, // bubble size → retweets
             meta: d, // store full object for tooltip
           })),
         },
