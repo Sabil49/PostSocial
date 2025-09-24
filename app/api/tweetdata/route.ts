@@ -51,15 +51,6 @@ export async function GET(req: NextRequest) {
       responseSchema: {
   type: Type.OBJECT,
   properties: {
-    sentiment_distribution: {
-      type: Type.OBJECT,
-      properties: {
-        positive_count: { type: Type.INTEGER },
-        neutral_count: { type: Type.INTEGER },
-        negative_count: { type: Type.INTEGER },
-      },
-      propertyOrdering: ["positive_count", "neutral_count", "negative_count"],
-    },
    sentiment_percentage: {
       type: Type.OBJECT,
       properties: {
@@ -93,6 +84,10 @@ export async function GET(req: NextRequest) {
     },propertyOrdering: ["title", "data"]
   },  
     scatterplot_data: {
+  type: Type.OBJECT,
+  properties: {
+    title: { type: Type.STRING },
+    data: {
       type: Type.ARRAY,
       items: {
         type: Type.OBJECT,
@@ -101,11 +96,14 @@ export async function GET(req: NextRequest) {
           sentiment_score: { type: Type.NUMBER },
           likes: { type: Type.INTEGER },
           retweets: { type: Type.INTEGER },
-          replies: { type: Type.INTEGER },
+          replies: { type: Type.INTEGER }
         },
-        propertyOrdering: ["tweet_id", "sentiment_score", "likes", "retweets", "replies"],
-      },
-    },
+        propertyOrdering: ["tweet_id", "sentiment_score", "likes", "retweets", "replies"]
+      }
+    }
+  },
+  propertyOrdering: ["title", "data"]
+},
     heatmap_data: {
       type: Type.OBJECT,
       properties: {
