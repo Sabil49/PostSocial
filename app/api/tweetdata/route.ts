@@ -150,7 +150,6 @@ export async function GET(req: NextRequest) {
     },
   },
   propertyOrdering: [
-    "sentiment_distribution",
     "sentiment_percentage",
     "histogram_data",
     "scatterplot_data",
