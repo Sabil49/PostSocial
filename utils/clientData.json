@@ -1,272 +1,254 @@
 {
-    "sentiment_distribution": {
-        "positive_count": 21,
-        "neutral_count": 2,
-        "negative_count": 0
+    "sentiment_percentage": {
+        "title": "Overall Sentiment Distribution",
+        "data": [
+            {
+                "label": "Positive",
+                "value": 82.61
+            },
+            {
+                "label": "Neutral",
+                "value": 17.39
+            },
+            {
+                "label": "Negative",
+                "value": 0
+            }
+        ]
     },
-    "sentiment_percentage": [
-        {
-            "label": "Positive",
-            "value": 91.3
-        },
-        {
-            "label": "Neutral",
-            "value": 8.7
-        },
-        {
-            "label": "Negative",
-            "value": 0
-        }
-    ],
-    "histogram_data": [
-        {
-            "score_range": "0.0-0.2",
-            "count": 0
-        },
-        {
-            "score_range": "0.2-0.4",
-            "count": 0
-        },
-        {
-            "score_range": "0.4-0.6",
-            "count": 2
-        },
-        {
-            "score_range": "0.6-0.8",
-            "count": 11
-        },
-        {
-            "score_range": "0.8-1.0",
-            "count": 10
-        }
-    ],
-    "scatterplot_data": [
-        {
-            "tweet_id": "1966001005128374464",
-            "sentiment_score": 0.75,
-            "likes": 15,
-            "retweets": 2,
-            "replies": 1
-        },
-        {
-            "tweet_id": "1965998802987264195",
-            "sentiment_score": 0.65,
-            "likes": 8,
-            "retweets": 0,
-            "replies": 0
-        },
-        {
-            "tweet_id": "1965977502183744800",
-            "sentiment_score": 0.85,
-            "likes": 12,
-            "retweets": 1,
-            "replies": 2
-        },
-        {
-            "tweet_id": "1965971201183744702",
-            "sentiment_score": 0.7,
-            "likes": 6,
-            "retweets": 0,
-            "replies": 0
-        },
-        {
-            "tweet_id": "1965960001183744620",
-            "sentiment_score": 0.78,
-            "likes": 10,
-            "retweets": 0,
-            "replies": 1
-        },
-        {
-            "tweet_id": "1965900001183744621",
-            "sentiment_score": 0.9,
-            "likes": 14,
-            "retweets": 1,
-            "replies": 0
-        },
-        {
-            "tweet_id": "1965890001183744622",
-            "sentiment_score": 0.8,
-            "likes": 9,
-            "retweets": 0,
-            "replies": 1
-        },
-        {
-            "tweet_id": "1965880001183744623",
-            "sentiment_score": 0.68,
-            "likes": 7,
-            "retweets": 0,
-            "replies": 0
-        },
-        {
-            "tweet_id": "1965870001183744624",
-            "sentiment_score": 0.92,
-            "likes": 20,
-            "retweets": 2,
-            "replies": 1
-        },
-        {
-            "tweet_id": "1965860001183744625",
-            "sentiment_score": 0.77,
-            "likes": 11,
-            "retweets": 0,
-            "replies": 2
-        },
-        {
-            "tweet_id": "1965850001183744626",
-            "sentiment_score": 0.82,
-            "likes": 9,
-            "retweets": 1,
-            "replies": 0
-        },
-        {
-            "tweet_id": "1965840001183744627",
-            "sentiment_score": 0.91,
-            "likes": 6,
-            "retweets": 0,
-            "replies": 0
-        },
-        {
-            "tweet_id": "1965830001183744628",
-            "sentiment_score": 0.55,
-            "likes": 13,
-            "retweets": 1,
-            "replies": 1
-        },
-        {
-            "tweet_id": "1965820001183744629",
-            "sentiment_score": 0.5,
-            "likes": 5,
-            "retweets": 0,
-            "replies": 0
-        },
-        {
-            "tweet_id": "1965810001183744630",
-            "sentiment_score": 0.72,
-            "likes": 8,
-            "retweets": 0,
-            "replies": 1
-        },
-        {
-            "tweet_id": "1965800001183744631",
-            "sentiment_score": 0.88,
-            "likes": 22,
-            "retweets": 2,
-            "replies": 2
-        },
-        {
-            "tweet_id": "1965790001183744632",
-            "sentiment_score": 0.76,
-            "likes": 12,
-            "retweets": 1,
-            "replies": 0
-        },
-        {
-            "tweet_id": "1965780001183744633",
-            "sentiment_score": 0.73,
-            "likes": 10,
-            "retweets": 0,
-            "replies": 0
-        },
-        {
-            "tweet_id": "1965770001183744634",
-            "sentiment_score": 0.71,
-            "likes": 7,
-            "retweets": 0,
-            "replies": 1
-        },
-        {
-            "tweet_id": "1965760001183744635",
-            "sentiment_score": 0.67,
-            "likes": 6,
-            "retweets": 0,
-            "replies": 0
-        },
-        {
-            "tweet_id": "1965750001183744636",
-            "sentiment_score": 0.83,
-            "likes": 15,
-            "retweets": 1,
-            "replies": 1
-        },
-        {
-            "tweet_id": "1965740001183744637",
-            "sentiment_score": 0.93,
-            "likes": 8,
-            "retweets": 0,
-            "replies": 0
-        },
-        {
-            "tweet_id": "1965730001183744638",
-            "sentiment_score": 0.81,
-            "likes": 11,
-            "retweets": 0,
-            "replies": 1
-        }
-    ],
+    "histogram_data": {
+        "title": "Sentiment Score Distribution",
+        "data": [
+            {
+                "score_range": "Very Negative (-1.0 to -0.6)",
+                "count": 0
+            },
+            {
+                "score_range": "Negative (-0.5 to -0.1)",
+                "count": 0
+            },
+            {
+                "score_range": "Neutral (0.0 to 0.4)",
+                "count": 4
+            },
+            {
+                "score_range": "Positive (0.5 to 0.8)",
+                "count": 15
+            },
+            {
+                "score_range": "Very Positive (0.9 to 1.0)",
+                "count": 4
+            }
+        ]
+    },
+    "scatterplot_data": {
+        "title": "Sentiment Score vs. Engagement Metrics",
+        "data": [
+            {
+                "tweet_id": "1966001005128374464",
+                "sentiment_score": 0.3,
+                "likes": 15,
+                "retweets": 2,
+                "replies": 1
+            },
+            {
+                "tweet_id": "1965998802987264195",
+                "sentiment_score": 0.6,
+                "likes": 8,
+                "retweets": 0,
+                "replies": 0
+            },
+            {
+                "tweet_id": "1965977502183744800",
+                "sentiment_score": 0.8,
+                "likes": 12,
+                "retweets": 1,
+                "replies": 2
+            },
+            {
+                "tweet_id": "1965971201183744702",
+                "sentiment_score": 0.5,
+                "likes": 6,
+                "retweets": 0,
+                "replies": 0
+            },
+            {
+                "tweet_id": "1965960001183744620",
+                "sentiment_score": 0.7,
+                "likes": 10,
+                "retweets": 0,
+                "replies": 1
+            },
+            {
+                "tweet_id": "1965900001183744621",
+                "sentiment_score": 0.9,
+                "likes": 14,
+                "retweets": 1,
+                "replies": 0
+            },
+            {
+                "tweet_id": "1965890001183744622",
+                "sentiment_score": 0.7,
+                "likes": 9,
+                "retweets": 0,
+                "replies": 1
+            },
+            {
+                "tweet_id": "1965880001183744623",
+                "sentiment_score": 0.4,
+                "likes": 7,
+                "retweets": 0,
+                "replies": 0
+            },
+            {
+                "tweet_id": "1965870001183744624",
+                "sentiment_score": 0.8,
+                "likes": 20,
+                "retweets": 2,
+                "replies": 1
+            },
+            {
+                "tweet_id": "1965860001183744625",
+                "sentiment_score": 0.7,
+                "likes": 11,
+                "retweets": 0,
+                "replies": 2
+            },
+            {
+                "tweet_id": "1965850001183744626",
+                "sentiment_score": 0.8,
+                "likes": 9,
+                "retweets": 1,
+                "replies": 0
+            },
+            {
+                "tweet_id": "1965840001183744627",
+                "sentiment_score": 0.9,
+                "likes": 6,
+                "retweets": 0,
+                "replies": 0
+            },
+            {
+                "tweet_id": "1965830001183744628",
+                "sentiment_score": 0.2,
+                "likes": 13,
+                "retweets": 1,
+                "replies": 1
+            },
+            {
+                "tweet_id": "1965820001183744629",
+                "sentiment_score": 0.4,
+                "likes": 5,
+                "retweets": 0,
+                "replies": 0
+            },
+            {
+                "tweet_id": "1965810001183744630",
+                "sentiment_score": 0.6,
+                "likes": 8,
+                "retweets": 0,
+                "replies": 1
+            },
+            {
+                "tweet_id": "1965800001183744631",
+                "sentiment_score": 0.8,
+                "likes": 22,
+                "retweets": 2,
+                "replies": 2
+            },
+            {
+                "tweet_id": "1965790001183744632",
+                "sentiment_score": 0.7,
+                "likes": 12,
+                "retweets": 1,
+                "replies": 0
+            },
+            {
+                "tweet_id": "1965780001183744633",
+                "sentiment_score": 0.7,
+                "likes": 10,
+                "retweets": 0,
+                "replies": 0
+            },
+            {
+                "tweet_id": "1965770001183744634",
+                "sentiment_score": 0.6,
+                "likes": 7,
+                "retweets": 0,
+                "replies": 1
+            },
+            {
+                "tweet_id": "1965760001183744635",
+                "sentiment_score": 0.5,
+                "likes": 6,
+                "retweets": 0,
+                "replies": 0
+            },
+            {
+                "tweet_id": "1965750001183744636",
+                "sentiment_score": 0.9,
+                "likes": 15,
+                "retweets": 1,
+                "replies": 1
+            },
+            {
+                "tweet_id": "1965740001183744637",
+                "sentiment_score": 0.8,
+                "likes": 8,
+                "retweets": 0,
+                "replies": 0
+            },
+            {
+                "tweet_id": "1965730001183744638",
+                "sentiment_score": 0.9,
+                "likes": 11,
+                "retweets": 0,
+                "replies": 1
+            }
+        ]
+    },
     "heatmap_data": {
         "sentiment_score_vs_engagement": {
-            "likes": 11.52,
+            "likes": 11.48,
             "retweets": 0.52,
-            "replies": 0.61
+            "replies": 0.65
         }
     },
     "word_cloud": {
         "positive_words": [
-            "consistency",
-            "ideas",
             "wins",
+            "ideas",
             "productive",
-            "create",
             "recharge",
             "grateful",
-            "fresh starts",
+            "starts",
             "hard work",
             "creativity",
             "calm",
-            "best ideas",
-            "good conversations",
-            "fuel",
             "soul",
-            "enjoy",
             "hustle",
             "results",
-            "better paths",
-            "energy",
-            "focus",
             "growth",
-            "recommend",
             "vibe",
-            "attracts",
-            "tribe",
             "clarity",
             "peace",
             "opportunities"
         ],
         "neutral_words": [
-            "coffee",
-            "morning routine",
-            "rest",
+            "consistency",
+            "teaches",
             "heavy",
-            "okay",
-            "write",
-            "process",
-            "outcome",
-            "silently",
-            "noise",
-            "failure",
-            "redirection",
-            "digital detox"
+            "doubt"
         ],
         "negative_words": []
     },
     "interpretations": {
-        "overall_sentiment": "The overall sentiment is overwhelmingly positive, reflecting an optimistic and motivational tone across the tweets.",
+        "overall_sentiment": "The overall sentiment is overwhelmingly positive, with a strong focus on personal development, productivity, and resilience.",
         "key_insights": [
-            "A vast majority (91.3%) of the tweets exhibit a positive sentiment, with 8.7% being neutral and no negative sentiments observed.",
-            "Common themes include personal growth, productivity, self-reflection, and positive affirmations.",
-            "Tweets with higher sentiment scores generally correlate with higher engagement metrics (likes, retweets, replies).",
-            "The absence of negative sentiment suggests a deliberate focus on uplifting and constructive messaging.",
-            "Neutral tweets tend to offer practical advice or acknowledge challenging situations with an accepting tone, rather than expressing indifference or negativity."
+            "There is a dominant theme of growth mindset, emphasizing learning from challenges and focusing on positive outcomes.",
+            "Tweets advocating for hard work and positive habits tend to receive higher engagement (likes and retweets).",
+            "The content frequently highlights self-care, mindfulness, and the importance of a clear mind for creativity.",
+            "Even when acknowledging difficulties like 'failure' or 'heavy days,' the tone quickly shifts to solutions or acceptance, maintaining an optimistic outlook."
         ]
     }
 }
