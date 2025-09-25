@@ -22,8 +22,16 @@ interface HeatmapPoint {
   meta: { metric: string };
 }
 
-const heatmapData= data ? Object.entries(data).map(([metric, value], index) => ({ x: index, y: 0, value, meta: { metric } })) : ([] as HeatmapPoint[]);
-
+const heatmapData: HeatmapPoint[] = data
+  ? (Object.entries(data) as [string, number][])
+      .map(([metric, value], index) => ({
+        x: index,
+        y: 0,
+        value,
+        meta: { metric },
+      }))
+  : [];
+  
 export default function EngagementHeatmap() {
   return (
     <Heatmap
