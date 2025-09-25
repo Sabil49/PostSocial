@@ -14,7 +14,7 @@ const data: DataMap = {
   replies: 0.65,
   retweets: 0.52,
 };
-
+const parseObj = JSON.parse(JSON.stringify(data));
 interface HeatmapPoint {
   x: string;
   y: number;
@@ -23,8 +23,8 @@ interface HeatmapPoint {
 }
 
 const heatmapData: HeatmapPoint[] = [];
- for (const [key, value] of Object.entries(data)) {
-  const valueObj = data[value as keyof DataMap];
+ for (const [key, value] of Object.entries(parseObj)) {
+  const valueObj = parseObj[value as keyof DataMap];
   heatmapData.push({
       x: key,
       y: 0,
@@ -39,7 +39,7 @@ export default function EngagementHeatmap() {
       width={500}
       height={200}
       series={[{ data: heatmapData as unknown as HeatmapValueType[] }]}
-      xAxis={[{ data: Object.keys(data), scaleType: "band", label: "Metrics" }]}
+      xAxis={[{ data: Object.keys(parseObj), scaleType: "band", label: "Metrics" }]}
       yAxis={[{ data: ["Engagement"], scaleType: "band" }]}
       // Removed invalid colorAxis prop. Use 'colors' prop if color customization is needed.
     />
