@@ -4,7 +4,7 @@
     import { useSearchParams } from 'next/navigation';
     import {signOutUser,} from '@/app/api/auth/actions';
     import { useSession } from "next-auth/react";
-    import EngagementHeatmap from '../Charts/Heatmap/Heatmap';
+    import EngagementHeatmap from '../Charts/Heatmap/page';
 
     function MyErrorComponent() {
      const searchParams = useSearchParams();
