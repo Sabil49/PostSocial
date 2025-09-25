@@ -39,6 +39,7 @@
 
       return (
         <div>
+          <EngagementHeatmap />
           <button onClick={handleConnectX}>
             <b>Connect with Twitter</b>
           </button>
