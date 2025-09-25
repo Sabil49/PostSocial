@@ -16,22 +16,23 @@ const data: DataMap = {
 };
 
 interface HeatmapPoint {
-  x: number;
+  x: string;
   y: number;
   value: number;
   meta: { metric: string };
 }
 
-const heatmapData: HeatmapPoint[] = data
-  ? (Object.entries(data) as [string, number][])
-      .map(([metric, value], index) => ({
-        x: index,
-        y: 0,
-        value,
-        meta: { metric },
-      }))
-  : [];
-  
+const heatmapData: HeatmapPoint[] = [];
+ for (const [key, value] of Object.entries(data)) {
+  const valueObj = data[value as keyof DataMap];
+  heatmapData.push({
+      x: key,
+      y: 0,
+      value: valueObj || 0,
+      meta: { metric: key },
+    });
+  }
+
 export default function EngagementHeatmap() {
   return (
     <Heatmap
