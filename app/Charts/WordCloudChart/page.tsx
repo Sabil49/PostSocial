@@ -52,7 +52,7 @@ const colorMapper = (word: { sentiment: string }) => {
 
 export default function TweetWordCloud(): JSX.Element {
   return (
-    <div className="w-full flex justify-center">
+    <div className="w-full flex justify-center *:w-full">
       <WordCloud
         data={words}
         font="Impact"
