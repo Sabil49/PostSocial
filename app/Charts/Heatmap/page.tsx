@@ -1,17 +1,37 @@
-import * as React from 'react';
-import Box from '@mui/material/Box';
-import { Heatmap } from '@mui/x-charts-pro/Heatmap';
-import { data } from './heatmapData';
+import * as React from "react";
+import { Heatmap } from "@mui/x-charts-pro/Heatmap";
+import { HeatmapValueType } from "@mui/x-charts-pro/models";
 
-export default function BasicHeatmap() {
+interface SentimentAnalysis {
+  positive_percentage: number;
+  neutral_percentage: number;
+  negative_percentage: number;
+}
+
+export default function SentimentHeatmap(): React.ReactElement {
+  const sentimentData: SentimentAnalysis = {
+    positive_percentage: 60,
+    neutral_percentage: 30,
+    negative_percentage: 10,
+  };
+
+  const heatmapData = [
+    [sentimentData.positive_percentage, sentimentData.neutral_percentage, sentimentData.negative_percentage],
+  ];
+
   return (
-    <Box sx={{ width: '100%', maxWidth: 400 }}>
-      <Heatmap
-        xAxis={[{ data: [1, 2, 3, 4] }]}
-        yAxis={[{ data: ['A', 'B', 'C', 'D', 'E'] }]}
-        series={[{ data }]}
-        height={310}
-      />
-    </Box>
+    <Heatmap
+      width={500}
+      height={200}
+      series={[
+        {
+          data: heatmapData as unknown as HeatmapValueType[],
+        },
+      ]}
+      xAxis={[
+        { data: ["Positive", "Neutral", "Negative"], scaleType: "band", label: "Sentiment" },
+      ]}
+      yAxis={[{ data: ["Tweets"], scaleType: "band" }]}
+    />
   );
 }
