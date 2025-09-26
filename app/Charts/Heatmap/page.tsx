@@ -43,7 +43,7 @@ export default function EngagementHeatmap() {
       width={500}
       height={200}
       series={[{ data: heatmapData as unknown as HeatmapValueType[] }]}
-      xAxis={[{ data: Object.keys(parseObj), scaleType: "band", label: "Metrics" }]}
+      xAxis={[{ data: ['likes', 'replies', 'retweets'], scaleType: "band", label: "Metrics" }]}
       yAxis={[{ data: ["Engagement"], scaleType: "band" }]}
       // Removed invalid colorAxis prop. Use 'colors' prop if color customization is needed.
     />
