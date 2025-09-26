@@ -104,21 +104,6 @@ export async function GET(req: NextRequest) {
   },
   propertyOrdering: ["title", "data"]
 },
-    heatmap_data: {
-      type: Type.OBJECT,
-      properties: {
-        sentiment_score_vs_engagement: {
-          type: Type.OBJECT,
-          properties: {
-            likes: { type: Type.NUMBER },
-            retweets: { type: Type.NUMBER },
-            replies: { type: Type.NUMBER },
-          },
-          propertyOrdering: ["likes", "retweets", "replies"],
-        },
-      },
-      propertyOrdering: ["sentiment_score_vs_engagement"],
-    },
     word_cloud: {
       type: Type.OBJECT,
       properties: {
