@@ -1,7 +1,9 @@
 "use client";
 
 import React,{JSX} from "react";
-import WordCloud from "react-d3-cloud";
+import dynamic from "next/dynamic";
+
+const WordCloud = dynamic(() => import("react-d3-cloud"), { ssr: false });
 
 interface WordCloudData {
   positive_words: string[];
