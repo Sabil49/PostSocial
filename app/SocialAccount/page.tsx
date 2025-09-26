@@ -38,7 +38,7 @@
       };
 
       return (
-        <div>
+        <div className='w-full'>
           <TweetWordCloud />
           <button onClick={handleConnectX}>
             <b>Connect with Twitter</b>
