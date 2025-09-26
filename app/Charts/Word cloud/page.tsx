@@ -1,15 +1,7 @@
-// components/TweetWordCloud.tsx
 "use client";
 
-import dynamic from "next/dynamic";
-import React, { JSX } from "react";
-
-const WordCloud = dynamic(() => import("react-wordcloud"), { ssr: false });
-
-interface WordData {
-  text: string;
-  value: number;
-}
+import React,{JSX} from "react";
+import WordCloud from "react-d3-cloud";
 
 interface WordCloudData {
   positive_words: string[];
@@ -41,19 +33,34 @@ const wordCloud: WordCloudData = {
   negative_words: [],
 };
 
-// Convert your words into { text, value }
-const words: WordData[] = [
-  ...wordCloud.positive_words.map((w) => ({ text: w, value: 30 })),
-  ...wordCloud.neutral_words.map((w) => ({ text: w, value: 15 })),
-  ...wordCloud.negative_words.map((w) => ({ text: w, value: 10 })),
+// Transform words into { text, value, sentiment }
+const words = [
+  ...wordCloud.positive_words.map((w) => ({ text: w, value: 30, sentiment: "positive" })),
+  ...wordCloud.neutral_words.map((w) => ({ text: w, value: 15, sentiment: "neutral" })),
+  ...wordCloud.negative_words.map((w) => ({ text: w, value: 10, sentiment: "negative" })),
 ];
 
-const options = {
-  rotations: 2,
-  rotationAngles: [-90, 0] as [number, number],
-  fontSizes: [15, 60] as [number, number],
+const fontSizeMapper = (word: { value: number }) => word.value;
+const rotate = () => (Math.random() > 0.5 ? 0 : 90);
+const colorMapper = (word: { sentiment: string }) => {
+  if (word.sentiment === "positive") return "#22c55e"; // green
+  if (word.sentiment === "negative") return "#ef4444"; // red
+  return "#6b7280"; // gray for neutral
 };
 
 export default function TweetWordCloud(): JSX.Element {
-  return <WordCloud words={words} options={options} />;
+  return (
+    <div className="w-full flex justify-center">
+      <WordCloud
+        data={words}
+        font="Impact"
+        fontSize={fontSizeMapper}
+        rotate={rotate}
+        padding={2}
+        fill={colorMapper}
+        width={600}
+        height={400}
+      />
+    </div>
+  );
 }
