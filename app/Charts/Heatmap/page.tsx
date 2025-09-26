@@ -42,9 +42,13 @@ export default function EngagementHeatmap() {
     <Heatmap
       width={500}
       height={200}
-      series={[{ data: heatmapData as unknown as HeatmapValueType[] }]}
-      xAxis={[{ data: ['likes', 'replies', 'retweets'], scaleType: "band", label: "Metrics" }]}
-      yAxis={[{ data: ["Engagement"], scaleType: "band" }]}
+      series={[{
+       data: [
+          [11.48, 0.65, 0.52], // values aligned with xAxis
+        ],
+  }]}
+  xAxis={[{ data: ['likes', 'replies', 'retweets'], scaleType: "band" }]}
+  yAxis={[{ data: ["Engagement"], scaleType: "band" }]}
       // Removed invalid colorAxis prop. Use 'colors' prop if color customization is needed.
     />
   );
