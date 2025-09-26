@@ -4,7 +4,7 @@
     import { useSearchParams } from 'next/navigation';
     import {signOutUser,} from '@/app/api/auth/actions';
     import { useSession } from "next-auth/react";
-    import BasicHeatmap from '@/app/Charts/Heatmap/page';
+   import TweetWordCloud from '../Charts/Word cloud/page';
     
     function MyErrorComponent() {
      const searchParams = useSearchParams();
@@ -39,7 +39,7 @@
 
       return (
         <div>
-          <BasicHeatmap />
+          <TweetWordCloud />
           <button onClick={handleConnectX}>
             <b>Connect with Twitter</b>
           </button>
