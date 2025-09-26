@@ -22,16 +22,20 @@ interface HeatmapPoint {
   meta: { metric: string };
 }
 
-const heatmapData: HeatmapPoint[] = [];
- for (const [key, value] of Object.entries(parseObj)) {
-  const valueObj = parseObj[value as keyof DataMap];
-  heatmapData.push({
-      x: key,
-      y: 0,
-      value: valueObj || 0,
-      meta: { metric: key },
-    });
-  }
+const heatmapData: HeatmapPoint[] = [
+  { x: 'likes', y: 0, value: parseObj.likes || 0, meta: { metric: 'likes' } },
+  { x: 'replies', y: 0, value: parseObj.replies || 0, meta: { metric: 'replies' } },
+  { x: 'retweets', y: 0, value: parseObj.retweets || 0, meta: { metric: 'retweets' } },
+];
+//  for (const [key, value] of Object.entries(parseObj)) {
+//   const valueObj = parseObj[value as keyof DataMap];
+//   heatmapData.push({
+//       x: key,
+//       y: 0,
+//       value: valueObj || 0,
+//       meta: { metric: key },
+//     });
+//   }
 
 export default function EngagementHeatmap() {
   return (
