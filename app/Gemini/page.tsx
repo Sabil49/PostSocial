@@ -4,7 +4,8 @@ import { Suspense } from 'react';
 import { PieChart } from '@mui/x-charts/PieChart';
 import { BarChart } from '@mui/x-charts/BarChart';
 import { ScatterChart } from '@mui/x-charts/ScatterChart';
-import TweetWordCloud from '../Charts/WordCloudChart/page';
+import dynamic from "next/dynamic";
+import type { Word } from "react-d3-cloud"; // Now works, thanks to d.ts
 
 const valueFormatterPiechart = (item: { value: number }) => `${item.value}%`;
 const valueFormatterHistogram = (value: number | null) => `Count: ${value}`;
@@ -67,6 +68,7 @@ function Responsedata() {
       displayJson(geminiDataObj, jsonOutputElement);
     }
 
+    /* Scatter plot data type */
 interface scatterplot_data {
  tweet_id: string;
  sentiment_score: number;
@@ -74,6 +76,58 @@ interface scatterplot_data {
  retweets: number;
  replies: number;
 }
+
+/* Word Cloud start */
+
+const WordCloud = dynamic(() => import("react-d3-cloud"), { ssr: false });
+
+interface CloudWord{
+  text: string;
+  value: number;
+  sentiment: "positive" | "neutral" | "negative";
+}
+
+const { positive_words = [], neutral_words = [], negative_words = [] } =
+    geminiDataObj.word_cloud.data;
+
+  const words: CloudWord[] = [
+    ...positive_words.map((w:string): CloudWord => ({
+      text: w,
+      value: 30,
+      sentiment: "positive",
+    })),
+    ...neutral_words.map((w:string): CloudWord => ({
+      text: w,
+      value: 15,
+      sentiment: "neutral",
+    })),
+    ...negative_words.map((w:string): CloudWord => ({
+      text: w,
+      value: 10,
+      sentiment: "negative",
+    })),
+  ];
+
+  // Library mappers use base Word
+  const fontSizeMapper = (word: Word) => word.value;
+  const rotate = () => (Math.random() > 0.5 ? 0 : 90);
+
+  // For color we cast to CloudWord to access sentiment
+  const colorMapper = (word: Word) => {
+    const cw = word as CloudWord;
+    switch (cw.sentiment) {
+      case "positive":
+        return "#22c55e";
+      case "negative":
+        return "#ef4444";
+      default:
+        return "#6b7280";
+    }
+  };
+
+/* Word Cloud end */
+
+
     return (
       <div className="grid grid-cols-2 gap-4 *:border *:p-2.5 *:rounded-md">
         <div>
@@ -113,8 +167,18 @@ interface scatterplot_data {
         </div>
 
         <div>
-          <h2 className="text-2xl font-bold mb-4 text-center">Word Cloud of Tweets</h2>
-          <TweetWordCloud wordcloudData={geminiDataObj.word_cloud.data} wordcloudTitle={geminiDataObj.word_cloud.title} />
+          <h2 className="text-2xl font-bold mb-4 text-center">{geminiDataObj.word_cloud.title}</h2>
+          <WordCloud
+             data={words}
+             font="Impact"
+             fontSize={fontSizeMapper}
+             rotate={rotate}
+             padding={2}
+             fill={colorMapper}
+             width={500}
+             height={300}
+          />
+        
         </div>
       </div>
     )
@@ -126,8 +190,7 @@ export default function GeminiComponent() {
           <Suspense fallback={<div>Loading error...</div>}>
                       <Responsedata />
           </Suspense>
-          <div id="json-output" className='grid grid-cols-2 gap-4 *:border *:p-2.5 *:rounded-md'></div>
-          
+          <div id="json-output" className='grid grid-cols-2 gap-4 *:border *:p-2.5 *:rounded-md'></div>          
         </div>
       );
     }
