@@ -4,7 +4,6 @@
     import { useSearchParams } from 'next/navigation';
     import {signOutUser,} from '@/app/api/auth/actions';
     import { useSession } from "next-auth/react";
-    import TweetWordCloud from '../Charts/WordCloudChart/page';
     
     function MyErrorComponent() {
      const searchParams = useSearchParams();
@@ -39,7 +38,6 @@
 
       return (
         <div className='w-full'>
-          <TweetWordCloud />
           <button onClick={handleConnectX}>
             <b>Connect with Twitter</b>
           </button>
