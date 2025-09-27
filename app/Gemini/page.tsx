@@ -144,7 +144,7 @@ const { positive_words = [], neutral_words = [], negative_words = [] } =
           />
         
         </div>
-        <div className='col-end-2'>
+        <div className='col-span-2'>
           {
             geminiDataObj.interpretations.key_insights.length > 0 &&
             <div>
