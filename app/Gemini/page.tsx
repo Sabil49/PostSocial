@@ -121,7 +121,10 @@ const { positive_words = [], neutral_words = [], negative_words = [] } =
         meta: d,
       })),
       valueFormatter: (value, { dataIndex }) => {
+        console.log(dataIndex);
+
         const { meta } = geminiDataObj.scatterplot_data.data[dataIndex];
+        console.log(meta);
         return `
           <div>
             <strong>Tweet ID:</strong> ${meta.tweet_id}<br/>
