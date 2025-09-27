@@ -148,10 +148,10 @@ const { positive_words = [], neutral_words = [], negative_words = [] } =
           {
             geminiDataObj.interpretations.key_insights.length > 0 &&
             <div>
-              <h2 className="text-2xl font-bold mb-4 text-center">Key Insights</h2> 
-              <ul>
+              <h2 className="text-2xl font-bold my-4 text-center">Key Insights</h2> 
+              <ul className=' ps-[50px]'>
                 {geminiDataObj.interpretations.key_insights.map((insight: string, index: number) => (
-                  <li key={index} className=" py-2 list-decimal">{insight}</li>
+                  <li key={index} className=" py-2 list-disc">{insight}</li>
                 ))}
               </ul>
             </div>
@@ -159,10 +159,10 @@ const { positive_words = [], neutral_words = [], negative_words = [] } =
           {
             geminiDataObj.interpretations.overall_insights.length > 0 &&
             <div>
-              <h2 className="text-2xl font-bold mb-4 text-center">Overall Insights</h2> 
-              <ul>
+              <h2 className="text-2xl font-bold my-4 text-center">Overall Insights</h2> 
+              <ul className=' ps-[50px]'>
                 {geminiDataObj.interpretations.overall_insights.map((insight: string, index: number) => (
-                  <li key={index} className="py-2 list-decimal">{insight}</li>
+                  <li key={index} className="py-2 list-disc">{insight}</li>
                 ))}
               </ul>
             </div>
