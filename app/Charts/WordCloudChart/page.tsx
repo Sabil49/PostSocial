@@ -5,34 +5,24 @@ import dynamic from "next/dynamic";
 
 const WordCloud = dynamic(() => import("react-d3-cloud"), { ssr: false });
 
+interface TweetWordCloudProps {
+  wordcloudData: { title: string; data: { positive_words: string[]; neutral_words: string[]; negative_words: string[] } };
+}
+
 interface WordCloudData {
   positive_words: string[];
   neutral_words: string[];
   negative_words: string[];
 }
 
-const wordCloud: WordCloudData = {
-  positive_words: [
-    "wins",
-    "ideas",
-    "productive",
-    "recharge",
-    "grateful",
-    "starts",
-    "hard work",
-    "creativity",
-    "calm",
-    "soul",
-    "hustle",
-    "results",
-    "growth",
-    "vibe",
-    "clarity",
-    "peace",
-    "opportunities",
-  ],
-  neutral_words: ["consistency", "teaches", "heavy", "doubt"],
-  negative_words: [],
+
+
+export default function TweetWordCloud({ wordcloudData }: TweetWordCloudProps): JSX.Element {
+  
+  const wordCloud: WordCloudData = {
+  positive_words: wordcloudData.data.positive_words || [],
+  neutral_words: wordcloudData.data.neutral_words || [],
+  negative_words: wordcloudData.data.negative_words || [],
 };
 
 // Transform words into { text, value, sentiment }
@@ -49,8 +39,7 @@ const colorMapper = (word: { sentiment: string }) => {
   if (word.sentiment === "negative") return "#ef4444"; // red
   return "#6b7280"; // gray for neutral
 };
-
-export default function TweetWordCloud(): JSX.Element {
+  
   return (
     <div className="w-full flex justify-center *:w-full">
       <WordCloud

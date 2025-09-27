@@ -107,20 +107,26 @@ export async function GET(req: NextRequest) {
     word_cloud: {
       type: Type.OBJECT,
       properties: {
-        positive_words: {
-          type: Type.ARRAY,
-          items: { type: Type.STRING },
-        },
-        neutral_words: {
-          type: Type.ARRAY,
+        title: { type: Type.STRING },
+        data: { type: Type.OBJECT,
+             properties: {
+               positive_words: {
+                type: Type.ARRAY,
+                 items: { type: Type.STRING },
+               },
+                neutral_words: {
+                type: Type.ARRAY,
           items: { type: Type.STRING },
         },
         negative_words: {
           type: Type.ARRAY,
           items: { type: Type.STRING },
         },
+             },
+            propertyOrdering: ["positive_words", "neutral_words", "negative_words"],
+           
       },
-      propertyOrdering: ["positive_words", "neutral_words", "negative_words"],
+    },propertyOrdering: ["title", "data"]
     },
     interpretations: {
       type: Type.OBJECT,
@@ -138,7 +144,6 @@ export async function GET(req: NextRequest) {
     "sentiment_percentage",
     "histogram_data",
     "scatterplot_data",
-    "heatmap_data",
     "word_cloud",
     "interpretations",
   ],
