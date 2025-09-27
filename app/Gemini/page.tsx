@@ -151,7 +151,7 @@ const { positive_words = [], neutral_words = [], negative_words = [] } =
               <h2 className="text-2xl font-bold mb-4 text-center">Key Insights</h2> 
               <ul>
                 {geminiDataObj.interpretations.key_insights.map((insight: string, index: number) => (
-                  <li key={index} className="border-b py-2">{insight}</li>
+                  <li key={index} className=" py-2 list-decimal">{insight}</li>
                 ))}
               </ul>
             </div>
@@ -162,7 +162,7 @@ const { positive_words = [], neutral_words = [], negative_words = [] } =
               <h2 className="text-2xl font-bold mb-4 text-center">Overall Insights</h2> 
               <ul>
                 {geminiDataObj.interpretations.overall_insights.map((insight: string, index: number) => (
-                  <li key={index} className="border-b py-2">{insight}</li>
+                  <li key={index} className="py-2 list-decimal">{insight}</li>
                 ))}
               </ul>
             </div>
