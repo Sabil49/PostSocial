@@ -19,20 +19,16 @@ interface WordCloudData {
   negative_words: string[];
 }
 
-interface TweetWordCloudProps {
-  wordcloudData: {
-    title: string;
-    data: {
+interface wordcloudDataTypes {
       positive_words: string[];
       neutral_words: string[];
       negative_words: string[];
-    };
   };
-}
+  
 
-export default function TweetWordCloud(props: TweetWordCloudProps): JSX.Element {
+export default function TweetWordCloud(wordcloudData:wordcloudDataTypes, wordcloudTitle: string): JSX.Element {
   const { positive_words = [], neutral_words = [], negative_words = [] } =
-    props.wordcloudData.data;
+    wordcloudData;
 
   const words: CloudWord[] = [
     ...positive_words.map((w): CloudWord => ({
@@ -71,6 +67,7 @@ export default function TweetWordCloud(props: TweetWordCloudProps): JSX.Element 
 
   return (
     <div className="w-full flex justify-center">
+      <h2 className="text-2xl font-bold mb-4 text-center">{wordcloudTitle}</h2>
       <WordCloud
         data={words}
         font="Impact"

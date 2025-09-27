@@ -114,7 +114,7 @@ interface scatterplot_data {
 
         <div>
           <h2 className="text-2xl font-bold mb-4 text-center">Word Cloud of Tweets</h2>
-          <TweetWordCloud wordcloudData={geminiDataObj.word_cloud} />
+          <TweetWordCloud wordcloudData={geminiDataObj.word_cloud.data} wordcloudTitle={geminiDataObj.word_cloud.title} />
         </div>
       </div>
     )
