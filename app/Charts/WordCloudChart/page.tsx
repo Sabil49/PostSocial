@@ -27,7 +27,7 @@ interface TweetWordCloudProps {
 
 export default function TweetWordCloud({
   wordcloudData,
-}: TweetWordCloudProps): JSX.Element {
+}: {wordcloudData: TweetWordCloudProps}): JSX.Element {
   const { positive_words = [], neutral_words = [], negative_words = [] } =
     wordcloudData.data;
 
