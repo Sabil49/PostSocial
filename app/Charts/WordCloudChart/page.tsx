@@ -1,6 +1,6 @@
 "use client";
 
-import React,{JSX} from "react";
+import React from "react";
 import dynamic from "next/dynamic";
 import type { Word } from "react-d3-cloud"; // Now works, thanks to d.ts
 
@@ -14,13 +14,16 @@ interface CloudWord extends Word {
 }
 
 export interface wordcloudDataTypes {
+  wordcloudData:{
       positive_words: string[];
       neutral_words: string[];
       negative_words: string[];
-  };
+  },
+  wordcloudTitle: string;
+    };
   
 
-export const TweetWordCloud = (wordcloudData: wordcloudDataTypes, wordcloudTitle: string): JSX.Element => {
+export const TweetWordCloud: React.FC<wordcloudDataTypes> = ({ wordcloudData,wordcloudTitle }) => {  
   const { positive_words = [], neutral_words = [], negative_words = [] } =
     wordcloudData;
 
