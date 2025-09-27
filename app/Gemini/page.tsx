@@ -23,39 +23,6 @@ const chartSetting = {
   margin: { left: 0 },
 };
 
-/* Display query string json data in table */
-function displayJson(data : Record<string, unknown>, parentElement: HTMLElement) {
-        for (const key in data) {
-            if (data.hasOwnProperty(key)) {
-                const value = data[key];
-                const keyReplaced = key.replace(/_/g, ' ');
-                const keyCapitalized = keyReplaced.charAt(0).toUpperCase() + keyReplaced.slice(1);
-                const itemElement = document.createElement('div');
-                itemElement.className = `border p-2.5 rounded-md ${value}-className`;
-                if (typeof value === 'object' && value !== null) {
-                    const keyElement = document.createElement('strong');
-                    keyElement.textContent = `${keyCapitalized}: `;
-                    keyElement.style.fontSize = '1.1em';
-                    itemElement.appendChild(keyElement);
-                    const nestedContainer = document.createElement('div');
-                    nestedContainer.style.marginLeft = '20px'; // Indent nested content
-                    nestedContainer.style.marginTop = '5px'; 
-                    displayJson(value as Record<string, unknown>, nestedContainer); // Recursive call
-                    itemElement.appendChild(nestedContainer);
-                }
-                 else {
-                    // const keyElement = document.createElement('strong');
-                    // keyElement.textContent = `${keyCapitalized}. `;
-                    // itemElement.appendChild(keyElement);
-                    const keyElement2 = document.createElement('span');
-                    keyElement2.textContent = `${value}. `;
-                    itemElement.appendChild(keyElement2);
-                }
-                parentElement.appendChild(itemElement);
-            }
-        }
-    }
-
 /* Get query string data to decode */
 function Responsedata() {
       const searchParams = useSearchParams();
@@ -63,11 +30,7 @@ function Responsedata() {
       const geminiDataDecoded = JSON.parse(Buffer.from(geminiData || '', "base64").toString("utf8"));
       const geminiDataObj = JSON.parse(geminiDataDecoded || '{}');
       console.log(geminiDataObj);
-    // Call the function with your data and a target HTML element
-    const jsonOutputElement = document.getElementById('json-output');
-    if (jsonOutputElement) {
-      displayJson(geminiDataObj, jsonOutputElement);
-    }
+
 
     /* Scatter plot data type */
 interface scatterplot_data {
@@ -182,9 +145,28 @@ const { positive_words = [], neutral_words = [], negative_words = [] } =
         
         </div>
         <div className='col-end-2'>
-          <div id="json-output" className='grid grid-cols-2 gap-4 *:border *:p-2.5 *:rounded-md'>
-
-          </div>
+          {
+            geminiDataObj.interpretations.key_insights.length > 0 &&
+            <div>
+              <h2 className="text-2xl font-bold mb-4 text-center">Key Insights</h2> 
+              <ul>
+                {geminiDataObj.interpretations.key_insights.map((insight: string, index: number) => (
+                  <li key={index} className="border-b py-2">{insight}</li>
+                ))}
+              </ul>
+            </div>
+          }
+          {
+            geminiDataObj.interpretations.overall_insights.length > 0 &&
+            <div>
+              <h2 className="text-2xl font-bold mb-4 text-center">Overall Insights</h2> 
+              <ul>
+                {geminiDataObj.interpretations.overall_insights.map((insight: string, index: number) => (
+                  <li key={index} className="border-b py-2">{insight}</li>
+                ))}
+              </ul>
+            </div>
+          }
         </div>
       </div>
     )
