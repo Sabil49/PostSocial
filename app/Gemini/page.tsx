@@ -126,7 +126,7 @@ const { positive_words = [], neutral_words = [], negative_words = [] } =
         const meta = geminiDataObj.scatterplot_data.data[dataIndex];
         console.log(meta);
         return `
-          <div>
+           <div style="width:200px; padding:8px; font-size:14px; line-height:1.4;">
             <strong>Tweet ID:</strong> ${meta.tweet_id}<br/>
             <strong>Sentiment Score:</strong> ${meta.sentiment_score}<br/>
             <strong>Likes:</strong> ${meta.likes}<br/>
