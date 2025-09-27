@@ -4,7 +4,7 @@ import { Suspense } from 'react';
 import { PieChart } from '@mui/x-charts/PieChart';
 import { BarChart } from '@mui/x-charts/BarChart';
 import { ScatterChart } from '@mui/x-charts/ScatterChart';
-import TweetWordCloud from '../Charts/WordCloudChart/page';
+import {TweetWordCloud} from '../Charts/WordCloudChart/page';
 
 const valueFormatterPiechart = (item: { value: number }) => `${item.value}%`;
 const valueFormatterHistogram = (value: number | null) => `Count: ${value}`;

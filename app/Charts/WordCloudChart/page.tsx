@@ -13,20 +13,14 @@ interface CloudWord extends Word {
   sentiment: Sentiment;
 }
 
-interface WordCloudData {
-  positive_words: string[];
-  neutral_words: string[];
-  negative_words: string[];
-}
-
-interface wordcloudDataTypes {
+export interface wordcloudDataTypes {
       positive_words: string[];
       neutral_words: string[];
       negative_words: string[];
   };
   
 
-export default function TweetWordCloud(wordcloudData:wordcloudDataTypes, wordcloudTitle: string): JSX.Element {
+export const TweetWordCloud = (wordcloudData: wordcloudDataTypes, wordcloudTitle: string): JSX.Element => {
   const { positive_words = [], neutral_words = [], negative_words = [] } =
     wordcloudData;
 
