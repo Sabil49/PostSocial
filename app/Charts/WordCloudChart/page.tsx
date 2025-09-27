@@ -13,7 +13,7 @@ interface CloudWord extends Word {
   sentiment: Sentiment;
 }
 
-interface wordcloudDataTypes {
+export interface wordcloudDataTypes {
   wordcloudData:{
       positive_words: string[];
       neutral_words: string[];
