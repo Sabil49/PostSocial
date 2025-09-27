@@ -78,8 +78,8 @@ export default function TweetWordCloud(props: TweetWordCloudProps): JSX.Element 
         rotate={rotate}
         padding={2}
         fill={colorMapper}
-        width={600}
-        height={400}
+        width={500}
+        height={300}
       />
     </div>
   );
