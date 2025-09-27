@@ -123,7 +123,7 @@ const { positive_words = [], neutral_words = [], negative_words = [] } =
       valueFormatter: (value, { dataIndex }) => {
         console.log(dataIndex);
 
-        const { meta } = geminiDataObj.scatterplot_data.data[dataIndex];
+        const meta = geminiDataObj.scatterplot_data.data[dataIndex];
         console.log(meta);
         return `
           <div>
