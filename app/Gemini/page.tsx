@@ -112,19 +112,33 @@ const { positive_words = [], neutral_words = [], negative_words = [] } =
                  <ScatterChart
       height={300}
       series={[
-        {
-          label: "Tweets",
-          data: geminiDataObj.scatterplot_data.data.map((d: scatterplot_data) => ({
-            x: d.sentiment_score,   // X-axis → sentiment
-            y: d.likes,             // Y-axis → likes
-            id: d.tweet_id,            
-            meta: d, // store full object for tooltip
-          })),
-          markerSize: geminiDataObj.scatterplot_data.data.map((d: scatterplot_data) => ({
-            size: (d.retweets + 1) * 10, // bubble size → retweets
-          })),
-        },
-      ]}
+    {
+      label: "Tweets",
+      data: geminiDataObj.scatterplot_data.data.map((d: scatterplot_data) => ({
+        x: d.sentiment_score,
+        y: d.likes,
+        id: d.tweet_id,
+        meta: d,
+      })),
+      valueFormatter: (value, { dataIndex }) => {
+        const { meta } = geminiDataObj.scatterplot_data.data[dataIndex];
+        return `
+          <div>
+            <strong>Tweet ID:</strong> ${meta.tweet_id}<br/>
+            <strong>Sentiment Score:</strong> ${meta.sentiment_score}<br/>
+            <strong>Likes:</strong> ${meta.likes}<br/>
+            <strong>Retweets:</strong> ${meta.retweets}<br/>
+            <strong>Replies:</strong> ${meta.replies}
+          </div>
+        `;
+      },
+    },
+  ]}
+  slotProps={{
+    tooltip: {
+      trigger: 'item',
+    },
+  }}
       xAxis={[{ label: "Sentiment Score" }]}
       yAxis={[{ label: "Likes" }]}
     />
