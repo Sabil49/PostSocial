@@ -131,13 +131,16 @@ export async function GET(req: NextRequest) {
     interpretations: {
       type: Type.OBJECT,
       properties: {
-        overall_sentiment: { type: Type.STRING },
         key_insights: {
           type: Type.ARRAY,
           items: { type: Type.STRING },
         },
+        overall_insights: {
+          type: Type.ARRAY,
+          items: { type: Type.STRING },
+        },        
       },
-      propertyOrdering: ["overall_sentiment", "key_insights"],
+      propertyOrdering: [ "key_insights","overall_insights"],
     },
   },
   propertyOrdering: [

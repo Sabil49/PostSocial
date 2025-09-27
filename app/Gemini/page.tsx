@@ -31,6 +31,7 @@ function displayJson(data : Record<string, unknown>, parentElement: HTMLElement)
                 const keyReplaced = key.replace(/_/g, ' ');
                 const keyCapitalized = keyReplaced.charAt(0).toUpperCase() + keyReplaced.slice(1);
                 const itemElement = document.createElement('div');
+                itemElement.className = `border p-2.5 rounded-md ${value}-className`;
                 if (typeof value === 'object' && value !== null) {
                     const keyElement = document.createElement('strong');
                     keyElement.textContent = `${keyCapitalized}: `;
@@ -43,9 +44,9 @@ function displayJson(data : Record<string, unknown>, parentElement: HTMLElement)
                     itemElement.appendChild(nestedContainer);
                 }
                  else {
-                    const keyElement = document.createElement('strong');
-                    keyElement.textContent = `${keyCapitalized}. `;
-                    itemElement.appendChild(keyElement);
+                    // const keyElement = document.createElement('strong');
+                    // keyElement.textContent = `${keyCapitalized}. `;
+                    // itemElement.appendChild(keyElement);
                     const keyElement2 = document.createElement('span');
                     keyElement2.textContent = `${value}. `;
                     itemElement.appendChild(keyElement2);
@@ -180,6 +181,11 @@ const { positive_words = [], neutral_words = [], negative_words = [] } =
           />
         
         </div>
+        <div className='col-end-2'>
+          <div id="json-output" className='grid grid-cols-2 gap-4 *:border *:p-2.5 *:rounded-md'>
+
+          </div>
+        </div>
       </div>
     )
        }
@@ -190,7 +196,6 @@ export default function GeminiComponent() {
           <Suspense fallback={<div>Loading error...</div>}>
                       <Responsedata />
           </Suspense>
-          <div id="json-output" className='grid grid-cols-2 gap-4 *:border *:p-2.5 *:rounded-md'></div>          
         </div>
       );
     }
