@@ -4,6 +4,7 @@ import React,{JSX} from "react";
 import dynamic from "next/dynamic";
 import type { Word } from "react-d3-cloud"; // Now works, thanks to d.ts
 
+
 const WordCloud = dynamic(() => import("react-d3-cloud"), { ssr: false });
 
 type Sentiment = "positive" | "neutral" | "negative";
@@ -18,18 +19,20 @@ interface WordCloudData {
   negative_words: string[];
 }
 
-interface TweetWordCloudProps {
+export interface TweetWordCloudProps {
   wordcloudData: {
-    title?: string;
-    data: WordCloudData;
+    title: string;
+    data: {
+      positive_words: string[];
+      neutral_words: string[];
+      negative_words: string[];
+    };
   };
 }
 
-export default function TweetWordCloud({
-  wordcloudData,
-}: {wordcloudData: TweetWordCloudProps}): JSX.Element {
+export default function TweetWordCloud(props: TweetWordCloudProps): JSX.Element {
   const { positive_words = [], neutral_words = [], negative_words = [] } =
-    wordcloudData.data;
+    props.wordcloudData.data;
 
   const words: CloudWord[] = [
     ...positive_words.map((w): CloudWord => ({
