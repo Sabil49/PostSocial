@@ -13,17 +13,17 @@ interface CloudWord extends Word {
   sentiment: Sentiment;
 }
 
-export interface wordcloudDataTypes {
+interface wordcloudDataTypes {
   wordcloudData:{
       positive_words: string[];
       neutral_words: string[];
       negative_words: string[];
   },
   wordcloudTitle: string;
-    };
-  
+};
 
-export const TweetWordCloud: React.FC<wordcloudDataTypes> = ({ wordcloudData,wordcloudTitle }) => {  
+export const TweetWordCloud: React.FC<wordcloudDataTypes> = ({ wordcloudData,wordcloudTitle }) => {
+  
   const { positive_words = [], neutral_words = [], negative_words = [] } =
     wordcloudData;
 
