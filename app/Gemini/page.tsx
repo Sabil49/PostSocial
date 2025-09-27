@@ -5,7 +5,7 @@ import { PieChart } from '@mui/x-charts/PieChart';
 import { BarChart } from '@mui/x-charts/BarChart';
 import { ScatterChart } from '@mui/x-charts/ScatterChart';
 import dynamic from "next/dynamic";
-import type { Word } from "react-d3-cloud"; // Now works, thanks to d.ts
+import type { Word } from "@/types/react-d3-cloud";
 
 const valueFormatterPiechart = (item: { value: number }) => `${item.value}%`;
 const valueFormatterHistogram = (value: number | null) => `Count: ${value}`;
