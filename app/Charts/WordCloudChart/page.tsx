@@ -2,11 +2,14 @@
 
 import React,{JSX} from "react";
 import dynamic from "next/dynamic";
+import type { Word } from "react-d3-cloud"; // Now works, thanks to d.ts
 
 const WordCloud = dynamic(() => import("react-d3-cloud"), { ssr: false });
 
-interface TweetWordCloudProps {
-  wordcloudData: { title: string; data: { positive_words: string[]; neutral_words: string[]; negative_words: string[] } };
+type Sentiment = "positive" | "neutral" | "negative";
+
+interface CloudWord extends Word {
+  sentiment: Sentiment;
 }
 
 interface WordCloudData {
@@ -15,33 +18,56 @@ interface WordCloudData {
   negative_words: string[];
 }
 
+interface TweetWordCloudProps {
+  wordcloudData: {
+    title?: string;
+    data: WordCloudData;
+  };
+}
 
+export default function TweetWordCloud({
+  wordcloudData,
+}: TweetWordCloudProps): JSX.Element {
+  const { positive_words = [], neutral_words = [], negative_words = [] } =
+    wordcloudData.data;
 
-export default function TweetWordCloud({ wordcloudData }: TweetWordCloudProps): JSX.Element {
-  
-  const wordCloud: WordCloudData = {
-  positive_words: wordcloudData.data.positive_words || [],
-  neutral_words: wordcloudData.data.neutral_words || [],
-  negative_words: wordcloudData.data.negative_words || [],
-};
+  const words: CloudWord[] = [
+    ...positive_words.map((w): CloudWord => ({
+      text: w,
+      value: 30,
+      sentiment: "positive",
+    })),
+    ...neutral_words.map((w): CloudWord => ({
+      text: w,
+      value: 15,
+      sentiment: "neutral",
+    })),
+    ...negative_words.map((w): CloudWord => ({
+      text: w,
+      value: 10,
+      sentiment: "negative",
+    })),
+  ];
 
-// Transform words into { text, value, sentiment }
-const words = [
-  ...wordCloud.positive_words.map((w) => ({ text: w, value: 30, sentiment: "positive" })),
-  ...wordCloud.neutral_words.map((w) => ({ text: w, value: 15, sentiment: "neutral" })),
-  ...wordCloud.negative_words.map((w) => ({ text: w, value: 10, sentiment: "negative" })),
-];
+  // Library mappers use base Word
+  const fontSizeMapper = (word: Word) => word.value;
+  const rotate = () => (Math.random() > 0.5 ? 0 : 90);
 
-const fontSizeMapper = (word: { value: number }) => word.value;
-const rotate = () => (Math.random() > 0.5 ? 0 : 90);
-const colorMapper = (word: { sentiment: string }) => {
-  if (word.sentiment === "positive") return "#22c55e"; // green
-  if (word.sentiment === "negative") return "#ef4444"; // red
-  return "#6b7280"; // gray for neutral
-};
-  
+  // For color we cast to CloudWord to access sentiment
+  const colorMapper = (word: Word) => {
+    const cw = word as CloudWord;
+    switch (cw.sentiment) {
+      case "positive":
+        return "#22c55e";
+      case "negative":
+        return "#ef4444";
+      default:
+        return "#6b7280";
+    }
+  };
+
   return (
-    <div className="w-full flex justify-center *:w-full">
+    <div className="w-full flex justify-center">
       <WordCloud
         data={words}
         font="Impact"
