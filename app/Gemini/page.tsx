@@ -120,21 +120,21 @@ const { positive_words = [], neutral_words = [], negative_words = [] } =
         id: d.tweet_id,
         meta: d,
       })),
-      valueFormatter: (value, { dataIndex }) => {
-        console.log(dataIndex);
+      // valueFormatter: (value, { dataIndex }) => {
+      //   console.log(dataIndex);
 
-        const meta = geminiDataObj.scatterplot_data.data[dataIndex];
-        console.log(meta);
-        return `
-           <div style="width:200px; padding:8px; font-size:14px; line-height:1.4;">
-            <strong>Tweet ID:</strong> ${meta.tweet_id}<br/>
-            <strong>Sentiment Score:</strong> ${meta.sentiment_score}<br/>
-            <strong>Likes:</strong> ${meta.likes}<br/>
-            <strong>Retweets:</strong> ${meta.retweets}<br/>
-            <strong>Replies:</strong> ${meta.replies}
-          </div>
-        `;
-      },
+      //   const meta = geminiDataObj.scatterplot_data.data[dataIndex];
+      //   console.log(meta);
+      //   return `
+      //      <div style="width:200px; padding:8px; font-size:14px; line-height:1.4;">
+      //       <strong>Tweet ID:</strong> ${meta.tweet_id}<br/>
+      //       <strong>Sentiment Score:</strong> ${meta.sentiment_score}<br/>
+      //       <strong>Likes:</strong> ${meta.likes}<br/>
+      //       <strong>Retweets:</strong> ${meta.retweets}<br/>
+      //       <strong>Replies:</strong> ${meta.replies}
+      //     </div>
+      //   `;
+      // },
     },
   ]}
   slotProps={{
