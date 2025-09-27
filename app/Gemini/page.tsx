@@ -117,12 +117,12 @@ const { positive_words = [], neutral_words = [], negative_words = [] } =
           data: geminiDataObj.scatterplot_data.data.map((d: scatterplot_data) => ({
             x: d.sentiment_score,   // X-axis → sentiment
             y: d.likes,             // Y-axis → likes
-            id: d.tweet_id,
-            markerSize: (d.retweets + 1) * 10, // bubble size → retweets
-            size: (d.retweets + 1) * 10, // bubble size → retweets
+            id: d.tweet_id,            
             meta: d, // store full object for tooltip
           })),
-          
+          markerSize: geminiDataObj.scatterplot_data.data.map((d: scatterplot_data) => ({
+            size: (d.retweets + 1) * 10, // bubble size → retweets
+          })),
         },
       ]}
       xAxis={[{ label: "Sentiment Score" }]}
@@ -159,7 +159,7 @@ const { positive_words = [], neutral_words = [], negative_words = [] } =
           {
             geminiDataObj.interpretations.overall_insights.length > 0 &&
             <div>
-              <h2 className="text-2xl font-bold my-4 text-center">Overall Insights</h2> 
+              <h2 className="text-2xl font-bold mb-4 mt-6 text-center">Overall Insights</h2> 
               <ul className=' ps-[50px]'>
                 {geminiDataObj.interpretations.overall_insights.map((insight: string, index: number) => (
                   <li key={index} className="py-2 list-disc">{insight}</li>
