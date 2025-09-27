@@ -19,7 +19,7 @@ interface WordCloudData {
   negative_words: string[];
 }
 
-export interface TweetWordCloudProps {
+interface TweetWordCloudProps {
   wordcloudData: {
     title: string;
     data: {
