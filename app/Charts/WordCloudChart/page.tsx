@@ -22,8 +22,9 @@ interface wordcloudDataTypes {
   wordcloudTitle: string;
 };
 
-export const TweetWordCloud: React.FC<wordcloudDataTypes> = ({ wordcloudData,wordcloudTitle }) => {
-  
+//export const TweetWordCloud: React.FC<wordcloudDataTypes> = ({ wordcloudData,wordcloudTitle }) => {
+  export default function TweetWordCloud({ wordcloudData, wordcloudTitle }: wordcloudDataTypes) {
+  // Destructure with defaults
   const { positive_words = [], neutral_words = [], negative_words = [] } =
     wordcloudData;
 
