@@ -23,4 +23,24 @@ model User {
   createdAt      DateTime  @default(now())
   updatedAt      DateTime  @updatedAt
   loginAt        DateTime?
+  subscriptionType SubscriptionType @default(FREE)
+  subscriptionId String?   // Dodo subscription ID
+  usageLimit     UsageLimit?
  }
+
+enum SubscriptionType {
+  FREE
+  PRO
+  LIFETIME
+}
+
+model UsageLimit {
+  id                String   @id @default(cuid())
+  userId            String   @unique
+  user              User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  visualizations    Int      @default(0)
+  visualizationLimit Int     @default(1)
+  lastResetDate     DateTime @default(now())
+  nextBillingDate   DateTime? // For subscription tracking
+  subscriptionStatus String  @default("active")
+}
