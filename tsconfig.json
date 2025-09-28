@@ -22,11 +22,21 @@
       }
     ],
     "target": "ES2017",
-     "baseUrl": ".",
-     "paths": {
-      "@/*": ["*"]
+    "baseUrl": ".",
+    "paths": {
+      "@/*": [
+        "*"
+      ]
     }
   },
- "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", "types"],
-  "exclude": ["node_modules"]
+  "include": [
+    "**/*.ts",
+    "**/*.tsx",
+    "next-env.d.ts",
+    "types",
+    ".next/types/**/*.ts"
+  ],
+  "exclude": [
+    "node_modules"
+  ]
 }
