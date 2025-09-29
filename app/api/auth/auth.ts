@@ -3,7 +3,7 @@ import GitHubProvider from "next-auth/providers/github";
 import NextAuth from "next-auth";
 import CredentialsProvider from 'next-auth/providers/credentials';
 import { z } from "zod";
-import type { User } from "@/lib/types/userType";
+import type { User } from "@/lib/types/type";
 import prisma from "@/lib/prisma";
 import { verifyPassword } from "@/utils/bcrypt";
 
@@ -50,7 +50,7 @@ export const { handlers: { GET, POST }, auth, signIn, signOut } = NextAuth({
       }
       return session;
     },
-    async signIn({ user, account, profile }) {
+    async signIn({ user }) {
       const userData = await getUser(user.email || '');
       if (!userData) {
         await prisma.user.create({
