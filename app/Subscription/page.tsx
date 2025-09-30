@@ -25,7 +25,7 @@ export default function SubscribeButton() {
 
   return (
     <div>
-      {!session && (
+      {session && (
         <>
         <button
           onClick={subscribe}
