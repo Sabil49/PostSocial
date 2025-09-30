@@ -7,11 +7,10 @@ export async function POST(req: NextRequest) {
   console.log(payload);
 
   try {
-    switch (payload.type) {
+    const { email: customer_email } = payload.data.customer;
+    switch (payload.type) {      
       case "subscription.active": {
         const { subscription_id: created_subscription_id, product_id, next_billing_date } = payload.data;
-        const { email: customer_email } = payload.data.customer;
-
         const user = await prisma.user.upsert({
           where: { email: customer_email },
           create: { email: customer_email },
@@ -31,14 +30,27 @@ export async function POST(req: NextRequest) {
       }
 
       case "subscription.renewed": {
-        const { subscription_id, next_billing_date } = payload.data;
+        const { subscription_id, next_billing_date,product_id } = payload.data;
 
-        await prisma.subscription.update({
+        const user = await prisma.user.upsert({
+          where: { email: customer_email },
+          create: { email: customer_email },
+          update: {},
+        });
+
+        await prisma.subscription.upsert({
           where: { subscriptionId: subscription_id },
-          data: {
+          update: {
             subscriptionStatus: "active",
             nextBillingDate: next_billing_date,
           },
+          create: {
+            subscriptionId: subscription_id,
+            planId: product_id,
+            nextBillingDate: next_billing_date,
+            subscriptionStatus: "active",
+            userId: user.id,
+          },  
         });
         break;
       }

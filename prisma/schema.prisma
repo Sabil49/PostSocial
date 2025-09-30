@@ -33,7 +33,7 @@ model Subscription {
   user           User     @relation(fields: [userId], references: [id])
   subscriptionStatus   String
   planId         String
-  subscriptionType SubscriptionType @default(FREE)
+  subscriptionType SubscriptionType @default(PRO)
   nextBillingDate   DateTime?
   createdAt      DateTime @default(now())
   updatedAt      DateTime @updatedAt
