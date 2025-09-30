@@ -11,12 +11,19 @@ export default function SubscribeButton() {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
-        planId: "pdt_ctSjb2435t8p2c1vQcx98",         // plan created in Dodo dashboard
-        customerEmail: email,
+        plan_id: "pdt_ctSjb2435t8p2c1vQcx98",         // plan created in Dodo dashboard
+        customer: { email: email },
       }),
     });
 
-    const data = await resp.json();
+    const text = await resp.text();
+    let data;
+    try {
+      data = JSON.parse(text);
+    } catch {
+      throw new Error(`Invalid JSON from server: ${text}`);
+    }
+    
     if (data.checkout_url) {
       console.log("Redirecting to:", data.checkout_url);
       window.location.href = data.checkout_url; // redirect to hosted checkout

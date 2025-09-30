@@ -1,8 +1,14 @@
-import { NextRequest } from "next/server";
+import { NextRequest, NextResponse } from "next/server";
 import { Checkout } from "@dodopayments/nextjs";
 
 export async function POST(req: NextRequest) {
-    //const { planId, customerEmail } = await req.json();
+    const { plan_id, customer } = await req.json();
+    if (!plan_id || !customer || !customer.email) {
+        return NextResponse.json(
+            { error: "Missing planId or customerEmail" },
+            { status: 400 }
+        );
+    }
 
   // Dodo Checkout handler for subscriptions
   const handler = Checkout({
