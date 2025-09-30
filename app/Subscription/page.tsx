@@ -32,9 +32,8 @@ const createCheckoutSession = async () => {
           email: email,
           name: userSession?.user?.name || "Test User",
         },
-        success_url: `${process.env.NEXT_PUBLIC_APP_URL}/Subscription/status/success`,
-        cancel_url: `${process.env.NEXT_PUBLIC_APP_URL}/Subscription/status/cancel`,
-  metadata: {
+  
+        metadata: {
     order_id: "order_123",
     source: "web_app",
   },
