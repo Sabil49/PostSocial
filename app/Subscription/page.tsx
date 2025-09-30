@@ -12,11 +12,12 @@ export default function SubscribeButton() {
   // Direct API call using fetch - useful for any JavaScript environment
 const createCheckoutSession = async () => {
   try {
-    const response = await fetch('https://test.dodopayments.com/checkouts', {
+    const response = await fetch('api/payments/dodo/checkout', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
-        'Authorization': `Bearer ${process.env.DODO_PAYMENTS_API_KEY}`
+        'Authorization': `Bearer ${process.env.DODO_PAYMENTS_API_KEY}`,
+        'Access-Control-Allow-Origin': '*',
       },
       body: JSON.stringify({
         // Products to sell - use IDs from your Dodo Payments dashboard
