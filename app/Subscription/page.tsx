@@ -41,14 +41,13 @@ const createCheckoutSession = async () => {
     }
 
     const checkoutSession = await response.json();
-    console.log('Checkout Session::::::::::');
+    console.log('Checkout Session:');
     console.log(checkoutSession);
     // Redirect your customer to this URL to complete payment
     console.log('Checkout URL:', checkoutSession.checkout_url);
-    console.log('Session ID:', checkoutSession.session_id);
 
     if (checkoutSession && checkoutSession.checkout_url) {
-      //window.location.href = checkoutSession.checkout_url;
+      window.location.href = checkoutSession.checkout_url;
       return checkoutSession;
     }
     
