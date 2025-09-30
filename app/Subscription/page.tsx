@@ -31,12 +31,7 @@ const createCheckoutSession = async () => {
         customer: {
           email: email,
           name: userSession?.user?.name || "Test User",
-        },
-  
-        metadata: {
-    order_id: "order_123",
-    source: "web_app",
-  },
+        }
       })
     });
 
