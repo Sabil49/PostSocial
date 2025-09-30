@@ -12,7 +12,7 @@ export default function SubscribeButton() {
   // Direct API call using fetch - useful for any JavaScript environment
 const createCheckoutSession = async () => {
   try {
-    const response = await fetch('https://test.dodopayments.com/checkouts', {
+    const response = await fetch('api/payments/dodo/checkout', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -33,23 +33,6 @@ const createCheckoutSession = async () => {
           name: userSession?.user?.name || "Test User",
         },
         
-        // Billing address for tax calculation and compliance
-        // billing_address: {
-        //   street: '123 Main St',
-        //   city: 'San Francisco',
-        //   state: 'CA', 
-        //   country: 'US', // Required: ISO 3166-1 alpha-2 country code
-        //   zipcode: '94102'
-        // },
-        
-        // Where to redirect after successful payment
-        return_url: process.env.DODO_PAYMENTS_RETURN_URL,
-        
-        // Custom data for your internal tracking
-        metadata: {
-          order_id: 'order_123',
-          source: 'web_app'
-        }
       })
     });
 
@@ -74,8 +57,6 @@ const createCheckoutSession = async () => {
     throw error;
   }
 }
-
-
 
   return (
     <div>
