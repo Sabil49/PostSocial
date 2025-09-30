@@ -6,7 +6,14 @@ export default function CustomerPortal() {
   const [loading, setLoading] = useState(false)
 
  async function openCustomerPortal(customerId: string) {
-  const res = await fetch(`/api/payments/dodo/customer-portal?customer_id=${customerId}`)
+  const res = await fetch(`/api/payments/dodo/customer-portal?customer_id=${customerId}`,{
+    method: "GET",
+    headers: {
+      "Content-Type": "application/json",
+      "Authorization": `Bearer ${process.env.DODO_PAYMENTS_API_KEY}`,
+      "Access-Control-Allow-Origin": "*",
+    },
+  })
   if (res.ok) {
     const { url } = await res.json()
     window.location.href = url
