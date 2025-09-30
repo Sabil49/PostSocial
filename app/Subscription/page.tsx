@@ -12,7 +12,7 @@ export default function SubscribeButton() {
   // Direct API call using fetch - useful for any JavaScript environment
 const createCheckoutSession = async () => {
   try {
-    const response = await fetch('api/payments/dodo/checkout', {
+    const response = await fetch('https://test.dodopayments.com/checkouts', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
