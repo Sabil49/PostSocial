@@ -2,10 +2,7 @@ import prisma from "@/lib/prisma";
 import { hashPassword } from "@/utils/bcrypt";
 import { NextRequest,NextResponse } from "next/server";
 import { S3Client, PutObjectCommand } from "@aws-sdk/client-s3";
-import fs from "fs";
 import * as zfd from 'zod-form-data';
-import { z } from 'zod';
-import { minLength } from "zod/v4";
 
 // export const config = {
 //       api: {

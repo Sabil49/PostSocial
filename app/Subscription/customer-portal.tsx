@@ -1,25 +1,34 @@
-"use client";
+"use client"
+
+import { useState } from "react"
+
 export default function CustomerPortal() {
-    const openPortal = async () => {
-  const res = await fetch("/api/payments/dodo/customer-portal?customer_id=cus_12345",{
-    method: "GET",
-    headers: {
-      "Content-Type": "application/json",
-      "Authorization": `Bearer ${process.env.DODO_PAYMENTS_API_KEY}`,
-      "Access-Control-Allow-Origin": "*",
-    },
-  });
-  const data = await res.json();
-  if (data.portal_url) {
-    window.location.href = data.portal_url;
+  const [loading, setLoading] = useState(false)
+
+  const handlePortal = async () => {
+    try {
+      setLoading(true)
+      const res = await fetch("api/payments/dodo/customer-portal")
+      if (!res.ok) throw new Error("Failed to create portal session")
+
+      const data = await res.json()
+      if (data.portal_url) {
+        window.location.href = data.portal_url
+      }
+    } catch (err) {
+      console.error("Error creating portal session", err)
+    } finally {
+      setLoading(false)
+    }
   }
-};
 
   return (
-    <div>
-      <button onClick={openPortal}>
-        Manage Subscription
-      </button>
-    </div>
-  );
+    <button
+      onClick={handlePortal}
+      disabled={loading}
+      className="px-4 py-2 rounded bg-blue-600 text-white hover:bg-blue-700 disabled:opacity-50"
+    >
+      {loading ? "Loading..." : "Manage Subscription"}
+    </button>
+  )
 }
