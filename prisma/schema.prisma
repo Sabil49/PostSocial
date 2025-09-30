@@ -24,6 +24,7 @@ model User {
   updatedAt      DateTime  @updatedAt
   loginAt        DateTime?
   subscriptions Subscription[]
+  payments      Payment[]
   usageLimit     UsageLimit?
  }
 model Subscription {
@@ -35,8 +36,23 @@ model Subscription {
   planId         String
   subscriptionType SubscriptionType @default(PRO)
   nextBillingDate   DateTime?
+  payments          Payment[]
   createdAt      DateTime @default(now())
   updatedAt      DateTime @updatedAt
+}
+
+model Payment {
+  id             String       @id @default(cuid())
+  paymentId      String       @unique
+  amount         Int
+  currency       String
+  status         String
+  subscription   Subscription @relation(fields: [subscriptionId], references: [subscriptionId])
+  subscriptionId String
+  user           User         @relation(fields: [userId], references: [id])
+  userId         String
+  createdAt      DateTime     @default(now())
+  updatedAt      DateTime     @updatedAt
 }
 
 model UsageLimit {

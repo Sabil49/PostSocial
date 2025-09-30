@@ -8,21 +8,28 @@ export async function POST(req: NextRequest) {
 
   try {
     const { email: customer_email } = payload.data.customer;
-    switch (payload.type) {      
-      case "subscription.active": {
-        const { subscription_id: created_subscription_id, product_id, next_billing_date } = payload.data;
+    switch (payload.type) {     
+
+      case "payment.succeeded": {
+        // Payment event
+        const { subscription_id, payment_id, total_amount, currency } = payload.data;
+        const amount = total_amount; // Assuming amount is in cents
+
+        // Ensure user exists
         const user = await prisma.user.upsert({
           where: { email: customer_email },
           create: { email: customer_email },
           update: {},
         });
 
-        await prisma.subscription.create({
+        // Log payment in DB (optional, separate payments table)
+        await prisma.payment.create({
           data: {
-            subscriptionId: created_subscription_id,
-            planId: product_id,
-            subscriptionStatus: "active",
-            nextBillingDate: next_billing_date,
+            subscriptionId: subscription_id,
+            paymentId: payment_id,
+            amount,
+            currency,
+            status: "succeeded",
             userId: user.id,
           },
         });
@@ -30,7 +37,7 @@ export async function POST(req: NextRequest) {
       }
 
       case "subscription.renewed": {
-        const { subscription_id, next_billing_date,product_id } = payload.data;
+        const { subscription_id, next_billing_date, product_id } = payload.data;
 
         const user = await prisma.user.upsert({
           where: { email: customer_email },
