@@ -1,5 +1,5 @@
 "use client";
-import CustomerPortal from "./costumer-portal";
+import CustomerPortal from "./customer-portal";
 
 export default function SubscribeButton() {
   const subscribe = async () => {
@@ -8,7 +8,7 @@ export default function SubscribeButton() {
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
         planId: "pdt_ctSjb2435t8p2c1vQcx98",         // plan created in Dodo dashboard
-        customerEmail: "test@example.com",
+        customerEmail: "test@example.com",    // get customer email from your auth/session system
       }),
     });
 

@@ -1,9 +1,9 @@
 import { NextRequest } from "next/server";
 import { Checkout } from "@dodopayments/nextjs";
 
-export const POST = async (req: NextRequest) => {
-    //  const { planId, customerEmail } = await req.json();
-     
+export async function POST(req: NextRequest) {
+    //const { planId, customerEmail } = await req.json();
+
   // Dodo Checkout handler for subscriptions
   const handler = Checkout({
     bearerToken: process.env.DODO_PAYMENTS_API_KEY!,
