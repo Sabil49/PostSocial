@@ -31,6 +31,7 @@ const createCheckoutSession = async () => {
         // Pre-fill customer information to reduce checkout friction
         customer: {
           email: email,
+          name: userSession?.user?.name || "Test User",
         },
         
         // Billing address for tax calculation and compliance
