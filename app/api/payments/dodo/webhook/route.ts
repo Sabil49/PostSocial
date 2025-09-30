@@ -7,6 +7,10 @@ import prisma from "@/lib/prisma";
   console.log("Webhook received:");
   console.log(payload);
   switch (payload.type) {
+    case "payment.succeeded":
+      // handle one-time payment success if needed
+      break;
+
     case "subscription.created":
       const { subscription_id: created_subscription_id, plan_id, next_billing_date } = payload.data;
       const { email: customer_email } = payload.data.customer;
@@ -24,7 +28,7 @@ import prisma from "@/lib/prisma";
           subscriptionId: created_subscription_id,
           planId: plan_id,
           subscriptionStatus: "active",
-          nextBillingDate: new Date(next_billing_date),
+          nextBillingDate: next_billing_date,
           userId: user.id,
         },
       });
@@ -37,7 +41,7 @@ import prisma from "@/lib/prisma";
         where: { subscriptionId: renewed_subscription_id },
         data: {
           subscriptionStatus: "active",
-          nextBillingDate: new Date(current_period_end),
+          nextBillingDate: next_billing_date,
         },
       });
       break;
