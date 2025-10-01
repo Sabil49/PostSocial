@@ -16,7 +16,7 @@ export async function POST(req: Request) {
   return_url: process.env.DODO_PAYMENTS_RETURN_URL,
 });
 
-    return NextResponse.json({ checkout_url: checkoutSessionResponse.session_id });
+    return NextResponse.json({ checkout_url: checkoutSessionResponse });
   } catch (error) {
     if (error instanceof Error) {
       return NextResponse.json({ error: error.message }, { status: 500 });
