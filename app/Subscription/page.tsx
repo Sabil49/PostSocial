@@ -22,11 +22,15 @@ export default function SubscribeButton() {
         name: userSession?.user?.name || "Test User",
       }),
     });
-    const data = await res.json();
-    console.log("New Checkout Response:");
-    console.log(data);
-    if (data.checkout_url) {
-      window.location.href = data.checkout_url; // Redirect to checkout
+        if (!res.ok) {
+      throw new Error(`HTTP error! status: ${res.status}`);
+    }
+
+    const checkoutSession = await res.json();
+    console.log('Checkout Session:>>>>>>>>>>');
+    console.log(checkoutSession);
+    if (checkoutSession.checkout_url) {
+      window.location.href = checkoutSession.checkout_url; // Redirect to checkout
     }
     setLoading(false);
   }
