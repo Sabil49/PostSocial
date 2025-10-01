@@ -1,35 +1,31 @@
-"use client"
+"use client";
 
-import { useState } from "react"
+    export default function CustomerPortal() {
+      const handleOpenPortal = async (customerId: string) => {
+        try {
+          const response = await fetch('/api/customer-portal', {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({ customer_id: customerId }),
+          });
 
-export default function CustomerPortal() {
-  const [loading, setLoading] = useState(false)
+          const data = await response.json();
 
- async function openCustomerPortal(customerId: string) {
-  const res = await fetch(`/api/payments/dodo/customer-portal?customer_id=${customerId}`,{
-    method: "GET",
-    headers: {
-      "Content-Type": "application/json",
-      "Authorization": `Bearer ${process.env.DODO_PAYMENTS_API_KEY}`,
-      "Access-Control-Allow-Origin": "*",
-    },
-  })
-  if (res.ok) {
-    const { url } = await res.json()
-    window.location.href = url
-  } else {
-    console.error("Failed to open customer portal")
-  }
-}
+          if (data.portal_url) {
+            window.location.href = data.portal_url;
+          } 
+          else {
+            alert('Could not open customer portal.');
+          }
+        } catch (error) {
+          console.error('Error opening customer portal:', error);
+          alert('An error occurred while trying to open the customer portal.');
+        }
+      };
 
-
-  return (
-    <button
-      onClick={() => openCustomerPortal("cus_Uqwg3OWPsUR5ftSq7qwHM")}
-      disabled={loading}
-      className="px-4 py-2 rounded bg-blue-600 text-white hover:bg-blue-700 disabled:opacity-50"
-    >
-      {loading ? "Loading..." : "Manage Subscription"}
-    </button>
-  )
-}
+      return (
+        <button onClick={() => handleOpenPortal("cus_Uqwg3OWPsUR5ftSq7qwHM")}>Manage Subscription</button>
+      );
+    }
