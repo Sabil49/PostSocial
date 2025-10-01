@@ -41,9 +41,8 @@ export async function GET(req: NextRequest) {
       }
      
       
-
-      
-       const GeminiResponse = await ai.models.generateContent({
+      try{
+              const GeminiResponse = await ai.models.generateContent({
            model: "gemini-2.5-flash",
              contents: "Analyze the following 'text' field data as tweets and return JSON data(No pre text, No after text and No special characters) for chart insights: " + JSON.stringify(tweetDataArray),
     config: {
@@ -153,8 +152,7 @@ export async function GET(req: NextRequest) {
 },
     },
          });
-
-        // Access the generated content from GeminiResponse
+         // Access the generated content from GeminiResponse
         const GeminiResponseData = GeminiResponse.text;
          if (!GeminiResponseData) {
            return new Response(JSON.stringify({ error: 'Failed to generate content' }), { status: 500 });
@@ -167,10 +165,24 @@ export async function GET(req: NextRequest) {
          // const GeminiResponseString = JSON.stringify(GeminiResponseData);
          // const GeminiResponseStringEncoded = encodeURIComponent(GeminiResponseString);
           
-          const responseRedirect = NextResponse.redirect(new URL('/Gemini?data=' + encodedJson, req.url));
+          //const responseRedirect = NextResponse.redirect(new URL('/Gemini?data=' + encodedJson, req.url));
          // responseRedirect.cookies.set('Geminidata', JSON.stringify(GeminiResponseData), { httpOnly: true, secure: true });
          // responseRedirect.cookies.set('twitterData', JSON.stringify(tweetData), { httpOnly: true, secure: true });
 
-        return responseRedirect;
-
+        // return responseRedirect;
+        return NextResponse.json({ geminiData: encodedJson, message: 'Analysis has been completed successfully.', status: 200 });
+      }
+      catch (error: unknown) {
+    return NextResponse.json(
+      {
+        error: {
+          message: (error as Error)?.message || "Something went wrong. Please try again later.",
+          code: (error as { code?: number })?.code || 500,
+          status: (error as { status?: string })?.status || "INTERNAL_ERROR",
+        },
+      },
+      { status: (error as { statusCode?: number })?.statusCode || 503 }
+    );    
+  }
+      
 }
