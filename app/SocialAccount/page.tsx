@@ -163,11 +163,11 @@ const valueFormatterHistogram = (value: number | null) => `Count: ${value}`;
         <div className='w-full'>
           
           <div className='flex justify-evenly items-center mb-6'>
-            {!data && <div>
+            {data === undefined ? <div>
               <button onClick={handleConnectX}>
               <b>Connect with Twitter</b>
             </button>
-            </div>}
+            </div> : null}
             {
               <div>
               <SessionComponent />
