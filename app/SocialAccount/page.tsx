@@ -178,9 +178,18 @@ const valueFormatterHistogram = (value: number | null) => `Count: ${value}`;
         </div>
         <div>
             <h2 className="text-2xl font-bold mb-4 text-center">{data?.histogram_data.title}</h2>
-                <BarChart
-                  
-                   dataset={data?.histogram_data.data}
+                <BarChart dataset={[
+      { "score_range": "0-10", "count": 5 },
+      { "score_range": "11-20", "count": 12 },
+      { "score_range": "21-30", "count": 8 },
+      { "score_range": "31-40", "count": 15 },
+      { "score_range": "41-50", "count": 20 },
+      { "score_range": "51-60", "count": 10 },
+      { "score_range": "61-70", "count": 7 },
+      { "score_range": "71-80", "count": 4 },
+      { "score_range": "81-90", "count": 2 },
+      { "score_range": "91-100", "count": 1 }
+    ]}
   xAxis={[{ dataKey: 'score_range', label: 'Score Range' }]}
   yAxis={[
     {
