@@ -43,8 +43,8 @@ const chartSetting = {
     }
 
  export default function ConnectXButton() {
-      
-      const dataInterface = {
+
+      interface dataInterface {
         sentiment_percentage: {
           title: "",    
           data: []
@@ -73,7 +73,7 @@ const chartSetting = {
 
       const [error, setError] = useState('');
       const [loading, setLoading] = useState(false);
-      const [data, setData] = useState(dataInterface);
+      const [data, setData] = useState<dataInterface>();
 
       const handleConnectX = async () => {
         setLoading(true);
@@ -173,7 +173,7 @@ const chartSetting = {
     <div className="grid grid-cols-2 gap-4 *:border *:p-2.5 *:rounded-md">
         <div>
           <h2 className="text-2xl font-bold mb-4 text-center">{data?.sentiment_percentage.title}</h2>
-          <PieChart series={[{ data: data?.sentiment_percentage.data, highlightScope: { fade: 'global', highlight: 'item' }, faded: { innerRadius: 30, additionalRadius: -30, color: 'gray' }, valueFormatter: valueFormatterPiechart, }, ]} height={200}
+          <PieChart series={[{ data: data?.sentiment_percentage.data ?? [], highlightScope: { fade: 'global', highlight: 'item' }, faded: { innerRadius: 30, additionalRadius: -30, color: 'gray' }, valueFormatter: valueFormatterPiechart, }, ]} height={200}
         width={200} />
         </div>
         <div>
@@ -225,7 +225,7 @@ const chartSetting = {
         </div>
         <div className='col-span-2'>
           {
-            data?.interpretations.key_insights.length > 0 &&
+            (data?.interpretations.key_insights?.length ?? 0) > 0 &&
             <div>
               <h2 className="text-2xl font-bold my-4 text-center">Key Insights</h2> 
               <ul className=' ps-[50px]'>
@@ -236,7 +236,7 @@ const chartSetting = {
             </div>
           }
           {
-            data?.interpretations.overall_insights.length > 0 &&
+            (data?.interpretations.overall_insights?.length ?? 0) > 0 &&
             <div>
               <h2 className="text-2xl font-bold mb-4 mt-6 text-center">Overall Insights</h2> 
               <ul className=' ps-[50px]'>
