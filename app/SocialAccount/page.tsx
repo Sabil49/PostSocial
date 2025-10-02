@@ -29,6 +29,8 @@ const valueFormatterHistogram = (value: number | null) => `Count: ${value}`;
     function SessionComponent() {
       const { data: session } = useSession();
       if (session) {
+        console.log("session");
+        console.log(session);
         return (
           <><pre>{JSON.stringify(session, null, 2)}</pre>
           <form action={signOutUser}>
@@ -154,22 +156,31 @@ const valueFormatterHistogram = (value: number | null) => `Count: ${value}`;
                   return "#6b7280";
               }
             };
-          
+          console.log(data && data);
           /* Word Cloud end */
       return (
         <div className='w-full'>
-          <button onClick={handleConnectX}>
-            <b>Connect with Twitter</b>
-          </button>
+          
+          <div className='flex justify-evenly items-center mb-6'>
+            {!data && <div>
+              <button onClick={handleConnectX}>
+              <b>Connect with Twitter</b>
+            </button>
+            </div>}
+            {
+              <div>
+              <SessionComponent />
+            </div> 
+            }                       
+          </div>
           {data && (
             <div>
               <h3>Fetched Tweet Data:</h3>
-              <pre>{JSON.stringify(data, null, 2)}</pre>
             </div>
           )}
           {loading && <p>Loading...</p>}
           {error && <p style={{ color: 'red' }}>{error}</p>}
-    <SessionComponent />   
+       
     {
       data && (
         <div className="grid grid-cols-2 gap-4 *:border *:p-2.5 *:rounded-md">
