@@ -13,17 +13,17 @@
 const valueFormatterHistogram = (value: number | null) => `Count: ${value}`;
 
 /* Chart setting for bar chart */
-const chartSetting = {
-  yAxis: [
-    {
-      label: 'Count',
-      width: 60,
-    },
-  ],
-  series: [{ dataKey: 'count', valueFormatter: valueFormatterHistogram }],
-  height: 300,
-  margin: { left: 0 },
-};
+// const chartSetting = {
+//   yAxis: [
+//     {
+//       label: 'Count',
+//       width: 60,
+//     },
+//   ],
+//   series: [{ dataKey: 'count', valueFormatter: valueFormatterHistogram }],
+//   height: 300,
+//   margin: { left: 0 },
+// };
 
 
     function SessionComponent() {
@@ -179,9 +179,18 @@ const chartSetting = {
         <div>
             <h2 className="text-2xl font-bold mb-4 text-center">{data?.histogram_data.title}</h2>
                 <BarChart
-                  dataset={data?.histogram_data.data}
-                  xAxis={[{ dataKey: 'score_range', label: 'Score Range' }]}
-                  {...chartSetting}
+                  
+                   dataset={data?.histogram_data.data}
+  xAxis={[{ dataKey: 'score_range', label: 'Score Range' }]}
+  yAxis={[
+    {
+      label: 'Count',
+      width: 60,
+    },
+  ]}
+  series={[{ dataKey: 'count', valueFormatter: valueFormatterHistogram }]}
+  height={300}
+  margin={{ left: 0 }}
                 />
         </div>
         <div>
