@@ -156,7 +156,8 @@ const valueFormatterHistogram = (value: number | null) => `Count: ${value}`;
                   return "#6b7280";
               }
             };
-          console.log(data && data);
+            console.log("data");
+          console.log(data);
           /* Word Cloud end */
       return (
         <div className='w-full'>
