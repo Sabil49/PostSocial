@@ -44,7 +44,9 @@
             throw new Error('Network response was not ok');
           }
           const data = await response.json();
-          setData(data);
+          const geminiDataDecoded = JSON.parse(Buffer.from(data.geminiData || '', "base64").toString("utf8"));
+          const geminiDataObj = JSON.parse(geminiDataDecoded || '{}');
+          setData(geminiDataObj);
         } catch (error) {
           if (error instanceof Error) {
             setError(error.message);
