@@ -2,6 +2,7 @@
 import { useSession } from "next-auth/react";
 import CustomerPortal from "./customer-portal";
 import { useState } from "react";
+import { th } from "zod/v4/locales";
 
 export default function SubscribeButton() {
   const [loading, setLoading] = useState(false);
@@ -56,16 +57,15 @@ const createCheckoutSession = async () => {
           email: email,
           name: userSession?.user?.name || "Test User",
         },
-         allowed_payment_method_types: ['card', 'upi', 'netbanking', 'wallet'], // adjust to what Dodo supports
+         allowed_payment_method_types: ["apple_pay", "google_pay", "credit", "debit"], // adjust to what Dodo supports
 
       })
     });
 
-    if (!response.ok) {
-      throw new Error(`HTTP error! status: ${response.status}`);
-    }
-
     const checkoutSession = await response.json();
+    if (!response.ok) {
+      throw new Error(checkoutSession.message || 'Failed to create checkout session');
+    }
     console.log('Checkout Session:===========>');
     console.log(checkoutSession);
     // Redirect your customer to this URL to complete payment
