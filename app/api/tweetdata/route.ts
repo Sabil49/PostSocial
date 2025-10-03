@@ -13,11 +13,13 @@ export async function GET() {
   if (!accessToken) {
     return new Response(JSON.stringify({ error: 'Token not found. Please login first.' }), { status: 401 });
   }
+  console.log('Access Token:', accessToken); // Debugging line to check the token value
   const response = await fetch('https://api.x.com/2/users/me', {
     headers: {
       'Authorization': `Bearer ${accessToken}`,
     },
             });
+            console.log('Twitter API Response Status:', response.status); // Debugging line to check response status
        if (response.status === 429) {
           const retryAfter = response.headers.get('Retry-After');
           if (retryAfter) {
@@ -26,20 +28,24 @@ export async function GET() {
             
           }
         } 
-        if (!response.ok) { 
-          return new Response(JSON.stringify({ error: 'Failed to fetch user data from Twitter' }), { status: response.status });
+        if (!response.ok) {
+          console.log('Error fetching user data from Twitter:', response.statusText);
+          return new Response(JSON.stringify({ error: `Failed to fetch user data from Twitter: ${response.statusText}` }), { status: response.status });
        }
        const userData = await response.json();
+       console.log('User Data:', userData); // Debugging line to check the user data
        if (!userData.data || !userData.data.id) {
         return new Response(JSON.stringify({ error: 'User account ID not found' }), { status: response.status });
        }
-       const twitterResponse = await fetch(`https://api.x.com/2/users/${userData.data.id}/tweets?max_results=5&expansions=author_id,referenced_tweets.id,attachments.media_keys&tweet.fields=created_at,public_metrics,entities,source&user.fields=username,name,profile_image_url&media.fields=url`, {
+       const twitterResponse = await fetch(`https://api.x.com/2/users/${userData.data.id}/tweets?max_results=10&expansions=author_id,referenced_tweets.id,attachments.media_keys&tweet.fields=created_at,public_metrics,entities,source&user.fields=username,name,profile_image_url&media.fields=url`, {
       headers: {
         Authorization: `Bearer ${accessToken}`,
       },
     });
-        if (!twitterResponse.ok) { 
-          return new Response(JSON.stringify({ error: 'Failed to fetch tweet data from Twitter' }), { status: twitterResponse.status });
+    console.log('Twitter Tweets API Response Status:', twitterResponse.status); // Debugging line to check response status
+        if (!twitterResponse.ok) {
+          console.log('Error fetching tweet data from Twitter:', twitterResponse.statusText);
+          return new Response(JSON.stringify({ error: `Failed to fetch tweet data from Twitter: ${twitterResponse.statusText}` }), { status: twitterResponse.status });
        }
 
        const tweetData = await twitterResponse.json();
