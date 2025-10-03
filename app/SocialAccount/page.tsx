@@ -76,7 +76,7 @@ const valueFormatterHistogram = (value: number | null) => `Count: ${value}`;
       const [error, setError] = useState('');
       const [loading, setLoading] = useState(false);
       const [data, setData] = useState<dataInterface>();
-      const svgRef = useRef<SVGSVGElement | null>(null);
+      const svgRef = useRef<HTMLDivElement | null>(null);
       const handleExport = () => {
   const svgElement = svgRef.current;
   if (!svgElement) return;
@@ -256,6 +256,7 @@ const valueFormatterHistogram = (value: number | null) => `Count: ${value}`;
 
         <div>
           <h2 className="text-2xl font-bold mb-4 text-center">{data?.word_cloud.title}</h2>
+          <div ref={svgRef}>
           <WordCloud 
              data={words}
              font="Impact"
@@ -264,9 +265,9 @@ const valueFormatterHistogram = (value: number | null) => `Count: ${value}`;
              padding={2}
              fill={colorMapper}
              width={500}
-             height={300}
-             svgRef={svgRef}              
+             height={300}                     
           />
+          </div>
         <button onClick={handleExport}>Export Chart</button>
         </div>
         <div className='col-span-2'>
