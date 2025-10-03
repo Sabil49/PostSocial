@@ -20,7 +20,7 @@
             alert('Could not open customer portal.');
           }
         } catch (error) {
-          //console.error('Error opening customer portal:', error);
+          console.error('Error opening customer portal:', error);
           alert('An error occurred while trying to open the customer portal.');
         }
       };

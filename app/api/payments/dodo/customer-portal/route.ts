@@ -15,7 +15,7 @@
           const customerPortalSession = await client.customers.customerPortal.create(customer_id);
           return NextResponse.json({ portal_url: customerPortalSession.link });
         } catch (error) {
-          //console.error("Error creating customer portal session:", error);
+          console.error("Error creating customer portal session:", error);
           return NextResponse.json({ error: "Failed to create customer portal session" }, { status: 500 });
         }
     }
