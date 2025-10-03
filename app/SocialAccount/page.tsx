@@ -81,9 +81,10 @@ const valueFormatterHistogram = (value: number | null) => `Count: ${value}`;
         setLoading(true);
         try {
           const response = await fetch('/api/tweetdata');
+          const responseData = await response.json();
           if (!response.ok) {
-            console.log(response);
-            throw new Error(`Error: ${response.status} ${response.statusText}`);
+            // Backend sent an error
+            throw new Error(responseData.error || 'Something went wronggg');
           }
           const data = await response.json();
           const geminiDataDecoded = JSON.parse(Buffer.from(data.geminiData || '', "base64").toString("utf8"));

@@ -20,7 +20,13 @@ export async function GET() {
     },
             });
             console.log('Twitter API Response Status:', response.status); // Debugging line to check response status
-       if (response.status === 429) {
+       if (!response.ok) {
+         return new Response(
+         JSON.stringify({ error: 'Failed to fetch user data from Twitter' }),
+         { status: response.status, headers: { 'Content-Type': 'application/json' } }
+  );
+}
+            if (response.status === 429) {
           const retryAfter = response.headers.get('Retry-After');
           if (retryAfter) {
             const delay = parseInt(retryAfter)/60; // Convert seconds to minutes
@@ -28,10 +34,7 @@ export async function GET() {
             
           }
         } 
-        if (!response.ok) {
-          console.log('Error fetching user data from Twitter:', response.statusText);
-          return new Response(JSON.stringify({ error: `Failed to fetch user data from Twitter: ${response.statusText}` }), { status: response.status });
-       }
+        
        const userData = await response.json();
        console.log('User Data:', userData); // Debugging line to check the user data
        if (!userData.data || !userData.data.id) {
