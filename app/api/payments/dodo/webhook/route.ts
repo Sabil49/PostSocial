@@ -90,11 +90,11 @@ export async function POST(req: NextRequest) {
     return NextResponse.json({ received: true });
   } catch (err: unknown) {
     if (err instanceof Error) {
-      console.error("Webhook handler error:", err.message);
+      //console.error("Webhook handler error:", err.message);
       return NextResponse.json({ error: err.message }, { status: 500 });
     }
 
-    console.error("Webhook handler unknown error:", err);
+    //console.error("Webhook handler unknown error:", err);
     return NextResponse.json({ error: "Unknown error" }, { status: 500 });
   }
 }

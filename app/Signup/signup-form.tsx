@@ -40,12 +40,12 @@ function CreateUserForm() {
         // Clear form or show success message
         setMessage('User created successfully!');
       } else {
-        console.error('Error creating user:', response.data.message);
+        //console.error('Error creating user:', response.data.message);
         setMessage(response.data.message || 'Error creating user');
       }
     } catch (error) {
-      console.error('Network error:', error);
-      setMessage('Network error. Please try again later.');
+      //console.error('Network error:', error);
+      setMessage(`${error}. Please try again later.`);
     }
   };
   // const files = {

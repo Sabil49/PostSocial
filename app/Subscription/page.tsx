@@ -76,7 +76,7 @@ const createCheckoutSession = async () => {
     }
     
   } catch (error) {
-    console.error('Failed to create checkout session:', error);
+    //console.error('Failed to create checkout session:', error);
     throw error;
   }
 }

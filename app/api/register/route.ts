@@ -108,7 +108,7 @@ export async function POST(req: NextRequest) {
     
     return NextResponse.json({ user }, { status: 201 });
   } catch (error) {
-    console.error('Error handling POST request:', error);
+    //console.error('Error handling POST request:', error);
     return NextResponse.json({ message: 'Error processing request' }, { status: 500 });
   }
 }

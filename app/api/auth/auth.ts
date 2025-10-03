@@ -24,7 +24,7 @@ async function getUser(email: string): Promise<User | null> {
             // Add other fields as needed to match your User type definition
         };
     } catch (error) {
-        console.error("Failed to fetch user:", error);
+        //console.error("Failed to fetch user:", error);
         throw new Error("Failed to fetch user.");
     }
 }

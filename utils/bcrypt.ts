@@ -7,7 +7,7 @@ async function hashPassword(plainPassword : string) {
     const hashedPassword = await bcrypt.hash(plainPassword, saltRounds);
     return hashedPassword;
   } catch (error) {
-    console.error("Error hashing password:", error);
+    //console.error("Error hashing password:", error);
         throw error;
       }
 }
@@ -17,7 +17,7 @@ async function verifyPassword(plainPassword: string, hashedPasswordFromDb: strin
         const match = await bcrypt.compare(plainPassword, hashedPasswordFromDb);
         return match; // true if passwords match, false otherwise
       } catch (error) {
-        console.error("Error comparing passwords:", error);
+        //console.error("Error comparing passwords:", error);
         throw error;
       }
     }   
