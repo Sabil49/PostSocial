@@ -61,11 +61,11 @@ const createCheckoutSession = async () => {
 
       })
     });
-
-    const checkoutSession = await response.json();
     if (!response.ok) {
-      throw new Error(checkoutSession.message || 'Failed to create checkout session');
+      throw new Error('Failed to create checkout session');
     }
+    const checkoutSession = await response.json();
+    
     console.log('Checkout Session:===========>');
     console.log(checkoutSession);
     // Redirect your customer to this URL to complete payment
