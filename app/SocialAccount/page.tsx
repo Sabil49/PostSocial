@@ -78,16 +78,13 @@ const valueFormatterHistogram = (value: number | null) => `Count: ${value}`;
       const [error, setError] = useState('');
       const [loading, setLoading] = useState(false);
       const [data, setData] = useState<dataInterface>();
-      const svgRef = useRef<HTMLDivElement | null>(null);
-  // Define a type that includes exportAsImage if you expect the ref to have it
-  
 
   const piechartRef = useRef<HTMLDivElement | null>(null);
   const barchartRef = useRef<HTMLDivElement | null>(null);
   const scatterplotRef = useRef<HTMLDivElement | null>(null);
   const wordcloudRef = useRef<HTMLDivElement | null>(null);
 
-    const handleDownload = (ref: HTMLDivElement | null) => {
+    const handleDownload = (ref: HTMLDivElement | null, filename: string) => {
     // Exporting as image is not supported directly on HTMLDivElement.
     // You can use libraries like html2canvas or dom-to-image for this purpose.
     // Example using html2canvas (make sure to install it first):
@@ -98,7 +95,7 @@ const valueFormatterHistogram = (value: number | null) => `Count: ${value}`;
           const dataUrl = canvas.toDataURL('image/png');
           const link = document.createElement('a');
           link.href = dataUrl;
-          link.download = 'pieChart.png';
+          link.download = filename;
           document.body.appendChild(link);
           link.click();
           document.body.removeChild(link);
@@ -213,22 +210,34 @@ const valueFormatterHistogram = (value: number | null) => `Count: ${value}`;
     {
       data && (
         <div className="grid grid-cols-2 gap-4 *:border *:p-2.5 *:rounded-md">
-        <div>
-          <h2 className="text-2xl font-bold mb-4 text-center">{data?.sentiment_percentage.title}</h2>
-          <Button variant='contained' className='!capitalize float-right clear-both' onClick={() => handleDownload(piechartRef.current)}>
-              Download
-           </Button>
+          <div className='flex justify-evenly'>
+            <div></div>
+            <div>
+              <h2 className="text-2xl font-bold mb-4 text-center">{data?.sentiment_percentage.title}</h2>
+            </div>
+            <div>
+              <Button variant='contained' className='!capitalize float-right clear-both' onClick={() => handleDownload(piechartRef.current, 'pieChart.png')}>
+                  Download
+              </Button>
+          </div>
+          </div>
            <ChartsWrapper ref={piechartRef}>
             <PieChart series={[{ data: data?.sentiment_percentage.data ?? [], highlightScope: { fade: 'global', highlight: 'item' }, faded: { innerRadius: 30, additionalRadius: -30, color: 'gray' }, valueFormatter: valueFormatterPiechart, }, ]} height={200}
               width={200} />
           </ChartsWrapper>
-           
-        </div>
+          </div>
+      )}
         <div>
-            <h2 className="text-2xl font-bold mb-4 text-center">{data?.histogram_data.title}</h2>
-                <Button variant='contained' className='!capitalize float-right clear-both' onClick={() => handleDownload(barchartRef.current)}>
-              Download
-           </Button>
+          <div className='flex justify-evenly'>
+            <div></div>
+            <div>
+              <h2 className="text-2xl font-bold mb-4 text-center">{data?.histogram_data.title}</h2>
+            </div>
+            <div>
+              <Button variant='contained' className='!capitalize float-right clear-both' onClick={() => handleDownload(barchartRef.current, 'barChart.png')}>
+                Download
+              </Button>
+            </div>
            <ChartsWrapper ref={barchartRef}>
                 <BarChart dataset={data?.histogram_data.data ?? []}
   xAxis={[{ dataKey: 'score_range', label: 'Score Range' }]}
@@ -244,11 +253,18 @@ const valueFormatterHistogram = (value: number | null) => `Count: ${value}`;
                 />
                 </ChartsWrapper>
         </div>
+        </div>
         <div>
-            <h2 className="text-2xl font-bold mb-4 text-center">Sentiment Score vs Likes Scatterplot</h2>
-                 <Button variant='contained' className='!capitalize float-right clear-both' onClick={() => handleDownload(scatterplotRef.current)}>
-              Download
-           </Button>
+          <div className='flex justify-evenly'>
+            <div></div>
+            <div>
+              <h2 className="text-2xl font-bold mb-4 text-center">Sentiment Score vs Likes Scatterplot</h2>
+            </div>
+            <div>
+              <Button variant='contained' className='!capitalize float-right clear-both' onClick={() => handleDownload(scatterplotRef.current, 'scatterPlot.png')}>
+                Download
+              </Button>
+            </div>
            <ChartsWrapper ref={scatterplotRef}>
                  <ScatterChart 
       height={300}
@@ -273,12 +289,16 @@ const valueFormatterHistogram = (value: number | null) => `Count: ${value}`;
     />
     </ChartsWrapper>
         </div>
-
+</div>
         <div>
-          <h2 className="text-2xl font-bold mb-4 text-center">{data?.word_cloud.title}</h2>
-         <Button variant='contained' className='!capitalize float-right clear-both' onClick={() => handleDownload(wordcloudRef.current)}>
-              Download
-           </Button>
+          <div className='flex justify-evenly'>
+            <div></div>
+            <h2 className="text-2xl font-bold mb-4 text-center">{data?.word_cloud.title}</h2>
+            <div>
+              <Button variant='contained' className='!capitalize float-right clear-both' onClick={() => handleDownload(wordcloudRef.current, 'wordCloud.png')}>
+                Download
+              </Button>
+            </div>
            <ChartsWrapper ref={wordcloudRef}>
           <WordCloud 
              data={words}
@@ -315,11 +335,9 @@ const valueFormatterHistogram = (value: number | null) => `Count: ${value}`;
               </ul>
             </div>
           }
+        </div>        
         </div>
-      </div>
-      )
-    }
         </div>
-        
-      );
-    }
+)}
+
+
