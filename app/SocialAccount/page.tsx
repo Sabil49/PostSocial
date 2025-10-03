@@ -1,5 +1,5 @@
     "use client";
-    import React, {  useRef } from 'react';
+    import React, {  useRef  } from 'react';
     import { useState } from 'react';
     import { PieChart } from '@mui/x-charts/PieChart';
     import { BarChart } from '@mui/x-charts/BarChart';
@@ -8,7 +8,9 @@
     import type { Word } from "@/types/react-d3-cloud";
     import { signOutUser } from '@/app/api/auth/actions';
     import { useSession } from "next-auth/react";
-    
+    import { Button } from '@mui/material';
+   import ChartsWrapper from '../Components/ChartsWrapper';
+
     const valueFormatterPiechart = (item: { value: number }) => `${item.value}%`;
 const valueFormatterHistogram = (value: number | null) => `Count: ${value}`;
 
@@ -77,6 +79,31 @@ const valueFormatterHistogram = (value: number | null) => `Count: ${value}`;
       const [loading, setLoading] = useState(false);
       const [data, setData] = useState<dataInterface>();
       const svgRef = useRef<HTMLDivElement | null>(null);
+  // Define a type that includes exportAsImage if you expect the ref to have it
+  
+
+  const chartRef = useRef<HTMLDivElement | null>(null);
+
+    const handleDownload = () => {
+    // Exporting as image is not supported directly on HTMLDivElement.
+    // You can use libraries like html2canvas or dom-to-image for this purpose.
+    // Example using html2canvas (make sure to install it first):
+    // import html2canvas from 'html2canvas';
+    if (chartRef.current) {
+      import('html2canvas').then(({ default: html2canvas }) => {
+        html2canvas(chartRef.current as HTMLElement).then((canvas) => {
+          const dataUrl = canvas.toDataURL('image/png');
+          const link = document.createElement('a');
+          link.href = dataUrl;
+          link.download = 'pieChart.png';
+          document.body.appendChild(link);
+          link.click();
+          document.body.removeChild(link);
+        });
+      }).catch((error) => console.error('Error exporting chart:', error));
+    }
+  };
+
       const handleExport = () => {
   const svgElement = svgRef.current;
   if (!svgElement) return;
@@ -211,12 +238,17 @@ const valueFormatterHistogram = (value: number | null) => `Count: ${value}`;
         <div className="grid grid-cols-2 gap-4 *:border *:p-2.5 *:rounded-md">
         <div>
           <h2 className="text-2xl font-bold mb-4 text-center">{data?.sentiment_percentage.title}</h2>
-          <PieChart showToolbar series={[{ data: data?.sentiment_percentage.data ?? [], highlightScope: { fade: 'global', highlight: 'item' }, faded: { innerRadius: 30, additionalRadius: -30, color: 'gray' }, valueFormatter: valueFormatterPiechart, }, ]} height={200}
-        width={200} />
+          <ChartsWrapper ref={chartRef}>
+            <PieChart series={[{ data: data?.sentiment_percentage.data ?? [], highlightScope: { fade: 'global', highlight: 'item' }, faded: { innerRadius: 30, additionalRadius: -30, color: 'gray' }, valueFormatter: valueFormatterPiechart, }, ]} height={200}
+              width={200} />
+          </ChartsWrapper>
+           <Button variant="contained" onClick={handleDownload}>
+              Download Chart
+           </Button>
         </div>
         <div>
             <h2 className="text-2xl font-bold mb-4 text-center">{data?.histogram_data.title}</h2>
-                <BarChart showToolbar dataset={data?.histogram_data.data ?? []}
+                <BarChart dataset={data?.histogram_data.data ?? []}
   xAxis={[{ dataKey: 'score_range', label: 'Score Range' }]}
   yAxis={[
     {
@@ -227,6 +259,7 @@ const valueFormatterHistogram = (value: number | null) => `Count: ${value}`;
   series={[{ dataKey: 'count', valueFormatter: valueFormatterHistogram }]}
   height={300}
   margin={{ left: 0 }}
+  showToolbar
                 />
         </div>
         <div>
