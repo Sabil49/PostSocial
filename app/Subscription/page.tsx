@@ -50,12 +50,14 @@ const createCheckoutSession = async () => {
             product_id: planId, // Replace with your actual product ID
             quantity: 1
           }
-        ],
+        ],        
         // Pre-fill customer information to reduce checkout friction
         customer: {
           email: email,
           name: userSession?.user?.name || "Test User",
-        }
+        },
+         allowed_payment_method_types: ['card', 'upi', 'netbanking', 'wallet'], // adjust to what Dodo supports
+
       })
     });
 
