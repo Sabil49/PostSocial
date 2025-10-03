@@ -210,7 +210,8 @@ const valueFormatterHistogram = (value: number | null) => `Count: ${value}`;
     {
       data && (
         <div className="grid grid-cols-2 gap-4 *:border *:p-2.5 *:rounded-md">
-          <div className='flex justify-evenly'>
+          <div>
+          <div className='flex justify-between'>
             <div></div>
             <div>
               <h2 className="text-2xl font-bold mb-4 text-center">{data?.sentiment_percentage.title}</h2>
@@ -226,9 +227,9 @@ const valueFormatterHistogram = (value: number | null) => `Count: ${value}`;
               width={200} />
           </ChartsWrapper>
           </div>
-      )}
+     
         <div>
-          <div className='flex justify-evenly'>
+          <div className='flex justify-between'>
             <div></div>
             <div>
               <h2 className="text-2xl font-bold mb-4 text-center">{data?.histogram_data.title}</h2>
@@ -255,7 +256,7 @@ const valueFormatterHistogram = (value: number | null) => `Count: ${value}`;
         </div>
         </div>
         <div>
-          <div className='flex justify-evenly'>
+          <div className='flex justify-between'>
             <div></div>
             <div>
               <h2 className="text-2xl font-bold mb-4 text-center">Sentiment Score vs Likes Scatterplot</h2>
@@ -291,7 +292,7 @@ const valueFormatterHistogram = (value: number | null) => `Count: ${value}`;
         </div>
 </div>
         <div>
-          <div className='flex justify-evenly'>
+          <div className='flex justify-between'>
             <div></div>
             <h2 className="text-2xl font-bold mb-4 text-center">{data?.word_cloud.title}</h2>
             <div>
@@ -338,6 +339,10 @@ const valueFormatterHistogram = (value: number | null) => `Count: ${value}`;
         </div>        
         </div>
         </div>
-)}
+         )}
+         </div>
+      );
+    }
+
 
 
