@@ -1,65 +1,65 @@
 import { NextResponse } from 'next/server';
 import { GoogleGenAI, Type } from "@google/genai";
 import { cookies } from 'next/headers';
-// import tweetData from '@/utils/tweetData.json';
+import tweetData from '@/utils/tweetData.json';
 
 
 const ai = new GoogleGenAI({ apiKey: process.env.GOOGLE_GEMINI_API_KEY || "" });
 
 export async function GET() {
   try{
-  const cookieStore = await cookies();
-  const accessToken = cookieStore.get('accessToken')?.value; // Using optional chaining for safety
-  if (!accessToken) {
-    return new Response(JSON.stringify({ error: 'Token not found. Please login first.' }),
-    { status: 401, headers: { 'Content-Type': 'application/json' } });
-  }
-  console.log('Access Token:', accessToken); // Debugging line to check the token value
-  const response = await fetch('https://api.x.com/2/users/me', {
-    headers: {
-      'Authorization': `Bearer ${accessToken}`,
-    },
-            });
-            console.log('Twitter API Response Status:', response.status); // Debugging line to check response status
-       if (!response.ok) {
-         return new Response(
-         JSON.stringify({ error: 'Failed to fetch user data from Twitter' }),
-         { status: response.status, headers: { 'Content-Type': 'application/json' } }
-  );
-}
-            if (response.status === 429) {
-          const retryAfter = response.headers.get('Retry-After');
-          if (retryAfter) {
-            const delay = parseInt(retryAfter)/60; // Convert seconds to minutes
-            return new Response(JSON.stringify({ error: `Rate limit exceeded. Please try again ${delay} milliseconds later.` }),
-             { status: 429, headers: { 'Retry-After': retryAfter, 'Content-Type': 'application/json' } });
+//   const cookieStore = await cookies();
+//   const accessToken = cookieStore.get('accessToken')?.value; // Using optional chaining for safety
+//   if (!accessToken) {
+//     return new Response(JSON.stringify({ error: 'Token not found. Please login first.' }),
+//     { status: 401, headers: { 'Content-Type': 'application/json' } });
+//   }
+//   console.log('Access Token:', accessToken); // Debugging line to check the token value
+//   const response = await fetch('https://api.x.com/2/users/me', {
+//     headers: {
+//       'Authorization': `Bearer ${accessToken}`,
+//     },
+//             });
+//             console.log('Twitter API Response Status:', response.status); // Debugging line to check response status
+//        if (!response.ok) {
+//          return new Response(
+//          JSON.stringify({ error: 'Failed to fetch user data from Twitter' }),
+//          { status: response.status, headers: { 'Content-Type': 'application/json' } }
+//   );
+// }
+//             if (response.status === 429) {
+//           const retryAfter = response.headers.get('Retry-After');
+//           if (retryAfter) {
+//             const delay = parseInt(retryAfter)/60; // Convert seconds to minutes
+//             return new Response(JSON.stringify({ error: `Rate limit exceeded. Please try again ${delay} milliseconds later.` }),
+//              { status: 429, headers: { 'Retry-After': retryAfter, 'Content-Type': 'application/json' } });
             
-          }
-        }
-       const userData = await response.json();
-       console.log('User Data:', userData); // Debugging line to check the user data
-       if (!userData.data || !userData.data.id) {
-        return new Response(JSON.stringify({ error: 'User account ID not found' }), {
-          status: userData.status,
-          headers: { 'Content-Type': 'application/json' }
-        });
-       }
-       const twitterResponse = await fetch(`https://api.x.com/2/users/${userData.data.id}/tweets?max_results=10&expansions=author_id,referenced_tweets.id,attachments.media_keys&tweet.fields=created_at,public_metrics,entities,source&user.fields=username,name,profile_image_url&media.fields=url`, {
-      headers: {
-        Authorization: `Bearer ${accessToken}`,
-      },
-    });
-    console.log('Twitter Tweets API Response Status:', twitterResponse.status); // Debugging line to check response status
-        if (!twitterResponse.ok) {
-          console.log('Error fetching tweet data from Twitter:', twitterResponse.statusText);
-          return new Response(JSON.stringify({ error: `Failed to fetch tweet data from Twitter: ${twitterResponse.statusText}` }), 
-          { status: twitterResponse.status, headers: { 'Content-Type': 'application/json' } });
-       }
+//           }
+//         }
+//        const userData = await response.json();
+//        console.log('User Data:', userData); // Debugging line to check the user data
+//        if (!userData.data || !userData.data.id) {
+//         return new Response(JSON.stringify({ error: 'User account ID not found' }), {
+//           status: userData.status,
+//           headers: { 'Content-Type': 'application/json' }
+//         });
+//        }
+//        const twitterResponse = await fetch(`https://api.x.com/2/users/${userData.data.id}/tweets?max_results=10&expansions=author_id,referenced_tweets.id,attachments.media_keys&tweet.fields=created_at,public_metrics,entities,source&user.fields=username,name,profile_image_url&media.fields=url`, {
+//       headers: {
+//         Authorization: `Bearer ${accessToken}`,
+//       },
+//     });
+//     console.log('Twitter Tweets API Response Status:', twitterResponse.status); // Debugging line to check response status
+//         if (!twitterResponse.ok) {
+//           console.log('Error fetching tweet data from Twitter:', twitterResponse.statusText);
+//           return new Response(JSON.stringify({ error: `Failed to fetch tweet data from Twitter: ${twitterResponse.statusText}` }), 
+//           { status: twitterResponse.status, headers: { 'Content-Type': 'application/json' } });
+//        }
 
-       const tweetData = await twitterResponse.json();
-       if(!tweetData || tweetData.errors || tweetData.errors.length > 0 || !tweetData.data){
-        return new Response(JSON.stringify({ error: 'User account data not found' }), { status: twitterResponse.status, headers: { 'Content-Type': 'application/json' } });
-       }
+//        const tweetData = await twitterResponse.json();
+//        if(!tweetData || tweetData.errors || tweetData.errors.length > 0 || !tweetData.data){
+//         return new Response(JSON.stringify({ error: 'User account data not found' }), { status: twitterResponse.status, headers: { 'Content-Type': 'application/json' } });
+//        }
 
       const tweetDataArray = tweetData.data;
      
