@@ -238,16 +238,21 @@ const valueFormatterHistogram = (value: number | null) => `Count: ${value}`;
         <div className="grid grid-cols-2 gap-4 *:border *:p-2.5 *:rounded-md">
         <div>
           <h2 className="text-2xl font-bold mb-4 text-center">{data?.sentiment_percentage.title}</h2>
-          <ChartsWrapper ref={chartRef}>
+          <Button variant='contained' className='!capitalize float-right clear-both' onClick={handleDownload}>
+              Download
+           </Button>
+           <ChartsWrapper ref={chartRef}>
             <PieChart series={[{ data: data?.sentiment_percentage.data ?? [], highlightScope: { fade: 'global', highlight: 'item' }, faded: { innerRadius: 30, additionalRadius: -30, color: 'gray' }, valueFormatter: valueFormatterPiechart, }, ]} height={200}
               width={200} />
           </ChartsWrapper>
-           <Button variant="contained" onClick={handleDownload}>
-              Download Chart
-           </Button>
+           
         </div>
         <div>
             <h2 className="text-2xl font-bold mb-4 text-center">{data?.histogram_data.title}</h2>
+                <Button variant='contained' className='!capitalize float-right clear-both' onClick={handleDownload}>
+              Download
+           </Button>
+           <ChartsWrapper ref={chartRef}>
                 <BarChart dataset={data?.histogram_data.data ?? []}
   xAxis={[{ dataKey: 'score_range', label: 'Score Range' }]}
   yAxis={[
@@ -259,12 +264,16 @@ const valueFormatterHistogram = (value: number | null) => `Count: ${value}`;
   series={[{ dataKey: 'count', valueFormatter: valueFormatterHistogram }]}
   height={300}
   margin={{ left: 0 }}
-  showToolbar
                 />
+                </ChartsWrapper>
         </div>
         <div>
             <h2 className="text-2xl font-bold mb-4 text-center">Sentiment Score vs Likes Scatterplot</h2>
-                 <ScatterChart showToolbar 
+                 <Button variant='contained' className='!capitalize float-right clear-both' onClick={handleDownload}>
+              Download
+           </Button>
+           <ChartsWrapper ref={chartRef}>
+                 <ScatterChart 
       height={300}
       series={[
     {
@@ -285,11 +294,15 @@ const valueFormatterHistogram = (value: number | null) => `Count: ${value}`;
       xAxis={[{ label: "Sentiment Score" }]}
       yAxis={[{ label: "Likes" }]}
     />
+    </ChartsWrapper>
         </div>
 
         <div>
           <h2 className="text-2xl font-bold mb-4 text-center">{data?.word_cloud.title}</h2>
-          <div ref={svgRef}>
+         <Button variant='contained' className='!capitalize float-right clear-both' onClick={handleDownload}>
+              Download
+           </Button>
+           <ChartsWrapper ref={chartRef}>
           <WordCloud 
              data={words}
              font="Impact"
@@ -300,8 +313,7 @@ const valueFormatterHistogram = (value: number | null) => `Count: ${value}`;
              width={500}
              height={300}                     
           />
-          </div>
-        <button onClick={handleExport}>Export Chart</button>
+          </ChartsWrapper>
         </div>
         <div className='col-span-2'>
           {
