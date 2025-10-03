@@ -82,16 +82,19 @@ const valueFormatterHistogram = (value: number | null) => `Count: ${value}`;
   // Define a type that includes exportAsImage if you expect the ref to have it
   
 
-  const chartRef = useRef<HTMLDivElement | null>(null);
+  const piechartRef = useRef<HTMLDivElement | null>(null);
+  const barchartRef = useRef<HTMLDivElement | null>(null);
+  const scatterplotRef = useRef<HTMLDivElement | null>(null);
+  const wordcloudRef = useRef<HTMLDivElement | null>(null);
 
-    const handleDownload = () => {
+    const handleDownload = (ref: HTMLDivElement | null) => {
     // Exporting as image is not supported directly on HTMLDivElement.
     // You can use libraries like html2canvas or dom-to-image for this purpose.
     // Example using html2canvas (make sure to install it first):
     // import html2canvas from 'html2canvas';
-    if (chartRef.current) {
+    if (ref) {
       import('html2canvas').then(({ default: html2canvas }) => {
-        html2canvas(chartRef.current as HTMLElement).then((canvas) => {
+        html2canvas(ref as HTMLElement).then((canvas) => {
           const dataUrl = canvas.toDataURL('image/png');
           const link = document.createElement('a');
           link.href = dataUrl;
@@ -104,33 +107,7 @@ const valueFormatterHistogram = (value: number | null) => `Count: ${value}`;
     }
   };
 
-      const handleExport = () => {
-  const svgElement = svgRef.current;
-  if (!svgElement) return;
-
-  const svgString = new XMLSerializer().serializeToString(svgElement);
-  const svgBlob = new Blob([svgString], { type: 'image/svg+xml;charset=utf-8' });
-  const url = URL.createObjectURL(svgBlob);
-
-  const img = new Image();
-  img.onload = () => {
-    const canvas = document.createElement('canvas');
-    canvas.width = svgElement.clientWidth;
-    canvas.height = svgElement.clientHeight;
-    const ctx = canvas.getContext('2d');
-    ctx?.drawImage(img, 0, 0);
-
-    const pngUrl = canvas.toDataURL('image/png');
-    const downloadLink = document.createElement('a');
-    downloadLink.href = pngUrl;
-    downloadLink.download = 'wordcloud.png';
-    document.body.appendChild(downloadLink);
-    downloadLink.click();
-    document.body.removeChild(downloadLink);
-    URL.revokeObjectURL(url); // Clean up the URL object
-  };
-  img.src = url;
-};
+     
       const handleConnectX = async () => {
         
         setLoading(true);
@@ -238,10 +215,10 @@ const valueFormatterHistogram = (value: number | null) => `Count: ${value}`;
         <div className="grid grid-cols-2 gap-4 *:border *:p-2.5 *:rounded-md">
         <div>
           <h2 className="text-2xl font-bold mb-4 text-center">{data?.sentiment_percentage.title}</h2>
-          <Button variant='contained' className='!capitalize float-right clear-both' onClick={handleDownload}>
+          <Button variant='contained' className='!capitalize float-right clear-both' onClick={() => handleDownload(piechartRef.current)}>
               Download
            </Button>
-           <ChartsWrapper ref={chartRef}>
+           <ChartsWrapper ref={piechartRef}>
             <PieChart series={[{ data: data?.sentiment_percentage.data ?? [], highlightScope: { fade: 'global', highlight: 'item' }, faded: { innerRadius: 30, additionalRadius: -30, color: 'gray' }, valueFormatter: valueFormatterPiechart, }, ]} height={200}
               width={200} />
           </ChartsWrapper>
@@ -249,10 +226,10 @@ const valueFormatterHistogram = (value: number | null) => `Count: ${value}`;
         </div>
         <div>
             <h2 className="text-2xl font-bold mb-4 text-center">{data?.histogram_data.title}</h2>
-                <Button variant='contained' className='!capitalize float-right clear-both' onClick={handleDownload}>
+                <Button variant='contained' className='!capitalize float-right clear-both' onClick={() => handleDownload(barchartRef.current)}>
               Download
            </Button>
-           <ChartsWrapper ref={chartRef}>
+           <ChartsWrapper ref={barchartRef}>
                 <BarChart dataset={data?.histogram_data.data ?? []}
   xAxis={[{ dataKey: 'score_range', label: 'Score Range' }]}
   yAxis={[
@@ -269,10 +246,10 @@ const valueFormatterHistogram = (value: number | null) => `Count: ${value}`;
         </div>
         <div>
             <h2 className="text-2xl font-bold mb-4 text-center">Sentiment Score vs Likes Scatterplot</h2>
-                 <Button variant='contained' className='!capitalize float-right clear-both' onClick={handleDownload}>
+                 <Button variant='contained' className='!capitalize float-right clear-both' onClick={() => handleDownload(scatterplotRef.current)}>
               Download
            </Button>
-           <ChartsWrapper ref={chartRef}>
+           <ChartsWrapper ref={scatterplotRef}>
                  <ScatterChart 
       height={300}
       series={[
@@ -299,10 +276,10 @@ const valueFormatterHistogram = (value: number | null) => `Count: ${value}`;
 
         <div>
           <h2 className="text-2xl font-bold mb-4 text-center">{data?.word_cloud.title}</h2>
-         <Button variant='contained' className='!capitalize float-right clear-both' onClick={handleDownload}>
+         <Button variant='contained' className='!capitalize float-right clear-both' onClick={() => handleDownload(wordcloudRef.current)}>
               Download
            </Button>
-           <ChartsWrapper ref={chartRef}>
+           <ChartsWrapper ref={wordcloudRef}>
           <WordCloud 
              data={words}
              font="Impact"
