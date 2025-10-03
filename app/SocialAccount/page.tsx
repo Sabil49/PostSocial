@@ -82,6 +82,7 @@ const valueFormatterHistogram = (value: number | null) => `Count: ${value}`;
         try {
           const response = await fetch('/api/tweetdata');
           if (!response.ok) {
+            console.log(response);
             throw new Error(response.statusText);
           }
           const data = await response.json();
