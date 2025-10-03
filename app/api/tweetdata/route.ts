@@ -3,7 +3,6 @@ import { GoogleGenAI, Type } from "@google/genai";
 import { cookies } from 'next/headers';
 import tweetData from '@/utils/tweetData.json';
 
-
 const ai = new GoogleGenAI({ apiKey: process.env.GOOGLE_GEMINI_API_KEY || "" });
 
 export async function GET() {
@@ -63,9 +62,7 @@ export async function GET() {
 
       const tweetDataArray = tweetData.data;
      
-      
-      
-              const GeminiResponse = await ai.models.generateContent({
+      const GeminiResponse = await ai.models.generateContent({
            model: "gemini-2.5-flash",
              contents: "Analyze the following 'text' field data as tweets and return JSON data(No pre text, No after text and No special characters) for chart insights: " + JSON.stringify(tweetDataArray),
     config: {

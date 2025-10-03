@@ -1,5 +1,5 @@
     "use client";
-    import React from 'react';
+    import React, {  useRef } from 'react';
     import { useState } from 'react';
     import { PieChart } from '@mui/x-charts/PieChart';
     import { BarChart } from '@mui/x-charts/BarChart';
@@ -76,8 +76,36 @@ const valueFormatterHistogram = (value: number | null) => `Count: ${value}`;
       const [error, setError] = useState('');
       const [loading, setLoading] = useState(false);
       const [data, setData] = useState<dataInterface>();
+      const svgRef = useRef<SVGSVGElement | null>(null);
+      const handleExport = () => {
+  const svgElement = svgRef.current;
+  if (!svgElement) return;
 
+  const svgString = new XMLSerializer().serializeToString(svgElement);
+  const svgBlob = new Blob([svgString], { type: 'image/svg+xml;charset=utf-8' });
+  const url = URL.createObjectURL(svgBlob);
+
+  const img = new Image();
+  img.onload = () => {
+    const canvas = document.createElement('canvas');
+    canvas.width = svgElement.clientWidth;
+    canvas.height = svgElement.clientHeight;
+    const ctx = canvas.getContext('2d');
+    ctx?.drawImage(img, 0, 0);
+
+    const pngUrl = canvas.toDataURL('image/png');
+    const downloadLink = document.createElement('a');
+    downloadLink.href = pngUrl;
+    downloadLink.download = 'wordcloud.png';
+    document.body.appendChild(downloadLink);
+    downloadLink.click();
+    document.body.removeChild(downloadLink);
+    URL.revokeObjectURL(url); // Clean up the URL object
+  };
+  img.src = url;
+};
       const handleConnectX = async () => {
+        
         setLoading(true);
         try {
           const response = await fetch('/api/tweetdata');
@@ -183,12 +211,12 @@ const valueFormatterHistogram = (value: number | null) => `Count: ${value}`;
         <div className="grid grid-cols-2 gap-4 *:border *:p-2.5 *:rounded-md">
         <div>
           <h2 className="text-2xl font-bold mb-4 text-center">{data?.sentiment_percentage.title}</h2>
-          <PieChart series={[{ data: data?.sentiment_percentage.data ?? [], highlightScope: { fade: 'global', highlight: 'item' }, faded: { innerRadius: 30, additionalRadius: -30, color: 'gray' }, valueFormatter: valueFormatterPiechart, }, ]} height={200}
+          <PieChart showToolbar series={[{ data: data?.sentiment_percentage.data ?? [], highlightScope: { fade: 'global', highlight: 'item' }, faded: { innerRadius: 30, additionalRadius: -30, color: 'gray' }, valueFormatter: valueFormatterPiechart, }, ]} height={200}
         width={200} />
         </div>
         <div>
             <h2 className="text-2xl font-bold mb-4 text-center">{data?.histogram_data.title}</h2>
-                <BarChart dataset={data?.histogram_data.data ?? []}
+                <BarChart showToolbar dataset={data?.histogram_data.data ?? []}
   xAxis={[{ dataKey: 'score_range', label: 'Score Range' }]}
   yAxis={[
     {
@@ -203,7 +231,7 @@ const valueFormatterHistogram = (value: number | null) => `Count: ${value}`;
         </div>
         <div>
             <h2 className="text-2xl font-bold mb-4 text-center">Sentiment Score vs Likes Scatterplot</h2>
-                 <ScatterChart
+                 <ScatterChart showToolbar 
       height={300}
       series={[
     {
@@ -228,7 +256,7 @@ const valueFormatterHistogram = (value: number | null) => `Count: ${value}`;
 
         <div>
           <h2 className="text-2xl font-bold mb-4 text-center">{data?.word_cloud.title}</h2>
-          <WordCloud
+          <WordCloud 
              data={words}
              font="Impact"
              fontSize={fontSizeMapper}
@@ -237,8 +265,9 @@ const valueFormatterHistogram = (value: number | null) => `Count: ${value}`;
              fill={colorMapper}
              width={500}
              height={300}
+             svgRef={svgRef}              
           />
-        
+        <button onClick={handleExport}>Export Chart</button>
         </div>
         <div className='col-span-2'>
           {

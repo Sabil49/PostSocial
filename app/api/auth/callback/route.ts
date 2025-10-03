@@ -10,7 +10,6 @@ export async function GET(req: NextRequest) {
     const { searchParams } = new URL(req.url);
     const code = searchParams.get('code');  
     if (!code) {     
-        //return new Response('Authorization failed', { status: 400 });
         return NextResponse.json({ error: 'Authorization failed.' }, { status: 400 });
       }
   
