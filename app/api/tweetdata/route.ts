@@ -1,47 +1,53 @@
 import { NextRequest,NextResponse } from 'next/server';
 import { GoogleGenAI, Type } from "@google/genai";
-// import { cookies } from 'next/headers';
+import { cookies } from 'next/headers';
 import tweetData from '@/utils/tweetData.json';
 
 
 const ai = new GoogleGenAI({ apiKey: process.env.GOOGLE_GEMINI_API_KEY || "" });
 
 export async function GET(req: NextRequest) {
-  //const cookieStore = await cookies();
-  //const accessToken = cookieStore.get('accessToken')?.value; // Using optional chaining for safety
+  try{
+  // const cookieStore = await cookies();
+  // const accessToken = cookieStore.get('accessToken')?.value; // Using optional chaining for safety
   // const response = await fetch('https://api.x.com/2/users/me', {
   //   headers: {
   //     'Authorization': `Bearer ${accessToken}`,
   //   },
   //           });
+  //      if (response.status === 429) {
+  //         const retryAfter = response.headers.get('Retry-After');
+  //         if (retryAfter) {
+  //           const delay = parseInt(retryAfter)/60; // Convert seconds to minutes
+  //           return new Response(JSON.stringify({ error: `Rate limit exceeded. Please try again ${delay} milliseconds later.` }), { status: 429, headers: { 'Retry-After': retryAfter } });
+            
+  //         }
+  //       } 
+  //       if (!response.ok) { 
+  //         return new Response(JSON.stringify({ error: 'Failed to fetch user data from Twitter' }), { status: response.status });
+  //      }
   //      const userData = await response.json();
-  //           if (userData.status === 429) {
-  //            const errorRedirect = NextResponse.redirect(new URL('/SocialAccount?error=' + userData.detail + ' from userData', req.url));
-  //            return errorRedirect;
-  //           }
-  //           //return NextResponse.json({ userData });
   //      if (!userData.data || !userData.data.id) {
-  //       return new Response(JSON.stringify({ error: 'User ID not found' }), { status: 401 });
+  //       return new Response(JSON.stringify({ error: 'User account ID not found' }), { status: response.status });
   //      }
   //      const twitterResponse = await fetch(`https://api.x.com/2/users/${userData.data.id}/tweets?max_results=5&expansions=author_id,referenced_tweets.id,attachments.media_keys&tweet.fields=created_at,public_metrics,entities,source&user.fields=username,name,profile_image_url&media.fields=url`, {
   //     headers: {
   //       Authorization: `Bearer ${accessToken}`,
   //     },
   //   });
-  //      const tweetData = await twitterResponse.json();
-  //     if (tweetData.status === 429) {
-  //            const errorRedirect = NextResponse.redirect(new URL('/SocialAccount?error=' + tweetData.detail + ' from tweetData', req.url));
-  //            return errorRedirect;
-  //           }
+  //       if (!twitterResponse.ok) { 
+  //         return new Response(JSON.stringify({ error: 'Failed to fetch tweet data from Twitter' }), { status: twitterResponse.status });
+  //      }
 
-    
+  //      const tweetData = await twitterResponse.json();
+  //      if(!tweetData || tweetData.errors || tweetData.errors.length > 0 || !tweetData.data){
+  //       return new Response(JSON.stringify({ error: 'User account data not found' }), { status: twitterResponse.status });
+  //      }
+
       const tweetDataArray = tweetData.data;
-      if (!tweetDataArray || tweetDataArray.length === 0) {
-        return new Response(JSON.stringify({ error: 'No tweets found' }), { status: 404 });
-      }
      
       
-      try{
+      
               const GeminiResponse = await ai.models.generateContent({
            model: "gemini-2.5-flash",
              contents: "Analyze the following 'text' field data as tweets and return JSON data(No pre text, No after text and No special characters) for chart insights: " + JSON.stringify(tweetDataArray),

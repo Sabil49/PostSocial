@@ -174,11 +174,6 @@ const valueFormatterHistogram = (value: number | null) => `Count: ${value}`;
             </div> 
             }                       
           </div>
-          {data && (
-            <div>
-              <h3>Fetched Tweet Data:</h3>
-            </div>
-          )}
           {loading && <p>Loading...</p>}
           {error && <p style={{ color: 'red' }}>{error}</p>}
        
