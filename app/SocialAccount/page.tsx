@@ -239,6 +239,7 @@ const valueFormatterHistogram = (value: number | null) => `Count: ${value}`;
                 Download
               </Button>
             </div>
+            </div>
            <ChartsWrapper ref={barchartRef}>
                 <BarChart dataset={data?.histogram_data.data ?? []}
   xAxis={[{ dataKey: 'score_range', label: 'Score Range' }]}
@@ -253,7 +254,7 @@ const valueFormatterHistogram = (value: number | null) => `Count: ${value}`;
   margin={{ left: 0 }}
                 />
                 </ChartsWrapper>
-        </div>
+        
         </div>
         <div>
           <div className='flex justify-between'>
@@ -265,6 +266,7 @@ const valueFormatterHistogram = (value: number | null) => `Count: ${value}`;
               <Button variant='contained' className='!capitalize float-right clear-both' onClick={() => handleDownload(scatterplotRef.current, 'scatterPlot.png')}>
                 Download
               </Button>
+            </div>
             </div>
            <ChartsWrapper ref={scatterplotRef}>
                  <ScatterChart 
@@ -289,7 +291,7 @@ const valueFormatterHistogram = (value: number | null) => `Count: ${value}`;
       yAxis={[{ label: "Likes" }]}
     />
     </ChartsWrapper>
-        </div>
+        
 </div>
         <div>
           <div className='flex justify-between'>
@@ -299,6 +301,7 @@ const valueFormatterHistogram = (value: number | null) => `Count: ${value}`;
               <Button variant='contained' className='!capitalize float-right clear-both' onClick={() => handleDownload(wordcloudRef.current, 'wordCloud.png')}>
                 Download
               </Button>
+            </div>
             </div>
            <ChartsWrapper ref={wordcloudRef}>
           <WordCloud 
@@ -337,7 +340,6 @@ const valueFormatterHistogram = (value: number | null) => `Count: ${value}`;
             </div>
           }
         </div>        
-        </div>
         </div>
          )}
          </div>

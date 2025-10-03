@@ -51,8 +51,6 @@ const createCheckoutSession = async () => {
             quantity: 1
           }
         ],
-        allowed_payment_method_types: ['credit_card', 'debit_card', 'amazon_pay', 'google_pay', 'upi'],
-        
         // Pre-fill customer information to reduce checkout friction
         customer: {
           email: email,
