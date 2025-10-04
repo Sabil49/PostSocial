@@ -1,11 +1,8 @@
 "use client";
 import { useSession } from "next-auth/react";
 import CustomerPortal from "./customer-portal";
-import { useState } from "react";
-import { th } from "zod/v4/locales";
 
 export default function SubscribeButton() {
-  const [loading, setLoading] = useState(false);
   const { data: userSession } = useSession();
 
   const email= userSession?.user?.email || "test@example.com";
@@ -38,7 +35,7 @@ export default function SubscribeButton() {
   // Direct API call using fetch - useful for any JavaScript environment
 const createCheckoutSession = async () => {
   try {
-    const response = await fetch('api/payments/dodo/checkout', {
+    const response = await fetch('api/payment/dodo/checkout', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',

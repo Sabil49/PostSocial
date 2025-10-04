@@ -38,7 +38,7 @@ interface MyFormState {
   name: string;
 }
 
-async function registerUser(data: FormData) {
+async function signupUser(data: FormData) {
                 if (!data) return null;
                 const parsedData = z.object({ email: z.string().email(), password: z.string().min(8), name: z.string().min(2).max(100)}).safeParse(data);
                 if (!parsedData.success) {
@@ -64,18 +64,18 @@ async function registerUser(data: FormData) {
                             name,
                         },
                     });
-                    console.log("User registered successfully:", user);
-                    return user; // Registration successful
+                    console.log("User signed up successfully:", user);
+                    return user; // Signup successful
                 }
-                console.log("Something went wrong during registration process. try again.");
+                console.log("Something went wrong during signup process. try again.");
                 return NextResponse.json({ error: 'Something went wrong' }, { status: 500 });
             }
 
-export async function registration(state: MyFormState, formData: FormData) {
+export async function signup(state: MyFormState, formData: FormData) {
   try {
-    const user = await registerUser(formData);
+    const user = await signupUser(formData);
     return user;
   } catch (error) {
-    throw new Error("Registration error: " + error);
+    throw new Error("Signup error: " + error);
   }
 }

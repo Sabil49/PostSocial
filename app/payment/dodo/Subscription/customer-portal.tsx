@@ -3,7 +3,7 @@
     export default function CustomerPortal() {
       const handleOpenPortal = async (customerId: string) => {
         try {
-          const response = await fetch('/api/payments/dodo/customer-portal', {
+          const response = await fetch('/api/payment/dodo/customer-portal', {
             method: 'POST',
             headers: {
               'Content-Type': 'application/json',

@@ -1,6 +1,6 @@
 "use client";
 import React, { useState } from 'react';
-import OAuth from '../Components/Oauth';
+import OAuth from '@/Components/Oauth';
 import Link from 'next/link';
 import axios from 'axios';
 
@@ -28,7 +28,7 @@ function CreateUserForm() {
         formData.append('files', image);
       }
 
-      const response = await axios.post('/api/register', formData, {
+      const response = await axios.post('/api/auth/signup', formData, {
         headers: {
           'Content-Type': 'multipart/form-data',
         },

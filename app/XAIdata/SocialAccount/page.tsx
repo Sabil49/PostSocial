@@ -9,9 +9,8 @@
     import { signOutUser } from '@/app/api/auth/actions';
     import { useSession } from "next-auth/react";
     import { Button } from '@mui/material';
-    import ChartsWrapper from '../Components/ChartsWrapper';
+    import ChartsWrapper from '@/Components/ChartsWrapper';
     import { useSearchParams } from 'next/navigation';
-    import { Suspense } from 'react';
 
     const GetAccessToken = () => {
           const searchParams = useSearchParams();
@@ -110,7 +109,7 @@ const valueFormatterHistogram = (value: number | null) => `Count: ${value}`;
         setLoading(true);
         setError('');
         try {
-      const response = await fetch('/api/tweetdata');
+      const response = await fetch('/api/XAIdata');
           const responseData = await response.json();
           if (!response.ok) {
             console.log("responseData");

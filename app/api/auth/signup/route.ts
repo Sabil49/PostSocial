@@ -103,7 +103,7 @@ export async function POST(req: NextRequest) {
         image: imageUrl,
       },
     });
-    console.log("User registered successfully:", user);
+    console.log("User signed up successfully:", user);
     // Do not return the password in the response
     
     return NextResponse.json({ user }, { status: 201 });

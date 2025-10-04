@@ -3,7 +3,7 @@ import GitHubProvider from "next-auth/providers/github";
 import NextAuth from "next-auth";
 import CredentialsProvider from 'next-auth/providers/credentials';
 import { z } from "zod";
-import type { User } from "@/lib/types/type";
+import type { User } from "@/types/type";
 import prisma from "@/lib/prisma";
 import { verifyPassword } from "@/utils/bcrypt";
 
