@@ -50,12 +50,12 @@ export async function GET() {
                 const diffHours = diffMs / (1000 * 60 * 60);
               
                 // Format values
-                const remainingHours = Math.floor(diffHours) === 0 ? '' : Math.floor(diffHours) === 1 ? '1 hour' : `${Math.floor(diffHours)} hours`;
+                const remainingHours = Math.floor(diffHours) === 0 ? '' : Math.floor(diffHours) === 1 ? '1 hour and' : `${Math.floor(diffHours)} hours and`;
                 const remainingMinutes = Math.round(diffMinutes % 60) === 0 ? '' : Math.round(diffMinutes % 60) === 1 ? '1 minute' : `${Math.round(diffMinutes % 60)} minutes`;
               
-                console.log(`User Rate limit resets in ${remainingHours}h ${remainingMinutes}m`);
+                console.log(`User Rate limit resets in ${remainingHours} ${remainingMinutes}.`);
                 return new Response(JSON.stringify({
-                    error: `Please try again in ${remainingHours} and ${remainingMinutes}.`
+                    error: `Please try again in ${remainingHours} ${remainingMinutes}.`
                 }), {
                     status: 429,
                     headers: {
@@ -117,12 +117,12 @@ export async function GET() {
                 const diffHours = diffMs / (1000 * 60 * 60);
               
                 // Format values
-                const remainingHours = Math.floor(diffHours) === 0 ? '' : Math.floor(diffHours) === 1 ? '1 hour' : `${Math.floor(diffHours)} hours`;
+                const remainingHours = Math.floor(diffHours) === 0 ? '' : Math.floor(diffHours) === 1 ? '1 hour and' : `${Math.floor(diffHours)} hours and`;
                 const remainingMinutes = Math.round(diffMinutes % 60) === 0 ? '' : Math.round(diffMinutes % 60) === 1 ? '1 minute' : `${Math.round(diffMinutes % 60)} minutes`;
               
-                console.log(`Tweet Rate limit resets in ${remainingHours}h ${remainingMinutes}m`);
+                console.log(`Tweet Rate limit resets in ${remainingHours} ${remainingMinutes}.`);
                 return new Response(JSON.stringify({
-                    error: `Please try again in ${remainingHours} and ${remainingMinutes}.`
+                    error: `Please try again in ${remainingHours} ${remainingMinutes}.`
                 }), {
                     status: 429,
                     headers: {
