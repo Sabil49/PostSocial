@@ -4,7 +4,7 @@
 
     export async function POST(req: NextRequest) {
         const { customer_id } = await req.json(); // Assuming you pass customer_id from the client
-
+        console.log("Received customer_id:", customer_id);
         const client = new DodoPayments({
           bearerToken: process.env.DODO_PAYMENTS_API_KEY,
           environment: process.env.DODO_PAYMENTS_ENVIRONMENT === 'live_mode' ? 'live_mode' : process.env.DODO_PAYMENTS_ENVIRONMENT === 'test_mode' ? 'test_mode' : undefined,
