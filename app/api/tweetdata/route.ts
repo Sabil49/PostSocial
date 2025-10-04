@@ -38,12 +38,12 @@ export async function GET() {
 
         if (response.status === 429) {
             return new Response(JSON.stringify({
-                error: response,
+                error: response.headers,
                 headers: response.headers
             }), {
                 status: 429,
                 headers: {
-                    'Content-Type': 'application/json'  
+                    'Content-Type': 'application/json'
                 }
             });
             // const retryAfter = response.headers.get('Retry-After');
