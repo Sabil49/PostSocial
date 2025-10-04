@@ -57,7 +57,7 @@ const createCheckoutSession = async () => {
           email: email,
           name: userSession?.user?.name || "Test User",
         },
-         allowed_payment_method_types: ["amazon_pay", "google_pay", "upi", "credit", "debit"], // adjust to what Dodo supports
+        //  allowed_payment_method_types: ["amazon_pay", "google_pay", "upi", "credit", "debit"], // adjust to what Dodo supports
 
       })
     });

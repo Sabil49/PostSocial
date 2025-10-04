@@ -1,7 +1,7 @@
 import { NextResponse } from 'next/server';
 import { GoogleGenAI, Type } from "@google/genai";
 import { cookies } from 'next/headers';
-import tweetData from '@/utils/tweetData.json';
+//import tweetData from '@/utils/tweetData.json';
 
 const ai = new GoogleGenAI({ apiKey: process.env.GOOGLE_GEMINI_API_KEY || "" });
 
