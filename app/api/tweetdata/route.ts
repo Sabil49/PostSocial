@@ -37,29 +37,33 @@ export async function GET() {
         console.log('Twitter API Response Status:', response.status); // Debugging line to check response status
 
         if (response.status === 429) {
+            const resetHeader = response.headers.get("x-rate-limit-reset");
+            if (resetHeader !== null) {
+            const resetTimestamp = parseInt(resetHeader) * 1000; // Convert seconds → ms
+            const resetTime = new Date(resetTimestamp);
+
+            const currentTime = new Date();
+            const diffMs = resetTime.getTime() - currentTime.getTime(); // Difference in ms
+            const diffHours = diffMs / (1000 * 60 * 60); // Convert ms → hours
+            const remainingHours = diffHours.toFixed(2); // Round to 2 decimals
             return new Response(JSON.stringify({
-                error: response.headers,
-                headers: response.headers
-            }), {
+                error: `Please try again in ${remainingHours} hours.`
+            }), {   
                 status: 429,
                 headers: {
                     'Content-Type': 'application/json'
                 }
             });
-            // const retryAfter = response.headers.get('Retry-After');
-            // console.log(response.headers);
-            // if (retryAfter) {
-            //     const delay = parseInt(retryAfter) / 60; // Convert seconds to minutes
-            //     return new Response(JSON.stringify({
-            //         error: `Rate limit exceeded. Please try again ${delay} milliseconds later.`
-            //     }), {
-            //         status: 429,
-            //         headers: {
-            //             'Retry-After': retryAfter,
-            //             'Content-Type': 'application/json'
-            //         }
-            //     });
-            // }
+            } else {
+                return new Response(JSON.stringify({
+                    error: 'Please try again later.'
+                }), {   
+                    status: 429,
+                    headers: {
+                        'Content-Type': 'application/json'
+                    }
+                }); 
+          }
         }
         if (!response.ok) {
             return new Response(
@@ -91,31 +95,38 @@ export async function GET() {
             },
         });
         console.log('Twitter Tweets API Response Status:', twitterResponse.status); // Debugging line to check response status
-        if (response.status === 429) {
+        if (twitterResponse.status === 429) {
+            const resetHeader = twitterResponse.headers.get("x-rate-limit-reset");
+
+            if (resetHeader !== null) {
+                const resetTimestamp = parseInt(resetHeader) * 1000; // Convert seconds → ms
+                const resetTime = new Date(resetTimestamp);
+
+                const currentTime = new Date();
+                const diffMs = resetTime.getTime() - currentTime.getTime(); // Time difference in ms
+
+                // Convert milliseconds → minutes
+                const diffMinutes = diffMs / (1000 * 60);
+                const remainingMinutes = Math.max(0, Math.round(diffMinutes)); // avoid negative values
+                
+                return new Response(JSON.stringify({
+                  error: `Please try again in ${remainingMinutes} minutes.`
+                }), {   
+                  status: 429,
+                  headers: {
+                    'Content-Type': 'application/json'
+                }
+            });                
+        } else {
             return new Response(JSON.stringify({
-                error: 'Rate limit exceeded. Please try again later.',
-                headers: response.headers
+                error: 'Please try again later.'
             }), {
                 status: 429,
                 headers: {
-                    'Content-Type': 'application/json'  
-                }
-            });
-            // const retryAfter = twitterResponse.headers.get('Retry-After');
-            // console.log(twitterResponse.headers);
-            // if (retryAfter) {
-            //     const delay = parseInt(retryAfter) / 60; // Convert seconds to minutes
-            //     return new Response(JSON.stringify({
-            //         error: `Rate limit exceeded. Please try again ${delay} milliseconds later.`
-            //     }), {
-            //         status: 429,
-            //         headers: {
-            //             'Retry-After': retryAfter,
-            //             'Content-Type': 'application/json'
-            //         }
-            //     });
-
-            // }
+                        'Content-Type': 'application/json'
+                    }
+                });
+            }
         }
         if (!twitterResponse.ok) {
             console.log('Error fetching tweet data from Twitter:', twitterResponse.statusText);
