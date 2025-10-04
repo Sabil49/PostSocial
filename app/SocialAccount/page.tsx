@@ -114,8 +114,8 @@ const valueFormatterHistogram = (value: number | null) => `Count: ${value}`;
           const responseData = await response.json();
           if (!response.ok) {
             console.log("responseData");
-            console.log(responseData.headers);
-            throw new Error(responseData.headers || 'Something went wrong. Please try again.');
+            console.log(responseData);
+            throw new Error(responseData.error || 'Something went wrong. Please try again.');
           }
           const geminiDataDecoded = JSON.parse(Buffer.from(responseData.geminiData || '', "base64").toString("utf8"));
           const geminiDataObj = JSON.parse(geminiDataDecoded || '{}');
