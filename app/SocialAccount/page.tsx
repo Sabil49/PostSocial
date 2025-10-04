@@ -114,7 +114,7 @@ const valueFormatterHistogram = (value: number | null) => `Count: ${value}`;
           const responseData = await response.json();
           if (!response.ok) {
             // Backend sent an error
-            throw new Error(responseData.error || 'Something went wrong. Please try again.');
+            throw new Error(responseData.headers || 'Something went wrong. Please try again.');
           }
           const geminiDataDecoded = JSON.parse(Buffer.from(responseData.geminiData || '', "base64").toString("utf8"));
           const geminiDataObj = JSON.parse(geminiDataDecoded || '{}');
@@ -122,9 +122,9 @@ const valueFormatterHistogram = (value: number | null) => `Count: ${value}`;
 
         } catch (error) {
           if (error instanceof Error) {
-            setError(error.message);
+            setError("Error: " + error.message);
           } else {
-            setError('Something went wrong. Please try again.');
+            setError("Error: " + 'Something went wrong. Please try again later.');
           }
         } finally {
           setLoading(false);
