@@ -106,10 +106,23 @@ const valueFormatterHistogram = (value: number | null) => `Count: ${value}`;
 
      
       const handleConnectX = async () => {
-        
-        setLoading(true);
+       setLoading(true);
         try {
-          const response = await fetch('/api/tweetdata');
+          window.location.href = process.env.NEXT_PUBLIC_X_AUTH_URL || '';
+          // After redirect and callback, fetch the data
+          await fetchData();
+        } catch (error) {
+          console.error('Error during ConnectX:', error);
+        } finally {
+          setLoading(false);
+        }
+      };
+
+      const fetchData = async () => {
+        setLoading(true);
+        setError('');
+        try {
+      const response = await fetch('/api/tweetdata');
           const responseData = await response.json();
           if (!response.ok) {
             // Backend sent an error
