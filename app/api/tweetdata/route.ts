@@ -38,7 +38,7 @@ export async function GET() {
 
         if (response.status === 429) {
             return new Response(JSON.stringify({
-                error: 'Rate limit exceeded. Please try again later.',
+                error: response,
                 headers: response.headers
             }), {
                 status: 429,
