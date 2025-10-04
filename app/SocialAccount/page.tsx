@@ -9,24 +9,21 @@
     import { signOutUser } from '@/app/api/auth/actions';
     import { useSession } from "next-auth/react";
     import { Button } from '@mui/material';
-   import ChartsWrapper from '../Components/ChartsWrapper';
+    import ChartsWrapper from '../Components/ChartsWrapper';
+    import { useSearchParams } from 'next/navigation';
+    import { Suspense } from 'react';
 
+    const GetAccessToken = () => {
+          const searchParams = useSearchParams();
+          const getAccessToken = searchParams.get('accessToken');
+          if (getAccessToken) {
+          return getAccessToken;
+          } else {
+            return null;
+          }
+    }
     const valueFormatterPiechart = (item: { value: number }) => `${item.value}%`;
 const valueFormatterHistogram = (value: number | null) => `Count: ${value}`;
-
-/* Chart setting for bar chart */
-// const chartSetting = {
-//   yAxis: [
-//     {
-//       label: 'Count',
-//       width: 60,
-//     },
-//   ],
-//   series: [{ dataKey: 'count', valueFormatter: valueFormatterHistogram }],
-//   height: 300,
-//   margin: { left: 0 },
-// };
-
 
     function SessionComponent() {
       const { data: session } = useSession();
@@ -106,16 +103,7 @@ const valueFormatterHistogram = (value: number | null) => `Count: ${value}`;
 
      
       const handleConnectX = async () => {
-       setLoading(true);
-        try {
           window.location.href = process.env.NEXT_PUBLIC_X_AUTH_URL || '';
-          // After redirect and callback, fetch the data
-          await fetchData();
-        } catch (error) {
-          console.error('Error during ConnectX:', error);
-        } finally {
-          setLoading(false);
-        }
       };
 
       const fetchData = async () => {
@@ -206,10 +194,14 @@ const valueFormatterHistogram = (value: number | null) => `Count: ${value}`;
         <div className='w-full'>
           
           <div className='flex justify-evenly items-center mb-6'>
-            {!data && <div>
+            {(!data && GetAccessToken !== null) && <div>
               <button onClick={handleConnectX}>
               <b>Connect with Twitter</b>
             </button>
+            { GetAccessToken !== null && (
+              <button onClick={fetchData} className='ml-4'>
+              <b>Post analysis</b>
+            </button>)}
             </div>}
             {
               <div>
