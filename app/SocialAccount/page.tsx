@@ -113,7 +113,8 @@ const valueFormatterHistogram = (value: number | null) => `Count: ${value}`;
       const response = await fetch('/api/tweetdata');
           const responseData = await response.json();
           if (!response.ok) {
-            // Backend sent an error
+            console.log("responseData");
+            console.log(responseData.headers);
             throw new Error(responseData.headers || 'Something went wrong. Please try again.');
           }
           const geminiDataDecoded = JSON.parse(Buffer.from(responseData.geminiData || '', "base64").toString("utf8"));
@@ -122,8 +123,10 @@ const valueFormatterHistogram = (value: number | null) => `Count: ${value}`;
 
         } catch (error) {
           if (error instanceof Error) {
+            console.log("instanceof Error");
             setError("Error: " + error.message);
           } else {
+            console.log("not instanceof Error");
             setError("Error: " + 'Something went wrong. Please try again later.');
           }
         } finally {
