@@ -53,7 +53,7 @@ export async function GET() {
                 const remainingHours = Math.floor(diffHours) === 0 ? '' : Math.floor(diffHours) === 1 ? '1 hour' : `${Math.floor(diffHours)} hours`;
                 const remainingMinutes = Math.round(diffMinutes % 60) === 0 ? '' : Math.round(diffMinutes % 60) === 1 ? '1 minute' : `${Math.round(diffMinutes % 60)} minutes`;
               
-                console.log(`Rate limit resets in ${remainingHours}h ${remainingMinutes}m`);
+                console.log(`User Rate limit resets in ${remainingHours}h ${remainingMinutes}m`);
                 return new Response(JSON.stringify({
                     error: `Please try again in ${remainingHours} and ${remainingMinutes}.`
                 }), {
@@ -104,37 +104,41 @@ export async function GET() {
         });
         console.log('Twitter Tweets API Response Status:', twitterResponse.status); // Debugging line to check response status
         if (twitterResponse.status === 429) {
-            const resetHeader = twitterResponse.headers.get("x-rate-limit-reset");
-
+            const resetHeader = response.headers.get("x-rate-limit-reset");
             if (resetHeader !== null) {
-                const resetTimestamp = parseInt(resetHeader) * 1000; // Convert seconds → ms
+                const resetTimestamp = parseInt(resetHeader) * 1000; // convert seconds → ms
                 const resetTime = new Date(resetTimestamp);
-
+              
                 const currentTime = new Date();
-                const diffMs = resetTime.getTime() - currentTime.getTime(); // Time difference in ms
-
-                // Convert milliseconds → minutes
+                const diffMs = resetTime.getTime() - currentTime.getTime(); // difference in ms
+              
+                // Convert difference
                 const diffMinutes = diffMs / (1000 * 60);
-                const remainingMinutes = Math.max(0, Math.round(diffMinutes)); // avoid negative values
-                
+                const diffHours = diffMs / (1000 * 60 * 60);
+              
+                // Format values
+                const remainingHours = Math.floor(diffHours) === 0 ? '' : Math.floor(diffHours) === 1 ? '1 hour' : `${Math.floor(diffHours)} hours`;
+                const remainingMinutes = Math.round(diffMinutes % 60) === 0 ? '' : Math.round(diffMinutes % 60) === 1 ? '1 minute' : `${Math.round(diffMinutes % 60)} minutes`;
+              
+                console.log(`Tweet Rate limit resets in ${remainingHours}h ${remainingMinutes}m`);
                 return new Response(JSON.stringify({
-                  error: `Please try again in ${remainingMinutes} minutes.`
-                }), {   
-                  status: 429,
-                  headers: {
-                    'Content-Type': 'application/json'
-                }
-            });                
-        } else {
-            return new Response(JSON.stringify({
-                error: 'Please try again later.'
-            }), {
-                status: 429,
-                headers: {
+                    error: `Please try again in ${remainingHours} and ${remainingMinutes}.`
+                }), {
+                    status: 429,
+                    headers: {
                         'Content-Type': 'application/json'
                     }
                 });
-            }
+                } else {
+                return new Response(JSON.stringify({
+                    error: 'Please try again later.'
+                }), {   
+                    status: 429,
+                    headers: {
+                        'Content-Type': 'application/json'
+                    }
+                }); 
+          }
         }
         if (!twitterResponse.ok) {
             console.log('Error fetching tweet data from Twitter:', twitterResponse.statusText);
