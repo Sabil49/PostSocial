@@ -20,21 +20,22 @@ export async function GET() {
     },
             });
             console.log('Twitter API Response Status:', response.status); // Debugging line to check response status
-       if (!response.ok) {
+      
+            if (response.status === 429) {
+          const retryAfter = response.headers.get('Retry-After');
+           console.log(response.headers);
+          if (retryAfter) {
+            const delay = parseInt(retryAfter)/60; // Convert seconds to minutes
+            return new Response(JSON.stringify({ error: `Rate limit exceeded. Please try again ${delay} milliseconds later.` }),
+             { status: 429, headers: { 'Retry-After': retryAfter, 'Content-Type': 'application/json' } });
+             }
+        } 
+        if (!response.ok) {
          return new Response(
          JSON.stringify({ error: 'Failed to fetch user data from Twitter' }),
          { status: response.status, headers: { 'Content-Type': 'application/json' } }
   );
 }
-            if (response.status === 429) {
-          const retryAfter = response.headers.get('Retry-After');
-          if (retryAfter) {
-            const delay = parseInt(retryAfter)/60; // Convert seconds to minutes
-            return new Response(JSON.stringify({ error: `Rate limit exceeded. Please try again ${delay} milliseconds later.` }),
-             { status: 429, headers: { 'Retry-After': retryAfter, 'Content-Type': 'application/json' } });
-            
-          }
-        }
        const userData = await response.json();
        console.log('User Data:', userData); // Debugging line to check the user data
        if (!userData.data || !userData.data.id) {
@@ -49,7 +50,17 @@ export async function GET() {
       },
     });
     console.log('Twitter Tweets API Response Status:', twitterResponse.status); // Debugging line to check response status
-        if (!twitterResponse.ok) {
+    if (twitterResponse.status === 429) {
+          const retryAfter = twitterResponse.headers.get('Retry-After');
+          console.log(twitterResponse.headers);
+          if (retryAfter) {
+            const delay = parseInt(retryAfter)/60; // Convert seconds to minutes
+            return new Response(JSON.stringify({ error: `Rate limit exceeded. Please try again ${delay} milliseconds later.` }),
+             { status: 429, headers: { 'Retry-After': retryAfter, 'Content-Type': 'application/json' } });
+            
+          }
+        }    
+    if (!twitterResponse.ok) {
           console.log('Error fetching tweet data from Twitter:', twitterResponse.statusText);
           return new Response(JSON.stringify({ error: `Failed to fetch tweet data from Twitter: ${twitterResponse.statusText}` }), 
           { status: twitterResponse.status, headers: { 'Content-Type': 'application/json' } });
