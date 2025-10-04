@@ -39,22 +39,30 @@ export async function GET() {
         if (response.status === 429) {
             const resetHeader = response.headers.get("x-rate-limit-reset");
             if (resetHeader !== null) {
-            const resetTimestamp = parseInt(resetHeader) * 1000; // Convert seconds → ms
-            const resetTime = new Date(resetTimestamp);
-
-            const currentTime = new Date();
-            const diffMs = resetTime.getTime() - currentTime.getTime(); // Difference in ms
-            const diffHours = diffMs / (1000 * 60 * 60); // Convert ms → hours
-            const remainingHours = diffHours.toFixed(2); // Round to 2 decimals
-            return new Response(JSON.stringify({
-                error: `Please try again in ${remainingHours} hours.`
-            }), {   
-                status: 429,
-                headers: {
-                    'Content-Type': 'application/json'
-                }
-            });
-            } else {
+                const resetTimestamp = parseInt(resetHeader) * 1000; // convert seconds → ms
+                const resetTime = new Date(resetTimestamp);
+              
+                const currentTime = new Date();
+                const diffMs = resetTime.getTime() - currentTime.getTime(); // difference in ms
+              
+                // Convert difference
+                const diffMinutes = diffMs / (1000 * 60);
+                const diffHours = diffMs / (1000 * 60 * 60);
+              
+                // Format values
+                const remainingHours = Math.floor(diffHours);
+                const remainingMinutes = Math.round(diffMinutes % 60);
+              
+                console.log(`Rate limit resets in ${remainingHours}h ${remainingMinutes}m`);
+                return new Response(JSON.stringify({
+                    error: `Please try again after ${resetTime.toLocaleTimeString()}.`
+                }), {
+                    status: 429,
+                    headers: {
+                        'Content-Type': 'application/json'
+                    }
+                });
+                } else {
                 return new Response(JSON.stringify({
                     error: 'Please try again later.'
                 }), {   
