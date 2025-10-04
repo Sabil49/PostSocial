@@ -109,7 +109,7 @@ const valueFormatterHistogram = (value: number | null) => `Count: ${value}`;
         setLoading(true);
         setError('');
         try {
-      const response = await fetch('/api/XAIdata');
+      const response = await fetch('/api/xdata');
           const responseData = await response.json();
           if (!response.ok) {
             console.log("responseData");
