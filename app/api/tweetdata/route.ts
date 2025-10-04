@@ -55,7 +55,7 @@ export async function GET() {
               
                 console.log(`Rate limit resets in ${remainingHours}h ${remainingMinutes}m`);
                 return new Response(JSON.stringify({
-                    error: `Please try again after ${resetTime.toLocaleTimeString()}.`
+                    error: `Please try again in ${remainingHours} hours and ${remainingMinutes} minutes.`
                 }), {
                     status: 429,
                     headers: {
