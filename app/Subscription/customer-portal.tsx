@@ -14,9 +14,8 @@
           const data = await response.json();
 
           if (data.portal_url) {
-            window.location.href = data.portal_url;
-          } 
-          else {
+            window.open(data.portal_url, '_blank');
+          } else {
             alert('Could not open customer portal.');
           }
         } catch (error) {
