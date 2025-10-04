@@ -104,7 +104,7 @@ export async function GET() {
         });
         console.log('Twitter Tweets API Response Status:', twitterResponse.status); // Debugging line to check response status
         if (twitterResponse.status === 429) {
-            const resetHeader = response.headers.get("x-rate-limit-reset");
+            const resetHeader = twitterResponse.headers.get("x-rate-limit-reset");
             if (resetHeader !== null) {
                 const resetTimestamp = parseInt(resetHeader) * 1000; // convert seconds → ms
                 const resetTime = new Date(resetTimestamp);

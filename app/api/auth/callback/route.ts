@@ -39,7 +39,7 @@ export async function GET(req: NextRequest) {
          return NextResponse.json({ error: data }, { status: 400 });
      }
 
-     const TokenRedirect = NextResponse.redirect(new URL('/SocialAccount?accessToken=' + data.access_token, req.url));
+     const TokenRedirect = NextResponse.redirect(new URL('/xdata/SocialAccount?accessToken=' + data.access_token, req.url));
      TokenRedirect.cookies.set('accessToken', `${data.access_token}`, { httpOnly: true, secure: true });
       return TokenRedirect;
    } catch (error) {
