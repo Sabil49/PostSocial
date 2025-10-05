@@ -39,11 +39,11 @@ export async function GET() {
         if (response.status === 429) {
             const resetHeader = response.headers.get("x-rate-limit-reset");
             if (resetHeader !== null) {
-                const epochSeconds = parseInt(resetHeader);
-                const dateObject = new Date(epochSeconds * 1000);
-                console.log(`Please try again after ${dateObject} and ${epochSeconds}.`);
+                const resetTimestamp = parseInt(resetHeader) * 1000; // convert seconds → ms
+                const resetTime = new Date(resetTimestamp);
+                console.log(`User Rate limit resets after ${resetTime}.`);
                 return new Response(JSON.stringify({
-                    error: `Please try again after ${dateObject}.`
+                    error: `Please try again after ${resetTime}.`
                 }), {
                     status: 429,
                     headers: {
@@ -94,13 +94,23 @@ export async function GET() {
         if (twitterResponse.status === 429) {
             const resetHeader = twitterResponse.headers.get("x-rate-limit-reset");
             if (resetHeader !== null) {
-                const epochSeconds = parseInt(resetHeader);
-                const dateObject = new Date(epochSeconds * 1000);
-                const hours = dateObject.getHours();
-                const minutes = dateObject.getMinutes();
-                console.log(`Please try again after ${minutes} minutes ${epochSeconds}.`);
+                const resetTimestamp = parseInt(resetHeader) * 1000; // convert seconds → ms
+                const resetTime = new Date(resetTimestamp);
+              
+                const currentTime = new Date();
+                const diffMs = resetTime.getTime() - currentTime.getTime(); // difference in ms
+              
+                // Convert difference
+                const diffMinutes = diffMs / (1000 * 60);
+                const diffHours = diffMs / (1000 * 60 * 60);
+              
+                // Format values
+                const remainingHours = Math.floor(diffHours) === 0 ? '' : Math.floor(diffHours) === 1 ? '1 hour and' : `${Math.floor(diffHours)} hours and`;
+                const remainingMinutes = Math.round(diffMinutes % 60) === 0 ? '' : Math.round(diffMinutes % 60) === 1 ? '1 minute' : `${Math.round(diffMinutes % 60)} minutes`;
+
+                console.log(`Tweet Rate limit resets in ${remainingMinutes}.`);
                 return new Response(JSON.stringify({
-                    error: `Please try again after ${minutes} minutes.`
+                    error: `Please try again after ${remainingMinutes}.`
                 }), {
                     status: 429,
                     headers: {
