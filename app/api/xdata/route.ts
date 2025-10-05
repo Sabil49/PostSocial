@@ -153,7 +153,7 @@ export async function GET() {
         }
 
         const tweetData = await twitterResponse.json();
-        if (!tweetData || tweetData.errors || tweetData.errors.length > 0 || !tweetData.data) {
+        if (!tweetData || tweetData.errors || !tweetData.data) {
             return new Response(JSON.stringify({
                 error: 'User account data not found'
             }), {
