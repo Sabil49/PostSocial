@@ -41,6 +41,7 @@ export async function GET() {
             if (resetHeader !== null) {
                 const epochSeconds = parseInt(resetHeader);
                 const dateObject = new Date(epochSeconds * 1000);
+                console.log(`Please try again after ${dateObject} and ${epochSeconds}.`);
                 return new Response(JSON.stringify({
                     error: `Please try again after ${dateObject}.`
                 }), {
@@ -97,9 +98,9 @@ export async function GET() {
                 const dateObject = new Date(epochSeconds * 1000);
                 const hours = dateObject.getHours();
                 const minutes = dateObject.getMinutes();
-                console.log(`Please try again after ${hours}:${minutes} (HH:MM)`);
+                console.log(`Please try again after ${minutes} minutes ${epochSeconds}.`);
                 return new Response(JSON.stringify({
-                    error: `Please try again after ${hours}:${minutes} (HH:MM).`
+                    error: `Please try again after ${minutes} minutes.`
                 }), {
                     status: 429,
                     headers: {
