@@ -1,40 +1,24 @@
 "use client";
 import { useSession } from "next-auth/react";
 import CustomerPortal from "./customer-portal";
+import { useState } from "react";
 
 export default function SubscribeButton() {
-  const { data: userSession } = useSession();
-
-  const email= userSession?.user?.email || "test@example.com";
-
-  const planId = "pdt_ctSjb2435t8p2c1vQcx98"; // replace with your actual plan ID from Dodo Payments
   
-  // async function handleSubscribe() {
-  //   setLoading(true);
-  //   const res = await fetch("api/payments/dodo/checkout", {
-  //     method: "POST",
-  //     headers: { "Content-Type": "application/json", "Authorization": `Bearer ${process.env.DODO_PAYMENTS_API_KEY}` },
-  //     body: JSON.stringify({
-  //       planId: planId, // Example plan ID
-  //       customerEmail: email,
-  //       name: userSession?.user?.name || "Test User",
-  //     }),
-  //   });
-  //       if (!res.ok) {
-  //     throw new Error(`HTTP error! status: ${res.status}`);
-  //   }
+  const [loading, setLoading] = useState<boolean>(false);
+  const [error, setError] = useState<string | null>(null);
 
-  //   const checkoutSession = await res.json();
-  //   console.log('Checkout Session:>>>>>>>>>>');
-  //   console.log(checkoutSession);
-  //   if (checkoutSession.checkout_url) {
-  //     window.location.href = checkoutSession.checkout_url; // Redirect to checkout
-  //   }
-  //   setLoading(false);
-  // }
-  // Direct API call using fetch - useful for any JavaScript environment
-const createCheckoutSession = async () => {
+  // Get the current user session
+  const { data: userSession } = useSession();
+  const email= userSession?.user?.email || "test@example.com";
+  const planId = "pdt_ctSjb2435t8p2c1vQcx98"; // replace with your actual plan ID from Dodo Payments
+
+  const createCheckoutSession = async () => {
+  setLoading(true);
+  setError(null);
+  console.log('Creating checkout session for plan:', planId);
   try {
+
     const response = await fetch('api/payment/dodo/checkout', {
       method: 'POST',
       headers: {
@@ -58,9 +42,13 @@ const createCheckoutSession = async () => {
 
       })
     });
+
     if (!response.ok) {
-      throw new Error('Failed to create checkout session');
+      setError('Failed to create checkout session');
+      setLoading(false);
+      return;
     }
+
     const checkoutSession = await response.json();
     
     console.log('Checkout Session:===========>');
@@ -69,14 +57,17 @@ const createCheckoutSession = async () => {
     console.log('Checkout URL:', checkoutSession.checkout_url);
 
     if (checkoutSession && checkoutSession.checkout_url) {
+
       window.location.href = checkoutSession.checkout_url;
+      
       return checkoutSession;
     }
     
   } catch (error) {
-    //console.error('Failed to create checkout session:', error);
-    throw error;
-  }
+    setError('An error occurred while creating checkout session: ' + (error instanceof Error ? error.message : ''));
+    setLoading(false);
+    return null;
+    }
 }
 
   return (
@@ -93,6 +84,8 @@ const createCheckoutSession = async () => {
           {loading ? "Redirecting..." : "Subscribe Now"}
        </button> */}
         <CustomerPortal />
+        <div>{loading && <p>Loading...</p>}</div>
+        <div>{error && <p className="text-red-500">{error}</p>}</div>
         </>
       )}      
     </div>

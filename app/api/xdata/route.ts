@@ -110,7 +110,7 @@ export async function GET() {
 
                 console.log(`Tweet Rate limit resets in ${remainingMinutes}.`);
                 return new Response(JSON.stringify({
-                    error: `Please try again after ${remainingMinutes}.`
+                    error: `Please try again after ${remainingMinutes} minutes.`
                 }), {
                     status: 429,
                     headers: {
