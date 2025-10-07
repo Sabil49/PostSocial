@@ -44,6 +44,7 @@ export default function SubscribeButton() {
     });
 
     if (!response.ok) {
+      console.log(response);
       setError('Failed to create checkout session: ' + response.statusText);
       setLoading(false);
       return;
