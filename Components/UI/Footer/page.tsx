@@ -5,7 +5,6 @@ import Image from "next/image";
 // 	faAngleRight
 // } from "@fortawesome/free-solid-svg-icons";
 import { FaTwitter,FaFacebookF,FaInstagram } from 'react-icons/fa';
-import '../globals.css'
 
 export default function Footer(){
     return(
