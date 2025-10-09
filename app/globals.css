@@ -1,16 +1,16 @@
-
 @import "tailwindcss";
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --shadowColor: #dba5dd;
+   --background: rgb(177, 141, 250);
+    --foreground: #fff;
 }
+
 
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  --shadow-3xl: 0px 0px 50px 50px rgba(222, 96, 99, 0.50); 
 }
 
 @media (prefers-color-scheme: dark) {
@@ -21,7 +21,57 @@
 }
 
 body {
-  background: var(--background);
+   background: var(--background);
   color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+}
+p{
+  font-size: 0.8rem;
+  line-height: 1.5;
+}
+h1{
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: var(--foreground);
+}
+button{
+  font-size: smaller;
+}
+@media screen and (min-width: 640px) {
+  h1 {
+    font-size: 2.5rem;
+  }  
+  p{
+    font-size: 0.9rem;
+  }
+  button{
+  font-size: small;
+}
+}
+@media screen and (min-width: 768px) {
+  h1 {
+    font-size: 3rem;
+  }  
+   p{
+    font-size: 1rem;
+  }
+   button{
+  font-size: medium;
+}
+  
+}
+@media screen and (min-width: 1024px) {
+  h1 {
+    font-size: 4rem;
+  }  
+    p{
+    font-size: 1.1rem;
+  }
+}
+@media screen and (min-width: 1280px) {
+  h1 {
+    font-size: 5rem;
+  }  
+    p{
+    font-size: 1.2rem;
+  }
 }
