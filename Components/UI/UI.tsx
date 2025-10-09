@@ -1,19 +1,21 @@
-import Header from "./Header/page";
-import Banner from "./Banner/page";
-import Services from "./Services/page";
-import AnimatedTestimonialsDemo from "./Reviews/testimonials";
-import AboutUs from "./AboutUs/page";
-import Footer from "./Footer/page";
+import BannerAnimation from "./Banner/BannerAnimation";
+import Header from './Header/page';
+import ExperiencePage from './Experience/page';
+import FrameworkPage from './Framework/page';
+import CommunityPage from './Community/page';
+import StartedPage from './Started/page';
+import Footer from './Footer/page';
 
 export default function UI() {
   return (
-    <>
-      <Header />
-      <Banner />
-      <Services />
-      <AnimatedTestimonialsDemo />
-      <AboutUs />
+    <div className="">
+      <Header />     
+      <BannerAnimation />
+      <ExperiencePage />
+      <FrameworkPage />
+      <CommunityPage />
+      <StartedPage />
       <Footer />
-    </>
+    </div>
   );
 }
