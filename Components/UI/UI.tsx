@@ -5,13 +5,14 @@ import FrameworkPage from './Framework/page';
 import CommunityPage from './Community/page';
 import StartedPage from './Started/page';
 import Footer from './Footer/page';
+import Services from "./Services/page";
 
 export default function UI() {
   return (
     <div className="">
       <Header />     
       <BannerAnimation />
-      <ExperiencePage />
+      <Services />
       <FrameworkPage />
       <CommunityPage />
       <StartedPage />
