@@ -160,10 +160,10 @@ export default function BannerAnimation() {
         "
                 />
 
-                <motion.image
-                    xlinkHref="/icons/x.png"
-                    width="100"
-                    height="100"
+                <motion.circle
+                    r="3"
+                    style={{ border:"none", fill: "var(--filterColor3)", fontWeight: "normal" }}
+                    className="filterColorClass3"
                     initial={{ opacity: 0 }}
                     animate={{
                         cx: [
@@ -211,10 +211,66 @@ export default function BannerAnimation() {
                             179 ,
                         ],
                         transition: { ease: "linear", duration: 3, repeat: Infinity, repeatType: "loop", repeatDelay: 3 },
-                        opacity: [ 0.5, 1, 0]
-                    }}                    
+                        opacity: [ 0.5, 1, 0],
+                    }}
                     exit={{ opacity: 0 }}
                 />
+                <motion.text
+                    style={{ fill: "black",letterSpacing:"2px",fontWeight:"normal" }}
+                    initial={{ opacity: 0 }}
+                    animate={{
+                        x: [
+                            67.189957,
+                            101.029297,
+                            120.701607,
+                            140.499664,
+                            160.539001,
+                            190.862137,
+                            221.766205,
+                            253.0121,
+                            276.607635,
+                            300.465942,
+                            324.48111,
+                            347.985321,
+                            371.716553,
+                            395.524017,
+                            415.406921,
+                            435.42041,
+                            455.536926,
+                            464.289124,
+                            472.999786,
+                            482,
+                        ],
+                        y: [
+                            53.821594,
+                            70.440338,
+                            80.101562,
+                            89.544037,
+                            98.411865,
+                            111.830505,
+                            123.858551,
+                            134.965942,
+                            143.35379,
+                            150.93988,
+                            158.06366,
+                            165.035858,
+                            171.133453,
+                            176.900879,
+                            181.717529,
+                            186.099396,
+                            189.799255,
+                            191.408997,
+                            193.772308,
+                            194
+                        ],
+                        transition: { ease: "linear", duration: 3, repeat: Infinity, repeatType: "loop", repeatDelay: 3 },
+                        opacity: [ 0.5, 1, 0],
+                    }}
+                    exit={{ opacity: 0 }}
+                    className="label"
+                >
+                    <Image src="/icons/x.png" alt="React logo" width={16} height={16} style={{ display: "inline", marginRight: "4px", marginBottom: "2px" }}></Image>
+                </motion.text>
             </g>
             {/* 1 end */}
 
