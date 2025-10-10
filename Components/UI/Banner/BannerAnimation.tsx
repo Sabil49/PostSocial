@@ -271,6 +271,62 @@ export default function BannerAnimation() {
                 >
                     <Image src="/icons/x.png" alt="React logo" width={16} height={16} style={{ display: "inline", marginRight: "4px", marginBottom: "2px" }}></Image>
                 </motion.text>
+                <motion.image
+                    href="/icons/x.png"
+                    width={16}
+                    height={16}
+                    style={{ display: "inline", marginRight: "4px", marginBottom: "2px" }}
+                    initial={{ opacity: 0 }}
+                    animate={{
+                        cx: [
+                            67.189957,
+                            101.029297,
+                            120.701607,
+                            140.499664,
+                            160.539001,
+                            190.862137,
+                            221.766205,
+                            253.0121,
+                            276.607635,
+                            300.465942,
+                            324.48111,
+                            347.985321,
+                            371.716553,
+                            395.524017,
+                            415.406921,
+                            435.42041,
+                            455.536926,
+                            464.289124,
+                            472.999786,
+                            482,
+                        ],
+                        cy: [
+                            38.821594 ,
+                            55.440338 ,
+                            65.101562 ,
+                            74.544037 ,
+                            83.411865 ,
+                            96.830505 ,
+                            108.858551 ,
+                            119.965942 ,
+                            128.35379 ,
+                            135.93988 ,
+                            143.06366 ,
+                            150.035858 ,
+                            156.133453 ,
+                            161.900879 ,
+                            166.717529 ,
+                            171.099396 ,
+                            174.799255 ,
+                            176.408997 ,
+                            178.772308 ,
+                            179 ,
+                        ],
+                        transition: { ease: "linear", duration: 3, repeat: Infinity, repeatType: "loop", repeatDelay: 3 },
+                        opacity: [ 0.5, 1, 0],
+                    }}
+                    exit={{ opacity: 0 }}
+                />
             </g>
             {/* 1 end */}
 
