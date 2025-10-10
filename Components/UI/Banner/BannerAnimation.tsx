@@ -159,12 +159,60 @@ export default function BannerAnimation() {
             C464.289124,176.408997 472.999786,178.772308 482.000000,179.000000 
         "
                 />
+
                 <motion.image
-                    href="/icons/x.png"
-                    width={50}
-                    height={50}
+                    xlinkHref="/icons/x.png"
+                    width="100"
+                    height="100"
                     initial={{ opacity: 0 }}
-                    animate={{ opacity: 1, transition: { duration: 1 } }}
+                    animate={{
+                        cx: [
+                            67.189957,
+                            101.029297,
+                            120.701607,
+                            140.499664,
+                            160.539001,
+                            190.862137,
+                            221.766205,
+                            253.0121,
+                            276.607635,
+                            300.465942,
+                            324.48111,
+                            347.985321,
+                            371.716553,
+                            395.524017,
+                            415.406921,
+                            435.42041,
+                            455.536926,
+                            464.289124,
+                            472.999786,
+                            482,
+                        ],
+                        cy: [
+                            38.821594 ,
+                            55.440338 ,
+                            65.101562 ,
+                            74.544037 ,
+                            83.411865 ,
+                            96.830505 ,
+                            108.858551 ,
+                            119.965942 ,
+                            128.35379 ,
+                            135.93988 ,
+                            143.06366 ,
+                            150.035858 ,
+                            156.133453 ,
+                            161.900879 ,
+                            166.717529 ,
+                            171.099396 ,
+                            174.799255 ,
+                            176.408997 ,
+                            178.772308 ,
+                            179 ,
+                        ],
+                        transition: { ease: "linear", duration: 3, repeat: Infinity, repeatType: "loop", repeatDelay: 3 },
+                        opacity: [ 0.5, 1, 0]
+                    }}                    
                     exit={{ opacity: 0 }}
                 />
             </g>
@@ -434,16 +482,33 @@ export default function BannerAnimation() {
             C931.000000,231.000000 781.500000,231.000000 632.000000,231.000000 
         "
                 />
-                <motion.image
-                    href="/icons/x.png"
-                    width={50}
-                    height={50}
+                <motion.circle
+                    r="3"
+                    style={{ border:"none", fill: "var(--filterColor1)",fontWeight: "normal" }}
+                    className="filterColorClass1"
                     initial={{ opacity: 0 }}
-                    animate={{ opacity: 1, transition: { duration: 1 } }}
+                    animate={{
+                        cx: [707, 782, 857, 932, 1007, 1085],
+                        cy: [231, 231, 231, 231, 231, 231],
+                        transition: { ease: "linear", duration: 3, delay: 3, repeat: Infinity, repeatType: "loop", repeatDelay: 3 },
+                        opacity: 1,
+                    }}
                     exit={{ opacity: 0 }}
-                    x="1020"
-                    y="196"
                 />
+                <motion.text
+                    style={{ fill: "black",letterSpacing:"2px",fontWeight:"normal" }}
+                    initial={{ opacity: 0 }}
+                    animate={{
+                        x: [707, 782, 857, 932, 1007, 1085],
+                        y: [246, 246, 246, 246, 246, 246],
+                        transition: { ease: "linear", duration: 3, delay: 3, repeat: Infinity, repeatType: "loop", repeatDelay: 3 },
+                        opacity: 1,
+                    }}
+                    exit={{ opacity: 0 }}
+                    className="label"
+                >
+                    .html
+                </motion.text>
 
                 <motion.circle
                     r="3"
