@@ -8,8 +8,8 @@ export default function BannerAnimation() {
         <div className=" relative wrapper pb-16">
 
             <div className="inner_wrapper text-white" style={{margin: "95px auto 0"}}>
-                <h1>The Build Tool for the Web</h1>
-            <h3>Rake is a blazing fast frontend build tool powering the next generation of web applications.</h3>
+                <h1>Social Media Sentiment Analysis Tool</h1>
+            <h3>PostSocial is a Social Media Analytics SaaS platform that helps users create detailed reports, receive actionable suggestions, and accelerate growth across social media platforms.</h3>
             <div className="hero__actions flex">
             <a href="" className="btn btn--primary">Get Started</a>
             <a href="" className="btn btn--outline">
@@ -159,118 +159,14 @@ export default function BannerAnimation() {
             C464.289124,176.408997 472.999786,178.772308 482.000000,179.000000 
         "
                 />
-
-                <motion.circle
-                    r="3"
-                    style={{ border:"none", fill: "var(--filterColor3)", fontWeight: "normal" }}
-                    className="filterColorClass3"
+                <motion.image
+                    href="/icons/x.png"
+                    width={50}
+                    height={50}
                     initial={{ opacity: 0 }}
-                    animate={{
-                        cx: [
-                            67.189957,
-                            101.029297,
-                            120.701607,
-                            140.499664,
-                            160.539001,
-                            190.862137,
-                            221.766205,
-                            253.0121,
-                            276.607635,
-                            300.465942,
-                            324.48111,
-                            347.985321,
-                            371.716553,
-                            395.524017,
-                            415.406921,
-                            435.42041,
-                            455.536926,
-                            464.289124,
-                            472.999786,
-                            482,
-                        ],
-                        cy: [
-                            38.821594 ,
-                            55.440338 ,
-                            65.101562 ,
-                            74.544037 ,
-                            83.411865 ,
-                            96.830505 ,
-                            108.858551 ,
-                            119.965942 ,
-                            128.35379 ,
-                            135.93988 ,
-                            143.06366 ,
-                            150.035858 ,
-                            156.133453 ,
-                            161.900879 ,
-                            166.717529 ,
-                            171.099396 ,
-                            174.799255 ,
-                            176.408997 ,
-                            178.772308 ,
-                            179 ,
-                        ],
-                        transition: { ease: "linear", duration: 3, repeat: Infinity, repeatType: "loop", repeatDelay: 3 },
-                        opacity: [ 0.5, 1, 0],
-                    }}
+                    animate={{ opacity: 1, transition: { duration: 1 } }}
                     exit={{ opacity: 0 }}
                 />
-                <motion.text
-                    style={{ fill: "black",letterSpacing:"2px",fontWeight:"normal" }}
-                    initial={{ opacity: 0 }}
-                    animate={{
-                        x: [
-                            67.189957,
-                            101.029297,
-                            120.701607,
-                            140.499664,
-                            160.539001,
-                            190.862137,
-                            221.766205,
-                            253.0121,
-                            276.607635,
-                            300.465942,
-                            324.48111,
-                            347.985321,
-                            371.716553,
-                            395.524017,
-                            415.406921,
-                            435.42041,
-                            455.536926,
-                            464.289124,
-                            472.999786,
-                            482,
-                        ],
-                        y: [
-                            53.821594,
-                            70.440338,
-                            80.101562,
-                            89.544037,
-                            98.411865,
-                            111.830505,
-                            123.858551,
-                            134.965942,
-                            143.35379,
-                            150.93988,
-                            158.06366,
-                            165.035858,
-                            171.133453,
-                            176.900879,
-                            181.717529,
-                            186.099396,
-                            189.799255,
-                            191.408997,
-                            193.772308,
-                            194
-                        ],
-                        transition: { ease: "linear", duration: 3, repeat: Infinity, repeatType: "loop", repeatDelay: 3 },
-                        opacity: [ 0.5, 1, 0],
-                    }}
-                    exit={{ opacity: 0 }}
-                    className="label"
-                >
-                    .html
-                </motion.text>
             </g>
             {/* 1 end */}
 
@@ -538,33 +434,16 @@ export default function BannerAnimation() {
             C931.000000,231.000000 781.500000,231.000000 632.000000,231.000000 
         "
                 />
-                <motion.circle
-                    r="3"
-                    style={{ border:"none", fill: "var(--filterColor1)",fontWeight: "normal" }}
-                    className="filterColorClass1"
+                <motion.image
+                    href="/icons/x.png"
+                    width={50}
+                    height={50}
                     initial={{ opacity: 0 }}
-                    animate={{
-                        cx: [707, 782, 857, 932, 1007, 1085],
-                        cy: [231, 231, 231, 231, 231, 231],
-                        transition: { ease: "linear", duration: 3, delay: 3, repeat: Infinity, repeatType: "loop", repeatDelay: 3 },
-                        opacity: 1,
-                    }}
+                    animate={{ opacity: 1, transition: { duration: 1 } }}
                     exit={{ opacity: 0 }}
+                    x="1020"
+                    y="196"
                 />
-                <motion.text
-                    style={{ fill: "black",letterSpacing:"2px",fontWeight:"normal" }}
-                    initial={{ opacity: 0 }}
-                    animate={{
-                        x: [707, 782, 857, 932, 1007, 1085],
-                        y: [246, 246, 246, 246, 246, 246],
-                        transition: { ease: "linear", duration: 3, delay: 3, repeat: Infinity, repeatType: "loop", repeatDelay: 3 },
-                        opacity: 1,
-                    }}
-                    exit={{ opacity: 0 }}
-                    className="label"
-                >
-                    .html
-                </motion.text>
 
                 <motion.circle
                     r="3"
