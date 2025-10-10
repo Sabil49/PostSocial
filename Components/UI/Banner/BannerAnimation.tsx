@@ -159,123 +159,10 @@ export default function BannerAnimation() {
             C464.289124,176.408997 472.999786,178.772308 482.000000,179.000000 
         "
                 />
-
-                <motion.circle
-                    r="3"
-                    style={{ border:"none", fill: "var(--filterColor3)", fontWeight: "normal" }}
-                    className="filterColorClass3"
-                    initial={{ opacity: 0 }}
-                    animate={{
-                        cx: [
-                            67.189957,
-                            101.029297,
-                            120.701607,
-                            140.499664,
-                            160.539001,
-                            190.862137,
-                            221.766205,
-                            253.0121,
-                            276.607635,
-                            300.465942,
-                            324.48111,
-                            347.985321,
-                            371.716553,
-                            395.524017,
-                            415.406921,
-                            435.42041,
-                            455.536926,
-                            464.289124,
-                            472.999786,
-                            482,
-                        ],
-                        cy: [
-                            38.821594 ,
-                            55.440338 ,
-                            65.101562 ,
-                            74.544037 ,
-                            83.411865 ,
-                            96.830505 ,
-                            108.858551 ,
-                            119.965942 ,
-                            128.35379 ,
-                            135.93988 ,
-                            143.06366 ,
-                            150.035858 ,
-                            156.133453 ,
-                            161.900879 ,
-                            166.717529 ,
-                            171.099396 ,
-                            174.799255 ,
-                            176.408997 ,
-                            178.772308 ,
-                            179 ,
-                        ],
-                        transition: { ease: "linear", duration: 3, repeat: Infinity, repeatType: "loop", repeatDelay: 3 },
-                        opacity: [ 0.5, 1, 0],
-                    }}
-                    exit={{ opacity: 0 }}
-                />
-                <motion.text
-                    style={{ fill: "black",letterSpacing:"2px",fontWeight:"normal" }}
-                    initial={{ opacity: 0 }}
-                    animate={{
-                        x: [
-                            67.189957,
-                            101.029297,
-                            120.701607,
-                            140.499664,
-                            160.539001,
-                            190.862137,
-                            221.766205,
-                            253.0121,
-                            276.607635,
-                            300.465942,
-                            324.48111,
-                            347.985321,
-                            371.716553,
-                            395.524017,
-                            415.406921,
-                            435.42041,
-                            455.536926,
-                            464.289124,
-                            472.999786,
-                            482,
-                        ],
-                        y: [
-                            53.821594,
-                            70.440338,
-                            80.101562,
-                            89.544037,
-                            98.411865,
-                            111.830505,
-                            123.858551,
-                            134.965942,
-                            143.35379,
-                            150.93988,
-                            158.06366,
-                            165.035858,
-                            171.133453,
-                            176.900879,
-                            181.717529,
-                            186.099396,
-                            189.799255,
-                            191.408997,
-                            193.772308,
-                            194
-                        ],
-                        transition: { ease: "linear", duration: 3, repeat: Infinity, repeatType: "loop", repeatDelay: 3 },
-                        opacity: [ 0.5, 1, 0],
-                    }}
-                    exit={{ opacity: 0 }}
-                    className="label"
-                >
-                    <Image src="/icons/x.png" alt="React logo" width={16} height={16} style={{ display: "inline", marginRight: "4px", marginBottom: "2px" }}></Image>
-                </motion.text>
                 <motion.image
                     href="/icons/x.png"
                     width={16}
                     height={16}
-                    style={{ display: "inline", marginRight: "4px", marginBottom: "2px" }}
                     initial={{ opacity: 0 }}
                     animate={{
                         x: [
@@ -353,11 +240,10 @@ export default function BannerAnimation() {
             C458.322845,204.705688 470.101990,206.792603 482.000000,208.000000 
         "
                 />
-
-                <motion.circle
-                    r="3"
-                    style={{ border:"none", fill: "var(--filterColor4)", fontWeight: "normal" }}
-                    className="filterColorClass4"
+                <motion.image
+                    href="/icons/in.png"
+                    width={16}
+                    height={16}
                     initial={{ opacity: 0 }}
                     animate={{
                         cx: [
@@ -443,96 +329,6 @@ export default function BannerAnimation() {
                     }}
                     exit={{ opacity: 0 }}
                 />
-                <motion.text
-                    style={{ fill: "black",letterSpacing:"2px",fontWeight:"normal" }}
-                    initial={{ opacity: 0 }}
-                    animate={{
-                        x: [
-                            2.0,
-                            15.349727,
-                            29.446733,
-                            43.5313,
-                            57.889759,
-                            72.440956,
-                            87.016701,
-                            101.440323,
-                            115.990837,
-                            130.50267,
-                            143.990143,
-                            157.479156,
-                            171.006348,
-                            182.642441,
-                            194.327789,
-                            206.001495,
-                            218.995026,
-                            231.980713,
-                            245.005463,
-                            257.813751,
-                            270.686066,
-                            283.494934,
-                            298.469147,
-                            313.460144,
-                            328.484924,
-                            341.823517,
-                            355.148285,
-                            368.479706,
-                            381.976196,
-                            395.466309,
-                            408.994171,
-                            421.491486,
-                            433.976501,
-                            446.48056,
-                            458.322845,
-                            470.10199,
-                            482
-                        ],
-                        y: [
-                            130,
-                            136.337982,
-                            140.672363,
-                            144.895599,
-                            149.200989,
-                            152.911194,
-                            156.430847,
-                            159.913788,
-                            162.876068,
-                            165.987518,
-                            168.879333,
-                            171.771179,
-                            174.468201,
-                            176.788177,
-                            178.863739,
-                            180.991821,
-                            183.360596,
-                            185.781555,
-                            187.967407,
-                            190.116852,
-                            191.884125,
-                            194.030304,
-                            196.539276,
-                            198.90271,
-                            201.103027,
-                            203.056396,
-                            205.124939,
-                            207.134552,
-                            209.169037,
-                            211.214539,
-                            213.043213,
-                            214.732574,
-                            216.502808,
-                            218.147766,
-                            219.705688,
-                            221.792603,
-                            223
-                        ],
-                        transition: { ease: "linear", duration: 3, repeat: Infinity, repeatType: "loop", repeatDelay: 3 },
-                        opacity: [ 0.5, 1, 0],
-                    }}
-                    exit={{ opacity: 0 }}
-                    className="label"
-                >
-                    .css
-                </motion.text>
             </g>
             {/* 2 end */}
             {/* 5 start */}
@@ -551,35 +347,19 @@ export default function BannerAnimation() {
             C223.889572,354.798401 188.644562,367.676025 154.080353,382.191345 
             C122.469856,395.466248 91.299194,409.829407 60.964970,425.934021 
             C41.049618,436.507141 21.143587,447.064819 2.000000,459.000000" />
-
-                <motion.circle
-                    r="3"
-                    style={{ border:"none", fill: "var(--filterColor5)",fontWeight: "normal" }}
-                    className="filterColorClass5"
+                <motion.image
+                    href="/icons/inst.png"
+                    width={16}
+                    height={16}
                     initial={{ opacity: 0 }}
-                    animate={{
+                        animate={{
                         cx: [2, 21.143587, 41.049618, 60.964970, 91.299194, 122.469856, 154.080353, 188.644562, 223.889572, 259.501160, 290.244904, 321.275513, 352.522125, 373.739594, 395.145721, 416.507324, 430.802032, 445.093536, 459.530182, 466.995392, 474.291534, 482],
                         cy: [459, 447.064819, 436.507141, 425.934021, 409.829407, 395.466248, 382.191345, 367.676025, 354.798401, 343.003479, 332.820801, 323.564636, 315.081604, 309.32135, 304.247559, 299.030029, 295.538513, 291.956482, 289.155518, 287.707214, 285.160645, 285],
                         transition: { ease: "linear", duration: 3, repeat: Infinity, repeatType: "loop", repeatDelay: 3 },
                         opacity: [ 0.5, 1, 0],
-                    }}
+                    }}                 
                     exit={{ opacity: 0 }}
-                />
-
-                <motion.text
-                    style={{ fill: "black",letterSpacing:"2px",fontWeight:"normal" }}
-                    initial={{ opacity: 0 }}
-                    animate={{
-                        x: [2, 21.143587, 41.049618, 60.964970, 91.299194, 122.469856, 154.080353, 188.644562, 223.889572, 259.501160, 290.244904, 321.275513, 352.522125, 373.739594, 395.145721, 416.507324, 430.802032, 445.093536, 459.530182, 466.995392, 474.291534, 482],
-                        y: [474, 462.064819, 451.507141, 440.934021, 424.829407, 410.466248, 397.191345, 382.676025, 369.798401, 358.003479, 347.820801, 338.564636, 330.081604, 324.32135, 319.247559, 314.030029, 310.538513, 306.956482, 304.155518, 302.707214, 300.160645, 300],
-                        transition: { ease: "linear", duration: 3, repeat: Infinity, repeatType: "loop", repeatDelay: 3 },
-                        opacity: [ 0.5, 1, 0],
-                    }}
-                    exit={{ opacity: 0 }}
-                    className="label"
-                >
-                    .ts
-                </motion.text>
+                />                
             </g>
             {/* 5 end */}
             {/* 6 start */}
@@ -594,33 +374,20 @@ export default function BannerAnimation() {
             C931.000000,231.000000 781.500000,231.000000 632.000000,231.000000 
         "
                 />
-                <motion.circle
-                    r="3"
-                    style={{ border:"none", fill: "var(--filterColor1)",fontWeight: "normal" }}
-                    className="filterColorClass1"
+                <motion.image
+                    href="/icons/fb.png"
+                    width={16}
+                    height={16}
                     initial={{ opacity: 0 }}
-                    animate={{
+                        animate={{
                         cx: [707, 782, 857, 932, 1007, 1085],
                         cy: [231, 231, 231, 231, 231, 231],
                         transition: { ease: "linear", duration: 3, delay: 3, repeat: Infinity, repeatType: "loop", repeatDelay: 3 },
                         opacity: 1,
-                    }}
+                    }}   
                     exit={{ opacity: 0 }}
                 />
-                <motion.text
-                    style={{ fill: "black",letterSpacing:"2px",fontWeight:"normal" }}
-                    initial={{ opacity: 0 }}
-                    animate={{
-                        x: [707, 782, 857, 932, 1007, 1085],
-                        y: [246, 246, 246, 246, 246, 246],
-                        transition: { ease: "linear", duration: 3, delay: 3, repeat: Infinity, repeatType: "loop", repeatDelay: 3 },
-                        opacity: 1,
-                    }}
-                    exit={{ opacity: 0 }}
-                    className="label"
-                >
-                    .html
-                </motion.text>
+                
 
                 <motion.circle
                     r="3"
