@@ -278,7 +278,7 @@ export default function BannerAnimation() {
                     style={{ display: "inline", marginRight: "4px", marginBottom: "2px" }}
                     initial={{ opacity: 0 }}
                     animate={{
-                        cx: [
+                        x: [
                             67.189957,
                             101.029297,
                             120.701607,
@@ -300,7 +300,7 @@ export default function BannerAnimation() {
                             472.999786,
                             482,
                         ],
-                        cy: [
+                        y: [
                             38.821594 ,
                             55.440338 ,
                             65.101562 ,
